@@ -1,20 +1,20 @@
-/* Shared pixel UI, with one vivid palette for each atmospheric world. */
+/* One celestial palette: warm gold hardware against a near-black sky. */
 :root {
   color-scheme: dark;
   --color-bg: #07090d;
-  --color-panel: #11121c;
-  --color-panel-raised: #242239;
+  --color-panel: #101116;
+  --color-panel-raised: #1d1b19;
   --color-text: #fff2df;
-  --color-muted: #c2c2d9;
-  --color-subtle: #a7a9c5;
-  --color-border: #383650;
-  --color-ink: #0e1920;
-  --color-accent: #bd9bff;
-  --color-secondary: #ffcf71;
-  --scene-color: #492b86;
-  --scene-next: #234c8a;
-  --scene-back: #39276b;
-  --scene-front: #7953c2;
+  --color-muted: #d1cdc5;
+  --color-subtle: #aaa79f;
+  --color-border: #4b402a;
+  --color-ink: #17120b;
+  --color-accent: #f2cd69;
+  --color-secondary: #ffe296;
+  --frame-gold: #dcb44f;
+  --frame-light: #ffe49b;
+  --frame-shadow: #986020;
+  --frame-dark: #533710;
   --font-heading: 'Pixelify Sans', monospace;
   --font-ui: 'Silkscreen', monospace;
   --font-body: 'Inter', sans-serif;
@@ -55,11 +55,11 @@
   --panel-padding: clamp(1.5rem, 2.5vw, 2.5rem);
   --panel-line: 1px;
   --panel-radius: 0;
-  --panel-frame-width: 8px;
+  --panel-frame-width: 4px;
   --panel-frame-ink: #020305;
-  --panel-frame-bevel: 3px;
+  --panel-frame-bevel: 6px;
   --panel-notch: 8px;
-  --pixel-shadow: #050914;
+  --pixel-shadow: #020305;
   --control-height: 52px;
   --control-padding: var(--space-3) var(--space-5);
   --control-gap: var(--space-5);
@@ -93,24 +93,17 @@
   );
 }
 
-/* One palette family for both sections and shared navigation. */
-[data-theme='universe'] { --color-panel: #11121c; --color-accent: #bd9bff; --color-secondary: #ffcf71; --scene-color: #492b86; --scene-back: #181526; --scene-front: #29213f; }
-[data-theme='sky'] { --color-panel: #10151e; --color-accent: #77d3ff; --color-secondary: #ffc4a3; --scene-color: #234c8a; --scene-back: #111b28; --scene-front: #1c2a3b; }
-[data-theme='mountains'] { --color-panel: #14141d; --color-accent: #abafff; --color-secondary: #ffb19c; --scene-color: #413179; --scene-back: #191924; --scene-front: #292738; }
-[data-theme='botanical'] { --color-panel: #101815; --color-accent: #a0ef79; --color-secondary: #ffc96e; --scene-color: #205a3c; --scene-back: #111f18; --scene-front: #21352b; }
-[data-theme='underwater'] { --color-panel: #10171e; --color-accent: #65e6e6; --color-secondary: #9ebaff; --scene-color: #125061; --scene-back: #111c24; --scene-front: #1c323c; }
-
-/* Resolve semantic aliases at every theme boundary. */
+/* Chapters share the same gold frame; only the sky changes along the journey. */
 :root, [data-theme] {
   --panel-background: var(--color-panel);
-  --panel-border: color-mix(in srgb, var(--color-border) 70%, var(--color-accent));
-  --panel-rule: color-mix(in srgb, var(--color-border) 94%, var(--color-accent));
+  --panel-border: #73603a;
+  --panel-rule: #39342b;
   --surface-subtle: color-mix(in srgb, var(--panel-background) 97%, var(--color-accent));
   --surface-hover: color-mix(in srgb, var(--panel-background) 93%, var(--color-accent));
   --accent-soft: color-mix(in srgb, var(--color-accent) 8%, transparent);
-  --accent-hover: color-mix(in srgb, var(--color-secondary) 85%, white);
-  --control-border: color-mix(in srgb, var(--color-border) 35%, var(--color-accent));
-  --control-edge: color-mix(in srgb, var(--color-accent) 38%, var(--color-bg));
+  --accent-hover: #fff0bd;
+  --control-border: #b7974a;
+  --control-edge: #705326;
 }
 
 @media (max-width: 800px) {

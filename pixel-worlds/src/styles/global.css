@@ -1,6 +1,8 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + var(--space-4)); }
 body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); font-size: var(--text-body); line-height: var(--leading-body); -webkit-font-smoothing: antialiased; }
+.portfolio { position: relative; isolation: isolate; }
+#main { position: relative; z-index: 2; pointer-events: none; }
 body, button, a { -webkit-tap-highlight-color: transparent; }
 button, a { touch-action: manipulation; transition: color var(--transition), background var(--transition), border-color var(--transition), transform var(--transition); }
 a { color: inherit; text-decoration: none; }
@@ -61,7 +63,7 @@ strong { color: var(--color-text); font-weight: 500; }
 .tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
 .tags li { font-size: var(--text-metadata); color: var(--color-muted); border: var(--panel-line) solid var(--panel-rule); padding: var(--space-1) var(--space-2); line-height: var(--leading-compact); }
 
-/* Fixed navigation inherits the active world's accent without changing layout. */
+/* Gold navigation is the fixed reference point through the changing sky. */
 .site-header { position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height); display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding: 0 var(--page-gutter); background: var(--color-bg); border-bottom: var(--panel-line) solid var(--panel-rule); z-index: 20; transition: border-color var(--duration-theme) ease; }
 .brand { display: flex; align-items: center; gap: var(--space-3); flex-shrink: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 400; letter-spacing: var(--tracking-heading); }
 .pixel-mark { display: grid; grid-template-columns: repeat(2, 6px); gap: 3px; }
@@ -83,19 +85,20 @@ strong { color: var(--color-text); font-weight: 500; }
 .chapter-rail a:hover span, .chapter-rail a:focus-visible span { opacity: 1; }
 
 /* One editorial frame and heading contract, shared by every chapter. */
-.world { min-height: 100svh; padding: var(--section-space) var(--page-gutter); position: relative; isolation: isolate; display: flex; align-items: center; }
-.world:first-child { padding-top: calc(var(--nav-height) + var(--space-12)); padding-bottom: var(--space-8); }
-.section-container { width: min(100%, var(--page-width)); margin-inline: auto; position: relative; z-index: 1; min-width: 0; }
+.world { --chapter-width: 68vw; min-height: 110svh; padding: calc(var(--nav-height) + 64px) var(--page-gutter) 144px; position: relative; display: flex; align-items: center; background: transparent; }
+.section-container { width: min(100%, var(--page-width)); margin-inline: auto; position: relative; z-index: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.section-panel, .chapter-line, .chapter-bottom, .site-footer { width: var(--chapter-width); max-width: 100%; }
+.panel, .chapter-bottom a, .site-footer a { pointer-events: auto; }
 .chapter-line { display: flex; align-items: center; gap: var(--space-5); font-size: var(--text-metadata); color: var(--color-subtle); letter-spacing: var(--tracking-label); text-transform: uppercase; padding-bottom: var(--space-6); }
 .chapter-label { display: inline-flex; align-items: center; gap: var(--space-4); flex-shrink: 0; }
 .biome-icon { width: 24px; height: 24px; color: var(--color-secondary); flex: 0 0 auto; }
 .chapter-number { color: var(--color-ink); background: var(--color-accent); padding: var(--space-1) var(--space-2); clip-path: polygon(4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px), 0 4px, 4px 4px); }
 .chapter-rule { height: 2px; flex: 1; border-top: 2px dashed var(--panel-border); }
 .chapter-purpose { text-align: right; max-width: 45%; }
-.panel { --pixel-cut: var(--panel-notch); background: transparent; position: relative; isolation: isolate; padding: calc(var(--panel-padding) + 4px); filter: drop-shadow(0 8px 0 var(--panel-frame-ink)); }
+.panel { --pixel-cut: var(--panel-notch); background: transparent; position: relative; isolation: isolate; padding: calc(var(--panel-padding) + 10px); filter: drop-shadow(0 8px 0 var(--panel-frame-ink)); }
 .panel::before, .panel::after { content: ''; position: absolute; pointer-events: none; clip-path: var(--pixel-outline); }
 .panel::before { inset: 0; z-index: -2; background: var(--panel-frame-ink); }
-.panel::after { inset: var(--panel-frame-width); z-index: -1; background: var(--panel-background); box-shadow: inset 0 0 0 var(--panel-frame-bevel) var(--panel-border), inset 0 7px 0 var(--surface-hover), inset 0 -7px 0 var(--panel-frame-ink); }
+.panel::after { inset: var(--panel-frame-width); z-index: -1; background: var(--panel-background); border: var(--panel-frame-bevel) solid var(--frame-gold); border-top-color: var(--frame-light); border-right-color: var(--frame-shadow); border-bottom-color: var(--frame-shadow); box-shadow: inset 0 0 0 3px var(--panel-frame-ink), inset 0 0 0 4px var(--frame-dark); }
 .section-heading { margin-bottom: var(--header-gap); }
 .section-heading .eyebrow { margin-bottom: var(--space-6); }
 .section-heading h1 { font-size: var(--text-display); letter-spacing: var(--tracking-display); line-height: var(--leading-display); text-shadow: 4px 4px 0 var(--pixel-shadow); }
@@ -219,8 +222,8 @@ strong { color: var(--color-text); font-weight: 500; }
 .back-to-top .icon { transform: rotate(-90deg); width: 14px; height: 14px; }
 .back-to-top:hover .icon { transform: rotate(-90deg) translateX(var(--pixel-unit)); }
 
-/* Native dialogs share panel and typography tokens, with the active biome accent. */
-.detail-dialog { background: var(--panel-background); color: var(--color-text); border: var(--panel-frame-width) solid var(--control-border); border-radius: 0; padding: 0; max-width: min(620px, calc(100vw - var(--space-8))); width: 620px; max-height: calc(100dvh - var(--space-16)); overflow: auto; box-shadow: 8px 8px 0 var(--pixel-shadow); }
+/* Dialogs carry the same gold bevel and quiet reading surface as the chapters. */
+.detail-dialog { background: var(--panel-background); color: var(--color-text); border: var(--panel-frame-bevel) solid var(--frame-gold); border-top-color: var(--frame-light); border-right-color: var(--frame-shadow); border-bottom-color: var(--frame-shadow); outline: var(--panel-frame-width) solid var(--panel-frame-ink); border-radius: 0; padding: 0; max-width: min(620px, calc(100vw - var(--space-8))); width: 620px; max-height: calc(100dvh - var(--space-16)); overflow: auto; box-shadow: inset 0 0 0 3px var(--panel-frame-ink), 8px 8px 0 var(--pixel-shadow); }
 .detail-dialog::backdrop { background: #040811db; }
 .dialog-inner { padding: var(--space-8); position: relative; overflow: hidden; }
 .dialog-close { position: absolute; top: var(--space-3); right: var(--space-3); width: 36px; height: 36px; min-height: 36px; padding: 0 0 4px; z-index: 3; }
@@ -283,7 +286,6 @@ strong { color: var(--color-text); font-weight: 500; }
   .nav-link { font-size: 10px; min-height: 44px; }
   .nav-link::after { bottom: 8px; }
   .nav-cv { gap: var(--space-2); padding: var(--space-1) var(--space-2); }
-  .world:first-child { padding-top: calc(var(--nav-height) + var(--space-8)); }
   .chapter-line { gap: var(--space-3); padding-bottom: var(--space-5); letter-spacing: .02em; }
   .chapter-label { gap: var(--space-2); }
   .biome-icon { width: 16px; height: 16px; }
@@ -338,11 +340,7 @@ strong { color: var(--color-text); font-weight: 500; }
   .nav-cv .icon { display: none; }
 }
 
-/* One centered editorial frame. Procedural forms extend behind its edges. */
-.world { --chapter-width: 68vw; min-height: 110svh; padding-block: calc(var(--nav-height) + 64px) 144px; }
-.world:first-child { padding-block: calc(var(--nav-height) + 64px) 144px; }
-.section-container { display: flex; flex-direction: column; align-items: center; }
-.section-panel, .chapter-line, .chapter-bottom, .site-footer { width: var(--chapter-width); max-width: 100%; }
+/* Centered editorial composition leaves both orbital gutters visible. */
 .section-panel-hero { display: block; }
 .chapter-purpose { font-size: 10px; max-width: 35%; }
 .chapter-line { gap: var(--space-3); }
@@ -400,10 +398,9 @@ strong { color: var(--color-text); font-weight: 500; }
   .archive-card .project-art-small { width: 48px; flex-basis: 48px; }
 }
 @media (max-width: 899px) {
-  .world, .world-botanical { --chapter-width: 100%; min-height: 100svh; padding-top: 190px; padding-bottom: 112px; }
+  .world { --chapter-width: 100%; min-height: 100svh; padding-top: 190px; padding-bottom: 112px; }
   .world:first-child { padding-top: calc(var(--nav-height) + 104px); padding-bottom: 112px; }
   .section-container { max-width: 760px; }
-  .chapter-transition { height: 96px; }
   .section-panel-hero { display: block; }
   .chapter-purpose { font-size: 10px; }
   .site-header nav { gap: var(--space-3); }

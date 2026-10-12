@@ -2,11 +2,11 @@ export type SectionId = 'home' | 'about' | 'journey' | 'projects' | 'contact'
 export type World = 'universe' | 'sky' | 'mountains' | 'botanical' | 'underwater'
 
 export const chapters: { id: SectionId; label: string; world: World; title: string; number: string }[] = [
-  { id: 'home', label: 'Home', world: 'universe', title: 'Universe', number: '01' },
-  { id: 'about', label: 'About', world: 'sky', title: 'Sky', number: '02' },
-  { id: 'journey', label: 'Journey', world: 'mountains', title: 'Mountains', number: '03' },
-  { id: 'projects', label: 'Projects', world: 'botanical', title: 'Botanical world', number: '04' },
-  { id: 'contact', label: 'Contact', world: 'underwater', title: 'Underwater', number: '05' },
+  { id: 'home', label: 'Home', world: 'universe', title: 'Outer orbit', number: '01' },
+  { id: 'about', label: 'About', world: 'universe', title: 'A closer look', number: '02' },
+  { id: 'journey', label: 'Journey', world: 'universe', title: 'The trajectory', number: '03' },
+  { id: 'projects', label: 'Projects', world: 'universe', title: 'Inner orbit', number: '04' },
+  { id: 'contact', label: 'Contact', world: 'universe', title: 'New horizons', number: '05' },
 ]
 
 // Identity and background come from the supplied portfolio brief.

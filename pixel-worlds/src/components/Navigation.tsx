@@ -47,5 +47,5 @@ export function Navigation({ active, onCv }: { active: SectionId; onCv: () => vo
 }
 
 export function ChapterRail({ active }: { active: SectionId }) {
-  return <nav className="chapter-rail" aria-label="World navigation">{chapters.map(({ id, number, title }) => <a key={id} href={`#${id}`} className={active === id ? 'is-active' : ''} aria-label={`${number}: ${title}`} aria-current={active === id ? 'location' : undefined}><span>{title}</span><i /></a>)}</nav>
+  return <nav className="chapter-rail" aria-label="Chapter navigation">{chapters.map(({ id, number, title }) => <a key={id} href={`#${id}`} className={active === id ? 'is-active' : ''} aria-label={`${number}: ${title}`} aria-current={active === id ? 'location' : undefined}><span>{title}</span><i /></a>)}</nav>
 }

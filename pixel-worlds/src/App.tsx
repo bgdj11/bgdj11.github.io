@@ -6,6 +6,7 @@ import { WorldSection } from './components/WorldSection'
 import { Icon } from './components/Icon'
 import { ProjectCollection } from './components/Projects'
 import { DetailDialog } from './components/DetailDialog'
+import { SpaceScene } from './components/SpaceScene'
 
 export function App() {
   const active = useActiveSection()
@@ -19,6 +20,7 @@ export function App() {
     <a className="skip-link" href="#main">Skip to content</a>
     <Navigation active={active} onCv={openCv} />
     <ChapterRail active={active} />
+    <SpaceScene />
     <main id="main">
       <WorldSection
         id="home"
@@ -28,7 +30,7 @@ export function App() {
         heading={<>I build things<br />that <em>move, see</em><br />& come alive<span className="heading-period">.</span></>}
         description="Exploring the space between intelligent systems and visual imagination. From understanding the world to creating new ones."
         panelFooter={<><span>Engineer by training.</span><span>Explorer by nature.</span></>}
-        footer={<div className="chapter-bottom"><a href="#about" className="scroll-cue"><span className="scroll-cue-icon"><Icon name="down" /></span>Scroll to explore<span className="muted">— five worlds, one journey</span></a><span className="mono world-count">01 <span>/ 05</span></span></div>}
+        footer={<div className="chapter-bottom"><a href="#about" className="scroll-cue"><span className="scroll-cue-icon"><Icon name="down" /></span>Scroll to explore<span className="muted">— a journey through the orbits</span></a><span className="mono world-count">01 <span>/ 05</span></span></div>}
       >
         <div className="hero-actions">
           <a className="button button-primary" href="#projects">View projects<Icon name="arrow" /></a>
@@ -65,7 +67,7 @@ export function App() {
       <WorldSection
         id="journey"
         eyebrow="The path so far"
-        heading={<>A change in altitude<span className="heading-period">.</span></>}
+        heading={<>A change in trajectory<span className="heading-period">.</span></>}
         description="Each chapter builds on the last. From a technical foundation to a more visual direction."
         panelFooter={<><span>Want the full picture?</span><CvAction onMissing={openCv} className="text-link" /></>}
       >
@@ -98,7 +100,7 @@ export function App() {
         heading={<>Good things start<br />with a <em>connection</em><span className="heading-period">.</span></>}
         description={<>Interested in graphics, vision, animation, or creative AI?<br />I’d love to explore what we could build together.</>}
         panelFooter={<span className="contact-note"><span className="tiny-square" />Open to conversations about R&D and internship opportunities.</span>}
-        footer={<footer className="site-footer"><a href="#home" className="footer-signature">{profile.name}<span className="heading-period">.</span></a><span>Logic, imagination, and everything in between.</span><a className="text-link back-to-top" href="#home">Back to the surface<Icon name="arrow" /></a></footer>}
+        footer={<footer className="site-footer"><a href="#home" className="footer-signature">{profile.name}<span className="heading-period">.</span></a><span>Logic, imagination, and everything in between.</span><a className="text-link back-to-top" href="#home">Back to the start<Icon name="arrow" /></a></footer>}
       >
         <div className="contact-email">
           {profile.email
