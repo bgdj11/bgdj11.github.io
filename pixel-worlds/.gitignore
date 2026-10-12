@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.local
+*.tsbuildinfo
+.sites-runtime/
+.qa/
+.tools/
+.env*
+!.env.example
+!.env.template

@@ -1,0 +1,57 @@
+/* Code-native concept thumbnails, explicitly labeled as placeholders. */
+.project-art { height: 180px; position: relative; overflow: hidden; isolation: isolate; background: #16382e; }
+.art-grid { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath d='M0 12V0H12' fill='none' stroke='%239fbfc1' stroke-opacity='.08'/%3E%3C/svg%3E"); }
+.preview-label { position: absolute; top: 12px; left: 12px; font-size: 6px; letter-spacing: .16em; color: #9badb5; z-index: 2; }
+.art-element { position: absolute; }
+.project-art-reasoning { background: #173548; }
+.project-art-reasoning .art-element-one { width: 77px; height: 77px; top: 47px; left: calc(50% - 40px); transform: rotate(30deg) skewY(-10deg); border: 1px solid #81dcec; background: #23586b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13'%3E%3Cpath d='M0 13V0H13' fill='none' stroke='%239cb1b3' stroke-opacity='.3'/%3E%3C/svg%3E"); box-shadow: 15px 15px 0 -1px #173548, 15px 15px 0 0 #4d91a8; }
+.project-art-reasoning .art-element-two { width: 6px; height: 6px; top: 60px; left: 24%; background: #ffd178; box-shadow: -15px 39px 0 -1px #6caad1, 140px 37px #81e5ce, 116px -19px 0 -1px #6caad1; }
+.project-art-terrain, .project-art-shader { background: #183442; }
+.project-art-terrain .art-element-one { bottom: 0; width: 100%; height: 125px; background: #397957; clip-path: polygon(0 65%, 12% 65%, 12% 49%, 22% 49%, 22% 34%, 32% 34%, 32% 16%, 44% 16%, 44% 35%, 52% 35%, 52% 50%, 63% 50%, 63% 60%, 76% 60%, 76% 48%, 87% 48%, 87% 68%, 100% 68%, 100% 100%, 0 100%); }
+.project-art-terrain .art-element-two { bottom: 0; width: 100%; height: 80px; background: #215342; clip-path: polygon(0 44%, 19% 44%, 19% 63%, 38% 63%, 38% 44%, 53% 44%, 53% 23%, 65% 23%, 65% 44%, 82% 44%, 82% 20%, 94% 20%, 94% 44%, 100% 44%, 100% 100%, 0 100%); }
+.project-art-terrain .art-element-three { width: 25px; height: 25px; top: 42px; right: 52px; background: #f2d277; clip-path: polygon(25% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%, 0 25%, 25% 25%); }
+.project-art-network { background: #2a2446; }
+.project-art-network .art-element-one { border: 1px solid #c8a8fb; width: 36px; height: 36px; top: 74px; left: calc(50% - 18px); box-shadow: -60px -31px 0 -8px #46375e, -60px -31px 0 -7px #aa8ad5, 60px -31px 0 -8px #46375e, 60px -31px 0 -7px #aa8ad5, -60px 31px 0 -8px #46375e, -60px 31px 0 -7px #aa8ad5, 60px 31px 0 -8px #46375e, 60px 31px 0 -7px #aa8ad5; }
+.project-art-network .art-element-two { width: 150px; height: 1px; background: #bf9be8; top: 92px; left: calc(50% - 75px); transform: rotate(28deg); opacity: .65; }
+.project-art-network .art-element-three { width: 150px; height: 1px; background: #bf9be8; top: 92px; left: calc(50% - 75px); transform: rotate(-28deg); opacity: .65; }
+.project-art-small { height: 65px; width: 65px; flex: 0 0 65px; border: 1px solid var(--panel-rule); }
+.project-art-botanical .art-element-one { width: 2px; height: 42px; bottom: 7px; left: 31px; background: #7cd795; }
+.project-art-botanical .art-element-two { width: 16px; height: 9px; top: 18px; left: 17px; border: 1px solid #b4e777; transform: rotate(35deg); box-shadow: 7px 13px #45946e; }
+.project-art-botanical .art-element-three { width: 17px; height: 9px; top: 25px; left: 31px; border: 1px solid #b4e777; transform: rotate(-35deg); }
+.project-art-orbit .art-element-one { width: 15px; height: 21px; left: 24px; top: 20px; background: #ffc878; clip-path: polygon(40% 0, 60% 0, 60% 25%, 80% 25%, 80% 50%, 100% 50%, 100% 100%, 60% 75%, 40% 75%, 0 100%, 0 50%, 20% 50%, 20% 25%, 40% 25%); }
+.project-art-orbit .art-element-two { width: 2px; height: 2px; background: #ae9deb; top: 12px; left: 17px; box-shadow: 29px 28px #ae9deb, 3px 35px #ae9deb, 33px 1px #ae9deb; }
+.project-art-vision .art-element-one { inset: 14px; border: 1px dashed #62cdd5; }
+.project-art-vision .art-element-two { width: 21px; height: 21px; top: 21px; left: 21px; border: 1px solid #b9ec94; transform: rotate(-13deg); }
+.project-art-vision .art-element-three { top: 30px; left: 30px; width: 3px; height: 3px; background: #b9ec94; }
+.project-art-shader .art-element-one { inset: 13px; border: 1px solid #e7b77f; transform: rotate(20deg); box-shadow: 4px 4px #815e97, -4px -4px #815e97; }
+.project-art-shader .art-element-two { inset: 22px; background: #9dcfed; }
+
+/* Flat fields and crisp raster pixels. A sticky stage keeps the world in view
+   throughout long chapters without enlarging or stretching the render buffer. */
+.scene-layer { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: clip; contain: paint; background: var(--scene-base); }
+.scene-viewport { position: sticky; top: 0; width: 100%; height: 100svh; }
+.procedural-scene, .scene-fallback { position: absolute; inset: 0; width: 100%; height: 100%; }
+.procedural-scene { display: block; image-rendering: crisp-edges; image-rendering: pixelated; }
+.procedural-scene:not([data-scene-state='unavailable']) ~ .scene-fallback { display: none; }
+.scene-fallback { background: var(--scene-base); }
+.scene-form { position: absolute; bottom: 0; width: 100%; height: 42%; background: var(--scene-back); clip-path: polygon(0 65%, 10% 65%, 10% 40%, 25% 40%, 25% 25%, 40% 25%, 40% 50%, 55% 50%, 55% 15%, 70% 15%, 70% 40%, 85% 40%, 85% 70%, 100% 70%, 100% 100%, 0 100%); }
+.scene-form-front { height: 24%; background: var(--scene-front); transform: scaleX(-1); }
+.scene-layer canvas, .scene-layer img { image-rendering: pixelated; }
+.project-art { border-bottom: var(--panel-line) solid var(--panel-rule); }
+
+/* Each crossing has the next biome's foreground contours. Opposing camera and
+   foreground movement create depth; the scene itself stays fully intact. */
+.chapter-transition { position: absolute; bottom: -1px; left: 0; width: 100%; height: 144px; overflow: clip; pointer-events: none; z-index: 0; view-timeline-name: --chapter-border; view-timeline-axis: block; }
+.chapter-transition svg { position: absolute; width: 120%; height: 100%; left: -10%; bottom: 0; overflow: visible; }
+.transition-back { fill: var(--scene-back); }
+.transition-front { fill: var(--scene-front); }
+.transition-ground { fill: var(--scene-base); }
+@keyframes terrain-crossing { from { transform: translate(-28px, 26px) scale(1.03); } to { transform: translate(28px, -18px) scale(1.14); } }
+@keyframes foreground-crossing { from { transform: translate(34px, 38px) scale(1.05); } to { transform: translate(-34px, -24px) scale(1.22); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .transition-back, .transition-front, .transition-ground { animation: terrain-crossing 1s linear both; animation-timeline: --chapter-border; animation-range: entry 0% exit 100%; transform-origin: 50% 100%; }
+    .transition-front { animation-name: foreground-crossing; }
+    .transition-ground { animation-name: foreground-crossing; animation-direction: reverse; }
+  }
+}
