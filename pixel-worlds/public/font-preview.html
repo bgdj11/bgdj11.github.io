@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="sr-Latn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Pixel fontovi — poređenje</title>
+  <style>
+    @font-face { font-family: 'Pixelify Sans'; src: url('/fonts/preview/pixelify-sans.woff2') format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Jersey 15'; src: url('/fonts/preview/Jersey15-Regular.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'VT323'; src: url('/fonts/preview/VT323-Regular.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'Press Start 2P'; src: url('/fonts/preview/PressStart2P-Regular.ttf') format('truetype'); font-display: swap; }
+    * { box-sizing: border-box; }
+    :root { color-scheme: dark; }
+    body { margin: 0; padding: 36px 24px; background: #07090d; color: #fff2df; font: 16px/1.6 system-ui, sans-serif; }
+    main { max-width: 1040px; margin: auto; }
+    h1 { font-size: 28px; margin: 20px 0 8px; }
+    p { margin: 0; color: #c4ccc6; }
+    a { color: #afd3a5; text-underline-offset: 4px; }
+    label { display: block; margin: 24px 0 8px; }
+    input { width: 100%; background: #132019; color: #fff2df; border: 2px solid #729b7e; padding: 12px; font: inherit; }
+    :focus-visible { outline: 3px solid #d1efd0; outline-offset: 4px; }
+    .samples { display: grid; gap: 24px; margin-top: 32px; }
+    article { border: 1px solid #527b61; background: #0d1110; padding: 24px; min-width: 0; }
+    header { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; align-items: baseline; }
+    header h2 { margin: 0; font: 600 16px/1.5 system-ui, sans-serif; color: #afd3a5; }
+    header a { font-size: 13px; }
+    .specimen { font-family: var(--sample-font), monospace; font-weight: 400; overflow-wrap: anywhere; }
+    .heading { font-size: 40px; line-height: 1.5; margin: 16px 0 12px; color: #fff2df; }
+    .labels { display: flex; flex-wrap: wrap; gap: 12px 28px; font-size: 24px; line-height: 1.6; color: #d1efd0; }
+    .alphabet { font-size: 18px; margin-top: 20px; color: #aaa79f; }
+    footer { margin-top: 28px; font-size: 14px; color: #aaa79f; }
+    @media (max-width: 600px) { body { padding: 24px 16px; } article { padding: 16px; } .heading { font-size: 28px; } .labels { font-size: 20px; } }
+  </style>
+</head>
+<body>
+<main>
+  <a href="/">← Nazad na portfolio</a>
+  <h1>Koji pixel font ti više odgovara?</h1>
+  <p>Isti tekst i iste veličine za svaki font. Portfolio sada koristi Press Start 2P.</p>
+  <label for="sample-text">Isprobaj svoj naslov</label>
+  <input id="sample-text" value="Hey, I'm Bogdan." maxlength="100" autocomplete="off">
+  <div class="samples">
+    <article style="--sample-font: 'Pixelify Sans'">
+      <header><h2>Pixelify Sans — prethodni</h2><a href="https://fonts.google.com/specimen/Pixelify+Sans" target="_blank" rel="noopener noreferrer">Google Fonts ↗</a></header>
+      <div class="specimen"><p class="heading">Hey, I'm Bogdan.</p><div class="labels"><span>Basketball</span><span>Board games</span><span>Video games</span><span>Fishing</span></div><p class="alphabet">Education / Projects / Hobbies · 0123456789 · Č ć Š š Ž ž Đ đ</p></div>
+    </article>
+    <article style="--sample-font: 'Jersey 15'">
+      <header><h2>Jersey 15 — kompaktniji naslovi</h2><a href="https://fonts.google.com/specimen/Jersey+15" target="_blank" rel="noopener noreferrer">Google Fonts ↗</a></header>
+      <div class="specimen"><p class="heading">Hey, I'm Bogdan.</p><div class="labels"><span>Basketball</span><span>Board games</span><span>Video games</span><span>Fishing</span></div><p class="alphabet">Education / Projects / Hobbies · 0123456789 · Č ć Š š Ž ž Đ đ</p></div>
+    </article>
+    <article style="--sample-font: 'VT323'">
+      <header><h2>VT323 — uži, terminalski izgled</h2><a href="https://fonts.google.com/specimen/VT323" target="_blank" rel="noopener noreferrer">Google Fonts ↗</a></header>
+      <div class="specimen"><p class="heading">Hey, I'm Bogdan.</p><div class="labels"><span>Basketball</span><span>Board games</span><span>Video games</span><span>Fishing</span></div><p class="alphabet">Education / Projects / Hobbies · 0123456789 · Č ć Š š Ž ž Đ đ</p></div>
+    </article>
+    <article style="--sample-font: 'Press Start 2P'">
+      <header><h2>Press Start 2P — trenutni</h2><a href="https://fonts.google.com/specimen/Press+Start+2P" target="_blank" rel="noopener noreferrer">Google Fonts ↗</a></header>
+      <div class="specimen"><p class="heading">Hey, I'm Bogdan.</p><div class="labels"><span>Basketball</span><span>Board games</span><span>Video games</span><span>Fishing</span></div><p class="alphabet">Education / Projects / Hobbies · 0123456789 · Č ć Š š Ž ž Đ đ</p></div>
+    </article>
+  </div>
+  <footer>Naslovi: 40 px, nazivi hobija: 24 px na desktopu. Svi fontovi se učitavaju lokalno, samo na ovoj stranici.</footer>
+</main>
+<script>
+  document.querySelector('#sample-text').addEventListener('input', event => {
+    for (const heading of document.querySelectorAll('.heading')) heading.textContent = event.target.value || "Hey, I'm Bogdan.";
+  });
+</script>
+</body>
+</html>

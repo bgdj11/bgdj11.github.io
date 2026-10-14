@@ -1,6 +1,6 @@
 # A Personal Universe — Bogdan Djukic
 
-A React + TypeScript + Vite portfolio with an interactive procedural pixel-art universe. Version two retains the real portfolio content and five navigation destinations, replacing the separate biomes with one continuous flight past six celestial bodies.
+A React + TypeScript + Vite portfolio with an interactive procedural pixel-art universe. Six content sections share one continuous flight past six celestial bodies.
 
 ## Run
 
@@ -27,24 +27,24 @@ npm run preview
 
 ## Portfolio content
 
-Home, About, Journey, Projects and Contact retain semantic headings, fixed navigation, smooth anchor links and active-section tracking. Featured Projects and More Work come from structured data, with category filters and accessible native project dialogs. CV and contact destinations remain explicitly unavailable until verified links are supplied.
+Home, Education, Experience, Projects, Beyond Code and Contact have semantic headings, persistent navigation, smooth anchors and active-section tracking. Featured Work uses compact two-column cards with a small image and summary inside one frame. More Work uses a denser three-column thumbnail grid. Whole cards open details; both grids collapse on smaller screens. Education, experience, projects and hobbies share accessible detail dialogs. CV and contact destinations remain unavailable until real files and links are supplied.
 
 Edit `src/data/portfolio.ts` to update:
 
-- `profile`: name, biography details, email, social URLs and `cvUrl`. Put a real CV PDF in `public/` before attaching it.
-- `milestones`: education, experience and interests grounded in the supplied brief.
-- `projects`: featured status, category, description, role, technologies, real images and verified links.
-- `chapters`: navigation labels and the five stages of the space journey.
+- `profile`: introduction, portrait, social URLs and resume settings. Put the actual PDF at `public/Bogdan_Djukic_CV.pdf`, or configure another path.
+- `education`, `experience`, `hobbies`: entries and expandable details grounded in the supplied brief.
+- `projects`: featured status, ordering, categories, descriptions, contribution, technologies, media and verified links.
+- `chapters`: labels, headings and theme mapping for the six content sections.
 
-Project candidates are labeled placeholders; they are not claims of finished work. Concept artwork is code-native and does not stand in for actual project screenshots. No addresses, results, dates or repository links have been invented.
+Project candidates are labeled drafts; they are not claims of finished work. Missing photographs and screenshots use neutral framed placeholders. No addresses, results, dates or repository links have been invented. See [CONTENT_GUIDE.md](CONTENT_GUIDE.md) for local asset paths, image sizing, galleries, GIF/video previews, detail blocks, favorites and the PDF resume.
 
 ## Visual system
 
 `src/styles/tokens.css` defines the shared palette, type scale, spacing, surfaces, controls and frame dimensions. All chapters use near-black opaque text panels with stepped gold frames: a black outer outline, bright upper/left bevel, bronze lower/right bevel and dark inner separation. Headings use Pixelify Sans, interface labels use Silkscreen and paragraphs use Inter. Fonts are locally bundled with licenses in `public/font-licenses/`.
 
-Panels occupy approximately 68% of the desktop viewport and the available width on small screens. Text remains a normal DOM layer above the scene: it is never drawn, warped, rotated or scaled by the camera. There are no CSS or canvas gradients, blurry glows, separate biome backgrounds or blackout transitions.
+Panels occupy approximately 72% of the desktop viewport (up to 1120 px) and the available width on small screens. Shared nine-slice frames in `public/frames/gold-pixel.svg` give panels, photographs and dialogs stepped pixel corners. Text remains a normal DOM layer above the scene: it is never drawn, warped, rotated or scaled by the camera. There are no CSS or canvas gradients, blurry glows, separate biome backgrounds or blackout transitions.
 
-`WorldSection` provides the chapter label, heading, description, framed body and optional footers/aside. Optional custom `scene` content is decorative and inert; the default background is the shared `SpaceScene` mounted once by `App`.
+`WorldSection` provides the chapter heading, description, framed body and optional footer/aside. Optional custom `scene` content is decorative and inert; the default background is the shared `SpaceScene` mounted once by `App`. Detail dialogs open up to 1240 px wide with independently scrollable content and nearly full-screen mobile layouts.
 
 ## Interactive space
 

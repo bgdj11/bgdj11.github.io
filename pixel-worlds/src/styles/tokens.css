@@ -1,37 +1,42 @@
-/* One celestial palette: warm gold hardware against a near-black sky. */
+/* Celadon pixel hardware against a near-black sky. */
 :root {
   color-scheme: dark;
   --color-bg: #07090d;
-  --color-panel: #101116;
-  --color-panel-raised: #1d1b19;
+  --color-panel: #0d1110;
+  --chapter-panel-opacity: 0.92;
+  --color-panel-raised: #18201c;
   --color-text: #fff2df;
   --color-muted: #d1cdc5;
   --color-subtle: #aaa79f;
-  --color-border: #4b402a;
-  --color-ink: #17120b;
-  --color-accent: #f2cd69;
-  --color-secondary: #ffe296;
-  --frame-gold: #dcb44f;
-  --frame-light: #ffe49b;
-  --frame-shadow: #986020;
-  --frame-dark: #533710;
-  --font-heading: 'Pixelify Sans', monospace;
-  --font-ui: 'Silkscreen', monospace;
+  --color-border: #394b41;
+  --color-ink: #09110d;
+  --color-accent: #a9d8aa;
+  --color-secondary: #d1efd0;
+  --frame-gold: #78a486;
+  --frame-light: #c9edc5;
+  --frame-shadow: #3c6651;
+  --frame-dark: #1b3429;
+  --retro-frame: url('/frames/gold-pixel.svg');
+  --retro-panel-frame: url('/frames/celadon-panel.svg');
+  --selection-frame: url('/frames/selection-corners.svg');
+  --card-selection-frame: url('/frames/card-selection.svg');
+  --font-heading: 'Press Start 2P', monospace;
+  --font-ui: 'Press Start 2P', monospace;
   --font-body: 'Inter', sans-serif;
   --font-mono: var(--font-ui);
   --text-display: clamp(2.5rem, 4.3vw, 4.5rem);
   --text-heading: clamp(2rem, 3.1vw, 2.8rem);
   --text-closing: clamp(2rem, 3.3vw, 3rem);
   --text-subheading: clamp(1.375rem, 1.85vw, 1.75rem);
-  --text-body: 1rem;
-  --text-small: .875rem;
+  --text-body: 1.125rem;
+  --text-small: 1rem;
   --text-caption: .75rem;
   --text-metadata: .625rem;
-  --leading-display: 1.08;
-  --leading-heading: 1.15;
+  --leading-display: 1.5;
+  --leading-heading: 1.65;
   --leading-body: 1.85;
   --leading-compact: 1.6;
-  --tracking-display: -.025em;
+  --tracking-display: 0;
   --tracking-heading: 0;
   --tracking-label: 0;
   --space-1: .25rem;
@@ -93,17 +98,17 @@
   );
 }
 
-/* Chapters share the same gold frame; only the sky changes along the journey. */
+/* Chapters share the same celadon frame; only the sky changes along the journey. */
 :root, [data-theme] {
   --panel-background: var(--color-panel);
-  --panel-border: #73603a;
-  --panel-rule: #39342b;
+  --panel-border: #587565;
+  --panel-rule: #303b35;
   --surface-subtle: color-mix(in srgb, var(--panel-background) 97%, var(--color-accent));
   --surface-hover: color-mix(in srgb, var(--panel-background) 93%, var(--color-accent));
   --accent-soft: color-mix(in srgb, var(--color-accent) 8%, transparent);
-  --accent-hover: #fff0bd;
-  --control-border: #b7974a;
-  --control-edge: #705326;
+  --accent-hover: #d9f5d4;
+  --control-border: #7ca789;
+  --control-edge: #355945;
 }
 
 @media (max-width: 800px) {
