@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" shape-rendering="crispEdges">
+  <defs>
+    <g id="corner">
+      <path fill="#030806" d="M6 0h10v8h-4v4H8v4H0V6h2V2h4z"/>
+      <path fill="#507a76" d="M6 2h10v4h-6v4H6v6H2V6h4z"/>
+      <path fill="#bad6c8" d="M6 2h10v2H6zM2 6h2v10H2z"/>
+      <path fill="#7abbb2" d="M4 4h6v4H8v2H4z"/>
+      <path fill="#3a5856" d="M10 6h2v6H6v-2h4z"/>
+    </g>
+  </defs>
+  <use href="#corner"/>
+  <use href="#corner" transform="rotate(90 24 24)"/>
+  <use href="#corner" transform="rotate(180 24 24)"/>
+  <use href="#corner" transform="rotate(270 24 24)"/>
+</svg>

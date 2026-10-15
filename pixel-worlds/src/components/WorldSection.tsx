@@ -7,7 +7,7 @@ export function WorldSection({ id, children, aside, footer, eyebrow, description
   eyebrow?: string; description?: ReactNode; theme?: World; scene?: ReactNode
 }) {
   const chapter = chapters.find(item => item.id === id)!
-  return <section id={id} className="world" data-theme={theme ?? chapter.world} aria-labelledby={id + '-heading'}>
+  return <section id={id} className="world" data-accent={id} data-theme={theme ?? chapter.world} aria-labelledby={id + '-heading'}>
     {scene && <div className="scene-layer" aria-hidden="true" inert>{scene}</div>}
     <div className="section-container">
       <ContentPanel className={'section-panel' + (aside ? ' section-panel-hero' : '')}>

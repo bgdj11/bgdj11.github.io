@@ -98,7 +98,7 @@
   );
 }
 
-/* Chapters share the same celadon frame; only the sky changes along the journey. */
+/* Neutral surfaces; chapter palettes supply the frame and accent tokens. */
 :root, [data-theme] {
   --panel-background: var(--color-panel);
   --panel-border: #587565;
@@ -123,7 +123,7 @@
     --text-display: clamp(2.375rem, 9.4vw, 3.25rem);
     --text-heading: clamp(2rem, 8vw, 2.5rem);
     --text-closing: clamp(2rem, 8.4vw, 2.75rem);
-    --text-body: .9375rem;
+    --text-body: 1.125rem;
   }
 }
 @media (max-width: 360px) {

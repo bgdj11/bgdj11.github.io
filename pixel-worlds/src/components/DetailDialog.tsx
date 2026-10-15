@@ -73,6 +73,7 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     }
   }, [entry])
   const project = entry && 'category' in entry ? entry as Project : null
+  const accent = entry && 'degree' in entry ? 'education' : entry && 'role' in entry ? 'experience' : project ? 'projects' : 'beyond-code'
   const facts = entry ? [
     ['degree' in entry ? 'Degree' : 'role' in entry ? 'Role' : '', 'degree' in entry ? ['credential' in entry ? entry.credential : '', entry.degree].filter(Boolean).join(' — ') : 'role' in entry ? String(entry.role) : ''],
     ['Dates', 'dates' in entry ? String(entry.dates ?? '') : project?.year ?? ''],
@@ -80,7 +81,7 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     ['Contribution', project?.contribution ?? ''],
     ['Technologies', 'technologies' in entry ? (entry.technologies as string[] | undefined)?.join(', ') ?? '' : ''],
   ].filter(([, value]) => value) : []
-  return <dialog className="detail-dialog" ref={ref} aria-labelledby="dialog-heading" onCancel={event => { event.preventDefault(); onClose() }} onKeyDown={event => {
+  return <dialog className="detail-dialog" data-accent={accent} ref={ref} aria-labelledby="dialog-heading" onCancel={event => { event.preventDefault(); onClose() }} onKeyDown={event => {
     if (event.key !== 'Tab') return
     const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], video[controls], [tabindex="0"]')].filter(node => node.getClientRects().length > 0)
     const first = controls[0], last = controls[controls.length - 1]

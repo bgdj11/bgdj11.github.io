@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" shape-rendering="crispEdges">
+  <!-- Original nine-slice frame inspired by tiled RPG inventory hardware. -->
+  <g id="top-tile">
+    <path fill="#030806" d="M24 0h24v24H24z"/>
+    <path fill="#2d2921" d="M24 4h24v16H24z"/>
+    <path fill="#82704f" d="M26 5h20v13H26z"/>
+    <path fill="#e2cda7" d="M28 6h16v4H28z"/>
+    <path fill="#c7aa73" d="M28 10h16v6H28z"/>
+    <path fill="#6a5c41" d="M28 16h16v2H28z"/>
+    <path fill="#07100c" d="M24 20h24v4H24zM24 4h2v16h-2zM46 4h2v16h-2z"/>
+  </g>
+  <use href="#top-tile" transform="rotate(180 36 36)"/>
+  <g id="left-tile">
+    <path fill="#030806" d="M0 24h24v24H0z"/>
+    <path fill="#2d2921" d="M4 24h16v24H4z"/>
+    <path fill="#82704f" d="M5 26h13v20H5z"/>
+    <path fill="#e2cda7" d="M6 28h4v16H6z"/>
+    <path fill="#c7aa73" d="M10 28h6v16h-6z"/>
+    <path fill="#6a5c41" d="M16 28h2v16h-2z"/>
+    <path fill="#07100c" d="M20 24h4v24h-4zM4 24h16v2H4zM4 46h16v2H4z"/>
+  </g>
+  <use href="#left-tile" transform="rotate(180 36 36)"/>
+  <defs>
+    <g id="corner">
+      <!-- Three overlapping corner stones create the reinforced RPG-frame silhouette. -->
+      <path fill="#020604" d="M6 0h18v4h4v8h-6v12h-10v4H4v-4H0V6h4V2h2z"/>
+      <!-- top arm -->
+      <path fill="#353026" d="M8 2h16v2h4v6h-4v2H8z"/>
+      <path fill="#897652" d="M10 4h14v6H10z"/>
+      <path fill="#ebd8b7" d="M10 4h14v2H10z"/>
+      <path fill="#675a40" d="M10 8h14v2H10z"/>
+      <!-- left arm -->
+      <path fill="#353026" d="M2 8h10v16h-2v4H4v-4H2z"/>
+      <path fill="#897652" d="M4 10h6v14H4z"/>
+      <path fill="#ebd8b7" d="M4 10h2v14H4z"/>
+      <path fill="#675a40" d="M8 10h2v14H8z"/>
+      <!-- central corner stone -->
+      <path fill="#07100c" d="M6 6h16v3h3v13h-4v4H8v-4H4V9h2z"/>
+      <path fill="#5c503a" d="M8 8h13v3h2v10h-4v3H9v-3H6V11h2z"/>
+      <path fill="#c7aa73" d="M9 9h11v3h2v8h-4v3h-8v-3H8v-8h1z"/>
+      <path fill="#f2e1c5" d="M9 9h11v3h-8v8H8v-8h1z"/>
+      <path fill="#786849" d="M18 12h4v8h-4zM12 20h6v3h-6z"/>
+    </g>
+  </defs>
+  <use href="#corner"/>
+  <use href="#corner" transform="rotate(90 36 36)"/>
+  <use href="#corner" transform="rotate(180 36 36)"/>
+  <use href="#corner" transform="rotate(270 36 36)"/>
+</svg>
