@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" shape-rendering="crispEdges">
+  <!-- Nine-slice inventory frame: inset rails, stepped iron corners, raised rivets. -->
+  <defs>
+    <g id="edge">
+      <path fill="#030806" d="M12 0h12v12H12v12H0V12h4V4h8zM24 2h24v10H24z"/>
+      <path fill="#345744" d="M12 2h12v8H10v14H2V12h4V6h6zM24 4h24v6H24z"/>
+      <path fill="#8fbe92" d="M12 4h12v3H9v17H4V12h4V8h4zM24 4h24v2H24z"/>
+      <path fill="#16271f" d="M12 10h12v4H14v10h-4V12h2zM24 8h24v4H24z"/>
+      <path fill="#547c62" d="M12 12h12v2H14v10h-2z"/>
+      <path fill="#030806" d="M8 8h12v12H8z"/>
+      <path fill="#547c62" d="M10 10h8v8h-8z"/>
+      <path fill="#c6e8c1" d="M10 10h8v2h-6v6h-2z"/>
+      <path fill="#345744" d="M16 12h2v6h-6v-2h4z"/>
+    </g>
+  </defs>
+  <use href="#edge"/>
+  <use href="#edge" transform="rotate(90 36 36)"/>
+  <use href="#edge" transform="rotate(180 36 36)"/>
+  <use href="#edge" transform="rotate(270 36 36)"/>
+</svg>

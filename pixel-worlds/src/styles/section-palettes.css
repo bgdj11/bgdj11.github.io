@@ -13,6 +13,7 @@
   --retro-frame: url('/frames/chapters/home-media.svg');
   --selection-frame: url('/frames/chapters/home-selection.svg');
   --card-selection-frame: url('/frames/chapters/home-card.svg');
+  --record-frame: url('/frames/chapters/home-record.svg');
 }
 
 [data-accent='education'] {
@@ -28,6 +29,7 @@
   --retro-frame: url('/frames/chapters/education-media.svg');
   --selection-frame: url('/frames/chapters/education-selection.svg');
   --card-selection-frame: url('/frames/chapters/education-card.svg');
+  --record-frame: url('/frames/chapters/education-record.svg');
 }
 
 [data-accent='experience'] {
@@ -43,6 +45,7 @@
   --retro-frame: url('/frames/chapters/experience-media.svg');
   --selection-frame: url('/frames/chapters/experience-selection.svg');
   --card-selection-frame: url('/frames/chapters/experience-card.svg');
+  --record-frame: url('/frames/chapters/experience-record.svg');
 }
 
 [data-accent='projects'] {
@@ -58,6 +61,7 @@
   --retro-frame: url('/frames/chapters/projects-media.svg');
   --selection-frame: url('/frames/chapters/projects-selection.svg');
   --card-selection-frame: url('/frames/chapters/projects-card.svg');
+  --record-frame: url('/frames/chapters/projects-record.svg');
 }
 
 [data-accent='beyond-code'] {
@@ -73,6 +77,7 @@
   --retro-frame: url('/frames/chapters/beyond-code-media.svg');
   --selection-frame: url('/frames/chapters/beyond-code-selection.svg');
   --card-selection-frame: url('/frames/chapters/beyond-code-card.svg');
+  --record-frame: url('/frames/chapters/beyond-code-record.svg');
 }
 
 [data-accent='contact'] {
@@ -88,4 +93,15 @@
   --retro-frame: url('/frames/chapters/contact-media.svg');
   --selection-frame: url('/frames/chapters/contact-selection.svg');
   --card-selection-frame: url('/frames/chapters/contact-card.svg');
+  --record-frame: url('/frames/chapters/contact-record.svg');
 }
+
+[data-category='Graphics'] { --record-frame: url('/frames/chapters/Graphics-record.svg'); }
+
+[data-category='Vision'] { --record-frame: url('/frames/chapters/Vision-record.svg'); }
+
+[data-category='AI'] { --record-frame: url('/frames/chapters/AI-record.svg'); }
+
+[data-category='Games'] { --record-frame: url('/frames/chapters/Games-record.svg'); }
+
+[data-category='Other'] { --record-frame: url('/frames/chapters/Other-record.svg'); }

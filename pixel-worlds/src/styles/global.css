@@ -17,6 +17,11 @@ button:disabled { cursor: default; }
 ::selection { background: var(--color-accent); color: var(--color-ink); }
 h1, h2, h3, h4, p { margin: 0; }
 h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 400; font-synthesis: none; line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
+/* Press Start 2P shortens É to fit its accent. Draw a full-height E and pixel acute,
+   leaving the original É in the DOM for selection and accessible names. */
+.pixel-capital-e { position: relative; display: inline-block; line-height: 1; -webkit-text-fill-color: transparent; text-shadow: none; }
+.pixel-capital-e::before { content: 'E' / ''; position: absolute; inset: 0; -webkit-text-fill-color: currentColor; pointer-events: none; }
+.pixel-capital-e::after { content: ''; position: absolute; right: .25em; top: -.15em; width: .125em; height: .125em; background: currentColor; box-shadow: .125em -.125em 0 currentColor; pointer-events: none; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 img { max-width: 100%; display: block; }
 strong { color: var(--color-text); font-weight: 500; }
@@ -145,6 +150,21 @@ button, a { -webkit-user-select: auto; }
 .section-panel-hero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(24px, 3vw, 48px); align-items: center; }
 .section-aside { min-width: 0; }
 .home-description { color: var(--color-muted); max-width: 48ch; line-height: 1.8; }
+.home-intro-copy,
+#beyond-code .section-intro,
+#contact .section-intro,
+#contact .resume-preview p {
+  color: var(--color-text);
+  font-size: clamp(18px, 1.4vw, 20px);
+  line-height: 1.8;
+  text-shadow: -1px 0 #07090d, 1px 0 #07090d, 0 -1px #07090d, 0 1px #07090d, 1px 2px #07090d;
+}
+/* Long introductory copy needs a quieter surface than the other chapters. */
+#home .section-panel { --chapter-panel-opacity: var(--home-panel-opacity); }
+.home-intro-copy { max-width: 48ch; text-shadow: 0 1px #07090d; }
+.home-intro-copy > p:first-child { font-weight: 500; }
+.home-intro-copy .home-description { color: inherit; font-size: inherit; }
+.home-intro-copy > p + p { margin-top: 18px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
 .hero-actions .button { font-size: 11px; gap: 12px; padding-inline: 14px; }
 .intro-socials { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 28px; }
@@ -197,6 +217,13 @@ button, a { -webkit-user-select: auto; }
 .entry-location { font-size: 18px; color: var(--color-muted); line-height: 1.6; }
 .detail-institution-heading { display: flex; align-items: center; gap: 24px; margin-bottom: 24px; }
 .detail-institution-heading h2 { margin-bottom: 0; }
+.education-dialog-header { display: grid; grid-template-columns: 80px minmax(0, 1fr) minmax(230px, .52fr); align-items: start; gap: 24px; margin-bottom: 44px; }
+.education-dialog-header > .media-logo { width: 80px; }
+.education-dialog-identity { min-width: 0; }
+.education-dialog-identity h2 { margin: 0; }
+.education-dialog-university { margin-top: 8px; color: var(--color-muted) !important; font-size: 18px; }
+.education-dialog-credential { margin-top: 24px; color: var(--color-accent) !important; font-size: 17px; }
+.education-dialog-program { margin-top: 10px; color: var(--color-text) !important; font-family: var(--font-heading); font-size: clamp(15px, 1.45vw, 19px); line-height: 1.65; }
 .entry-date, .experience-date { color: var(--color-accent); font-size: 18px; }
 .entry-copy h3, .experience-entry h3 { font-size: clamp(.875rem, 1.2vw, 1rem); margin: 8px 0 12px; }
 .entry-copy > p:not(.entry-date), .experience-entry article > p, .hobby-card > p { color: var(--color-muted); font-size: 18px; }
@@ -453,8 +480,32 @@ a.social-link:hover { color: var(--color-accent); }
 .detail-dialog::-webkit-scrollbar { display: none; width: 0; height: 0; }
 .detail-dialog::backdrop { background: #020305de; }
 .detail-dialog { border-image: var(--retro-panel-frame) 48 / 48px round; }
-.dialog-toolbar { position: sticky; top: 0; background: var(--color-panel); z-index: 4; display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; border-bottom: 1px solid var(--panel-rule); }
-.dialog-toolbar > span { font-size: 16px; color: var(--color-subtle); }
+.dialog-toolbar { position: sticky; top: 0; background: var(--color-panel); z-index: 4; display: flex; align-items: center; justify-content: flex-end; padding: 12px 24px; border-bottom: 1px solid var(--panel-rule); }
+.dialog-scroll-cue { position: sticky; bottom: 0; z-index: 3; height: 56px; margin-top: -56px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.dialog-scroll-hint { display: inline-flex; align-items: center; gap: 14px; padding: 10px 16px; background: var(--color-panel); border: 2px solid var(--color-accent); box-shadow: 0 4px 0 #020305; font: 10px/1.8 var(--font-ui); color: var(--color-accent); }
+.dialog-scroll-hint svg { width: 20px; height: 20px; }
+.dialog-scroll-hint[data-visible='false'] { visibility: hidden; }
+.detail-dialog:has(.dialog-scroll-cue) .dialog-inner { padding-bottom: 76px; }
+.experience-profile-dialog .dialog-toolbar { border-bottom: 0; padding: 4px 16px; }
+.experience-profile-dialog .dialog-inner { padding: 12px clamp(20px, 3vw, 40px) 76px; font-size: 18px; line-height: 1.65; }
+.experience-profile-dialog .detail-facts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr); gap: 16px 24px; }
+.experience-profile-dialog .detail-facts:not(:has(> div:nth-child(3))) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.experience-profile-dialog .detail-facts > div { display: block; padding: 0; border: 0; }
+.experience-profile-dialog .detail-facts dt { color: var(--color-accent); font-size: 14px; }
+.experience-profile-dialog .detail-facts dd { font-size: 16px; }
+.experience-profile-dialog .detail-block { margin-top: 36px; }
+.experience-profile-dialog .detail-block h3 { color: var(--color-accent); font-size: 16px; line-height: 1.8; }
+.experience-profile-dialog .education-subsections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; margin-top: 24px; }
+.experience-profile-dialog .education-subsections h4 { font: 12px/1.9 var(--font-heading); color: #a6c6dc; margin-bottom: 10px; }
+.experience-profile-dialog .detail-block ul { padding-left: 18px; }
+.experience-profile-dialog .detail-block li::marker { color: var(--color-accent); }
+@media (max-width: 700px) {
+  .experience-profile-dialog .education-subsections { grid-template-columns: minmax(0, 1fr); }
+  .experience-profile-dialog .detail-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .experience-profile-dialog .detail-facts > div:nth-child(3):last-child { grid-column: 1 / -1; }
+  .experience-profile-dialog .dialog-inner { padding-inline: 16px; }
+  .experience-profile-dialog .detail-block h3 { font-size: 14px; }
+}
 .dialog-close { width: 44px; min-height: 44px; padding: 8px 8px 12px; }
 .dialog-inner { padding: 28px clamp(24px, 5vw, 76px) 56px; }
 .dialog-inner h2 { font-size: clamp(1rem, 2.2vw, 1.5rem); margin-bottom: 20px; max-width: 36ch; }
@@ -468,6 +519,19 @@ a.social-link:hover { color: var(--color-accent); }
 .detail-facts > div { display: grid; grid-template-columns: 130px minmax(0, 1fr); padding-block: 12px; gap: 18px; border-top: 1px solid var(--panel-rule); }
 .detail-facts dt { color: var(--color-subtle); font-size: 16px; }
 .detail-facts dd { margin: 0; font-size: 18px; }
+.education-dialog-meta { display: grid; gap: 16px; margin: 0; text-align: right; }
+.education-dialog-meta > div { display: grid; gap: 3px; }
+.education-dialog-meta dt { color: var(--color-accent); font-family: var(--font-ui); font-size: 10px; line-height: 1.7; }
+.education-dialog-meta dd { margin: 0; color: var(--color-muted); font-size: 16px; line-height: 1.5; }
+.detail-dialog[data-accent='education'] .detail-block { max-width: 76ch; }
+.detail-dialog[data-accent='education'] .detail-block h3 { color: var(--color-secondary); }
+.detail-dialog[data-accent='education'] .detail-block ul { padding-left: 0; list-style: none; }
+.detail-dialog[data-accent='education'] .detail-block li { position: relative; padding-left: 18px; }
+.detail-dialog[data-accent='education'] .detail-block li::before { content: ''; position: absolute; left: 0; top: calc(.5lh - 3px); width: 6px; height: 6px; background: var(--color-accent); }
+.education-coursework { max-width: none !important; }
+.education-coursework-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 56px; }
+.education-coursework-column h4 { margin-bottom: 16px; color: var(--color-text); font-family: var(--font-body); font-size: 18px; font-weight: 500; }
+.detail-dialog[data-accent='education'] .education-coursework-column li + li { margin-top: 10px; }
 .detail-block { margin-top: 32px; }
 .detail-block h3 { font-size: 16px; margin-bottom: 16px; }
 .detail-block p + p { margin-top: 14px; }
@@ -549,6 +613,9 @@ a.social-link:hover { color: var(--color-accent); }
   .academic-heading .entry-date { font-size: 18px; }
   .detail-institution-heading { gap: 14px; align-items: flex-start; }
   .detail-institution-heading h2 { font-size: 14px; }
+  .education-dialog-header { grid-template-columns: 56px minmax(0, 1fr); gap: 14px; }
+  .education-dialog-header > .media-logo { width: 56px; }
+  .education-dialog-meta { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; text-align: left; margin-top: 12px; }
   .featured-work, .small-projects { grid-template-columns: 1fr; }
   .academic-entry { padding-block: 22px; }
   .academic-entries { gap: 0; }
@@ -575,6 +642,8 @@ a.social-link:hover { color: var(--color-accent); }
   .dialog-toolbar { padding: 10px 16px; }
   .dialog-inner { padding: 22px 20px 32px; }
   .detail-facts > div { grid-template-columns: 1fr; gap: 4px; }
+  .education-coursework-columns { grid-template-columns: 1fr; gap: 28px; }
+  .education-dialog-meta { grid-template-columns: 1fr; }
   .favorites { grid-template-columns: 1fr; }
 }
 @media (max-width: 360px) {
@@ -593,4 +662,57 @@ a.social-link:hover { color: var(--color-accent); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Compact education profile, within the existing scrolling pixel dialog. */
+.education-profile-dialog .dialog-toolbar { padding: 4px 16px; border-bottom: 0; }
+.education-profile-dialog .dialog-inner { padding: 8px clamp(20px, 3vw, 40px) 28px; font-size: 17px; line-height: 1.6; }
+.education-profile-dialog .education-dialog-header { grid-template-columns: 64px minmax(0, 1fr); gap: 16px 20px; margin-bottom: 26px; }
+.education-profile-dialog .education-dialog-header > .media-logo { width: 64px; }
+.education-profile-dialog .education-dialog-identity h2 { font-size: clamp(16px, 1.6vw, 21px); line-height: 1.5; margin: 0; max-width: none; }
+.education-profile-dialog .education-dialog-university { margin-top: 4px; font-size: 17px; }
+.education-profile-dialog .education-dialog-degree { grid-column: 1 / -1; min-width: 0; background: #131b25; padding: 14px 18px; }
+.education-profile-dialog .education-dialog-credential { margin-top: 0; font-size: 15px; }
+.education-profile-dialog .education-dialog-program { margin-top: 6px; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.6; color: #d5c29b !important; text-wrap: balance; }
+.education-profile-dialog .education-dialog-meta { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) auto; gap: 12px 24px; margin: 0; text-align: left; }
+.education-profile-dialog .education-dialog-meta dt { color: var(--color-accent); font: 500 14px/1.5 var(--font-body); }
+.education-profile-dialog .education-dialog-meta dd { font-size: 15px; line-height: 1.6; }
+.education-profile-dialog .dialog-inner p, .education-profile-dialog[data-accent='education'] .detail-block { max-width: none; }
+.education-profile-dialog .detail-block { margin-top: 28px; }
+.education-profile-dialog[data-accent='education'] .detail-block h3 { color: var(--color-accent); font-size: 16px; margin-bottom: 16px; line-height: 1.6; }
+.education-profile-dialog .education-coursework-columns,
+.education-profile-dialog .education-involvement-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 32px; }
+.education-profile-dialog .education-coursework-column h4,
+.education-profile-dialog .education-involvement h4 { margin: 0 0 12px; font: 400 12px/1.8 var(--font-heading); color: #d5c29b; }
+.education-profile-dialog .education-coursework-column { display: grid; grid-template-rows: subgrid; grid-row: span 2; row-gap: 12px; min-width: 0; }
+.education-profile-dialog .education-coursework-column h4 { margin: 0; }
+.education-profile-dialog .education-coursework-column ul { align-self: start; }
+.education-profile-dialog .education-coursework-column li + li { margin-top: 5px; }
+.education-profile-dialog .education-involvement h4 { display: flex; align-items: baseline; gap: 10px; }
+.education-profile-dialog .ambassador-icon { width: 16px; height: 16px; flex: 0 0 16px; color: var(--color-accent); }
+.education-profile-dialog .education-involvement { padding-top: 6px; border-top: 0; }
+.education-profile-dialog .education-dialog-specialization { margin-top: 8px; font-size: 16px; }
+.education-profile-dialog .education-dialog-meta:has(> div:nth-child(4)) { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) repeat(3, auto); }
+.education-profile-dialog .education-subsections { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px 32px; }
+.education-profile-dialog .education-subsections h4 { font: 400 12px/1.8 var(--font-heading); color: #d5c29b; margin-bottom: 12px; }
+.education-profile-dialog .education-subsections + ul { margin-top: 12px; }
+@media (min-width: 1100px) {
+  .education-profile-dialog .education-coursework-columns.has-three-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+}
+@media (max-width: 900px) {
+  .education-profile-dialog .education-dialog-meta:has(> div:nth-child(4)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .education-profile-dialog .education-coursework-columns,
+  .education-profile-dialog .education-involvement-columns { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
+@media (max-width: 600px) {
+  .education-profile-dialog .dialog-inner { padding: 10px 16px 24px; }
+  .education-profile-dialog .education-dialog-header { grid-template-columns: 48px minmax(0, 1fr); gap: 16px 12px; }
+  .education-profile-dialog .education-dialog-header > .media-logo { width: 48px; }
+  .education-profile-dialog .education-dialog-degree { grid-column: 1 / -1; }
+  .education-profile-dialog .education-dialog-meta { grid-template-columns: 1fr 1fr; gap: 12px 18px; }
+  .education-profile-dialog .education-dialog-meta:has(> div:nth-child(4)) { grid-template-columns: 1fr 1fr; }
+  .education-profile-dialog .education-dialog-meta > div:first-child { grid-column: 1 / -1; }
+  .education-profile-dialog .education-dialog-degree { padding: 12px; }
 }

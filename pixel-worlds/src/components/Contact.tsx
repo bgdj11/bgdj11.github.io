@@ -11,7 +11,7 @@ export function safeUrl(url?: string) {
 }
 
 export function ContentLinks({ links = [] }: { links?: ContentLink[] }) {
-  return <div className="content-links">{links.filter(link => safeUrl(link.url)).map(link => <a key={link.url} href={link.url} className="text-link" target="_blank" rel="noopener noreferrer">{link.label}<Icon name="arrow" /></a>)}</div>
+  return <div className="content-links">{links.filter(link => safeUrl(link.url)).map(link => <a key={link.url} href={link.url} className="text-link" target="_blank" rel="noopener noreferrer">{link.url.startsWith('https://github.com/') && <img className="github-link-icon" src="/media/social/normal/github.png" width="24" height="24" alt="GitHub:" />}{link.label}<Icon name="arrow" /></a>)}</div>
 }
 
 function SocialIcon({ kind }: { kind: SocialKind }) {

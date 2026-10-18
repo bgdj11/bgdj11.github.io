@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { DetailContent, Project } from '../data/portfolio'
+import type { DetailContent, Education, Project } from '../data/portfolio'
 import { projects } from '../data/portfolio'
 import { FramedImage, ImageGallery } from './Media'
 import { ContentLinks } from './Contact'
 import { Icon } from './Icon'
+import { PixelHeadingText } from './PixelHeadingText'
+import { ProjectCaseStudy } from './ProjectCaseStudy'
 
 function linkedProject() {
   const id = new URL(location.href).searchParams.get('project')
@@ -73,15 +75,19 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     }
   }, [entry])
   const project = entry && 'category' in entry ? entry as Project : null
+  const educationEntry = entry && 'degree' in entry ? entry as Education : null
+  const polytechniqueEntry = educationEntry?.id === 'polytechnique' ? educationEntry : null
+  const educationProfile = educationEntry
+  const experienceProfile = !!entry && 'role' in entry
   const accent = entry && 'degree' in entry ? 'education' : entry && 'role' in entry ? 'experience' : project ? 'projects' : 'beyond-code'
-  const facts = entry ? [
-    ['degree' in entry ? 'Degree' : 'role' in entry ? 'Role' : '', 'degree' in entry ? ['credential' in entry ? entry.credential : '', entry.degree].filter(Boolean).join(' — ') : 'role' in entry ? String(entry.role) : ''],
+  const facts = entry && !educationEntry ? [
+    ['role' in entry ? 'Role' : '', 'role' in entry ? String(entry.role) : ''],
     ['Dates', 'dates' in entry ? String(entry.dates ?? '') : project?.year ?? ''],
     ['Location', entry.location ?? ''],
     ['Contribution', project?.contribution ?? ''],
     ['Technologies', 'technologies' in entry ? (entry.technologies as string[] | undefined)?.join(', ') ?? '' : ''],
-  ].filter(([, value]) => value) : []
-  return <dialog className="detail-dialog" data-accent={accent} ref={ref} aria-labelledby="dialog-heading" onCancel={event => { event.preventDefault(); onClose() }} onKeyDown={event => {
+  ].filter(([label, value]) => label && value && !(experienceProfile && label === 'Role')) : []
+  return <dialog className={'detail-dialog' + (educationProfile ? ' education-profile-dialog' : '') + (experienceProfile ? ' experience-profile-dialog' : '') + (project ? ' project-profile-dialog' : '')} data-accent={accent} ref={ref} aria-labelledby="dialog-heading" onCancel={event => { event.preventDefault(); onClose() }} onKeyDown={event => {
     if (event.key !== 'Tab') return
     const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], video[controls], [tabindex="0"]')].filter(node => node.getClientRects().length > 0)
     const first = controls[0], last = controls[controls.length - 1]
@@ -92,22 +98,79 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     if (event.target === event.currentTarget && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) onClose()
   }}>
     {entry && <>
-      <div className="dialog-toolbar"><span>Details</span><button className="dialog-close" onClick={onClose} aria-label="Close details"><Icon name="close" /></button></div>
+      <div className="dialog-toolbar"><button className="dialog-close" onClick={onClose} aria-label="Close details"><Icon name="close" /></button></div>
       <div className="dialog-inner" key={entry.id}>
-        <div className={entry.media.presentation === 'logo' ? 'detail-institution-heading' : undefined}>
-          {entry.media.presentation === 'logo' && entry.media.src && <FramedImage media={entry.media} />}
-          <div><h2 id="dialog-heading">{'role' in entry ? String(entry.role) : entry.title}</h2>{'role' in entry && <p className="experience-company">{entry.title}</p>}</div>
-        </div>
-        {entry.subtitle && <p>{entry.subtitle}</p>}
-        {entry.summary && <p className="detail-summary">{entry.summary}</p>}
+        {project?.caseStudy ? <ProjectCaseStudy project={project} /> : <>
+        {educationEntry ? <header className="education-dialog-header">
+          {entry.media.src && <FramedImage media={entry.media} />}
+          <div className="education-dialog-identity">
+            <h2 id="dialog-heading"><PixelHeadingText>{entry.title}</PixelHeadingText></h2>
+            {entry.subtitle && <p className="education-dialog-university">{entry.subtitle}</p>}
+          </div>
+          {educationProfile && <div className="education-dialog-degree">
+            {educationEntry.credential && <p className="education-dialog-credential">{educationEntry.credential}</p>}
+            <p className="education-dialog-program">{educationEntry.degree}</p>
+            {educationEntry.summary && <p className="education-dialog-specialization">{educationEntry.summary}</p>}
+          </div>}
+          <dl className="education-dialog-meta" aria-label="Education details">
+            {educationEntry.dates && <div><dt>Period</dt><dd>{educationEntry.dates}</dd></div>}
+            {educationEntry.location && <div><dt>Location</dt><dd>{educationEntry.location}</dd></div>}
+            {educationEntry.credits && <div><dt>Credits</dt><dd>{educationEntry.credits} ECTS</dd></div>}
+            {educationEntry.gpa && <div><dt>GPA</dt><dd>{educationEntry.gpa}</dd></div>}
+            {educationEntry.status && <div><dt>Status</dt><dd>{educationEntry.status}</dd></div>}
+          </dl>
+        </header> : <>
+          <div className={entry.media.presentation === 'logo' ? 'detail-institution-heading' : undefined}>
+            {entry.media.presentation === 'logo' && entry.media.src && <FramedImage media={entry.media} />}
+            <div><h2 id="dialog-heading"><PixelHeadingText>{'role' in entry ? String(entry.role) : entry.title}</PixelHeadingText></h2>{'role' in entry && <p className="experience-company">{entry.title}</p>}</div>
+          </div>
+          {entry.subtitle && <p>{entry.subtitle}</p>}
+        </>}
+        {entry.summary && !educationProfile && !experienceProfile && <p className="detail-summary">{entry.summary}</p>}
         {entry.placeholderNote && <p className="draft-note">{entry.placeholderNote}</p>}
         {!!facts.length && <dl className="detail-facts">{facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>}
         {entry.media.presentation !== 'logo' && (!('role' in entry) || entry.media.src) && <FramedImage media={{ ...entry.media, fit: 'contain' }} />}
-        {entry.details.map((block, index) => <section className="detail-block" key={index} aria-labelledby={'detail-block-' + index}><h3 id={'detail-block-' + index}>{block.heading}</h3>{block.paragraphs?.map((paragraph, i) => <p key={i}>{paragraph}</p>)}{!!block.items?.length && <ul>{block.items.map((item, i) => <li key={i}>{item}</li>)}</ul>}</section>)}
+        {!!educationEntry?.aboutProgram?.length && <DetailBlockView block={{ heading: 'About the Program', paragraphs: educationEntry.aboutProgram }} id="detail-block-about" />}
+        {!!educationEntry?.coursework?.length && <Coursework blocks={educationEntry.coursework} />}
+        {polytechniqueEntry ? <>
+          <DetailBlockView block={polytechniqueEntry.details[0]} id="detail-block-about" />
+          <Coursework blocks={polytechniqueEntry.details.slice(1, 3)} />
+          <section className="detail-block education-involvement" aria-labelledby="detail-block-honors">
+            <h3 id="detail-block-honors">Honors &amp; Involvement</h3>
+            <div className="education-involvement-columns">
+              <article>
+                <h4>{polytechniqueEntry.details[3].items?.join(', ')}</h4>
+                <p>Academic distinction</p>
+              </article>
+              {polytechniqueEntry.involvement?.map(item => <article key={item.title}>
+                <h4><svg className="ambassador-icon" viewBox="0 0 16 16" aria-hidden="true" shapeRendering="crispEdges"><path fill="currentColor" d="M2 1h12v2h2v8h-2v2H8l-4 3v-3H2v-2H0V3h2V1zm0 2v8h4v2l2-2h6V3H2zM4 6h2v2H4zm3 0h2v2H7zm3 0h2v2h-2z" /></svg>{item.title}</h4>
+                <p>{item.description}</p>
+              </article>)}
+            </div>
+          </section>
+        </> : entry.details.map((block, index) => <DetailBlockView block={block} id={'detail-block-' + index} key={index} />)}
         {!!entry.gallery?.length && <section className="detail-block"><h3>Gallery</h3><ImageGallery media={entry.gallery} /></section>}
         {!!entry.favorites?.length && <section className="detail-block"><h3>Favorites & collections</h3><div className="favorites">{entry.favorites.map((favorite, index) => <article key={index}>{favorite.media && <FramedImage media={favorite.media} />}<h4>{favorite.title}</h4>{favorite.category && <p>{favorite.category}</p>}{favorite.note && <p>{favorite.note}</p>}</article>)}</div></section>}
         <ContentLinks links={entry.links} />
+        </>}
       </div>
     </>}
   </dialog>
+}
+
+function DetailBlockView({ block, id }: { block: DetailContent['details'][number]; id: string }) {
+  if (!block) return null
+  return <section className="detail-block" aria-labelledby={id}><h3 id={id}>{block.heading}</h3>{block.paragraphs?.map((paragraph, i) => <p key={i}>{paragraph}</p>)}{!!block.subsections?.length && <div className="education-subsections">{block.subsections.map(part => <article key={part.heading}><h4>{part.heading}</h4>{part.paragraphs?.map(text => <p key={text}>{text}</p>)}{!!part.items?.length && <ul>{part.items.map(text => <li key={text}>{text}</li>)}</ul>}</article>)}</div>}{!!block.items?.length && <ul>{block.items.map((item, i) => <li key={i}>{item}</li>)}</ul>}<ContentLinks links={block.links} /></section>
+}
+
+function Coursework({ blocks }: { blocks: DetailContent['details'] }) {
+  return <section className="detail-block education-coursework" aria-labelledby="education-coursework-heading">
+    <h3 id="education-coursework-heading">Relevant Coursework</h3>
+    <div className={'education-coursework-columns' + (blocks.length === 3 ? ' has-three-columns' : '')}>
+      {blocks.map((block, index) => <section className="education-coursework-column" key={block.heading} aria-labelledby={'coursework-column-' + index}>
+        <h4 id={'coursework-column-' + index}>{block.heading}</h4>
+        <ul>{block.items?.map(item => <li key={item}>{item}</li>)}</ul>
+      </section>)}
+    </div>
+  </section>
 }

@@ -3,7 +3,8 @@
   color-scheme: dark;
   --color-bg: #07090d;
   --color-panel: #0d1110;
-  --chapter-panel-opacity: 0.92;
+  --chapter-panel-opacity: 0.42;
+  --home-panel-opacity: 0.84;
   --color-panel-raised: #18201c;
   --color-text: #fff2df;
   --color-muted: #d1cdc5;

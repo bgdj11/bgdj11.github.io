@@ -1,10 +1,13 @@
-import portraitImage from '../../../images/me.jpg'
+import portraitImage from '../../../images/me2.jpg'
 import basketballImage from '../../../images/basketabll.png'
 import boardGamesImage from '../../../images/board_games.png'
 import videoGamesImage from '../../../images/gaming.png'
 import fishingImage from '../../../images/fishing.png'
 import comtradeLogo from '../../../images/comtrade.png'
 import petnicaLogo from '../../../images/petnica.jpg'
+import zmajPortrait from '../../../images/Jovan_Jovanović_Zmaj.jpg'
+import { comtradeDetails } from './comtrade'
+export { projects } from './projects'
 
 export type SectionId = 'home' | 'education' | 'experience' | 'projects' | 'beyond-code' | 'contact'
 export type World = 'universe' | 'sky' | 'mountains' | 'botanical' | 'underwater'
@@ -40,11 +43,12 @@ export interface MediaAsset {
   captionsSrc?: string // WebVTT for videos with speech.
   pixelated?: boolean // Photographs stay clear unless explicitly enabled.
   presentation?: 'logo' // Compact institutional marks, not gallery photographs.
+  background?: string // Matte behind transparent media; does not alter the original artwork.
 }
 export interface ContentLink { label: string; url: string }
 export type SocialKind = 'github' | 'linkedin' | 'itch' | 'instagram' | 'email' | 'whatsapp'
 export interface Social { kind: SocialKind; label: string; url?: string }
-export interface DetailBlock { heading: string; paragraphs?: string[]; items?: string[] }
+export interface DetailBlock { heading: string; paragraphs?: string[]; items?: string[]; subsections?: DetailBlock[]; links?: ContentLink[] }
 export interface Favorite { title: string; note?: string; category?: string; media?: MediaAsset }
 export interface DetailContent {
   id: string
@@ -59,25 +63,49 @@ export interface DetailContent {
   links?: ContentLink[]
   favorites?: Favorite[]
 }
-export interface Education extends DetailContent { dates?: string; degree: string; credential?: string; credits?: number; gpa?: string }
-export interface Experience extends DetailContent { dates?: string; role: string; highlights?: string[]; technologies?: string[] }
+export interface Education extends DetailContent { dates?: string; cardDates?: string; degree: string; credential?: string; credits?: number; gpa?: string; status?: string; aboutProgram?: string[]; coursework?: DetailBlock[]; involvement?: { title: string; description: string }[] }
+export interface Experience extends DetailContent { dates?: string; cardDates?: string; role: string; highlights?: string[]; technologies?: string[] }
 export type ProjectCategory = 'Graphics' | 'Vision' | 'AI' | 'Games' | 'Other'
+export type ProjectCollection = 'Graphics & Computer Vision' | 'AI & Other Projects'
+export interface ProjectChart {
+  display?: 'table'
+  label: string
+  unit: string
+  max: number
+  series: string[]
+  rows: { label: string; values: number[] }[]
+  note: string
+}
+export interface ProjectSection extends DetailBlock {
+  comparison?: { label: string; media: MediaAsset }[]
+  navLabel?: string
+  code?: string
+  table?: { caption: string; columns: string[]; rows: string[][] }
+  media?: MediaAsset[]
+  chart?: ProjectChart
+  source?: ContentLink
+}
+export interface ProjectDocument { title: string; description: string; url: string; preview: string; format: string; slides?: boolean; original?: string }
 export interface Project extends DetailContent {
+  cardMedia?: MediaAsset
   category: ProjectCategory
   featured: boolean // Array order sets editorial order.
   year?: string
   contribution?: string
   technologies?: string[]
+  collection?: ProjectCollection
+  caseStudy?: ProjectSection[]
+  documents?: ProjectDocument[]
 }
 export type Hobby = DetailContent
 
 const photo = (id: string, placeholder: string, shape: MediaAsset['shape'] = 'landscape'): MediaAsset => ({ id, alt: '', placeholder, shape })
 
 export const profile = {
-  name: 'Bogdan Djukic', initials: 'BD', greeting: 'HELLO, WORLD!',
-  introduction: "I'm an MScT student in Visual and Creative Artificial Intelligence at École Polytechnique.",
-  description: "I'm interested in computer graphics, computer vision, creative AI, and building interactive experiences.",
-  portrait: { id: 'portrait', src: portraitImage, alt: 'Bogdan Djukic by the sea', placeholder: 'Bogdan Djukic', shape: 'portrait', fit: 'cover', position: '50% 30%', width: 3200, height: 4000 } satisfies MediaAsset,
+  name: 'Bogdan Đukić', initials: 'BĐ', greeting: '',
+  introduction: "I'm currently pursuing an MScT in Visual and Creative Artificial Intelligence at École Polytechnique, with previous experience working as an AI engineer.",
+  description: "My interests lie in computer vision, computer graphics, and creative AI. Lately, I've also been exploring game development with Godot and diving deeper into real-time graphics. I'm especially drawn to research and R&D at the intersection of AI, computer graphics, and interactive technologies, from the technology behind video games and animated films to new ways of creating and interacting with digital worlds.",
+  portrait: { id: 'portrait', src: portraitImage, alt: 'Bogdan Đukić by the sea', placeholder: 'Bogdan Đukić', shape: 'portrait', fit: 'cover', position: '50% 30%', width: 3200, height: 4000 } satisfies MediaAsset,
   // Fill only with real destinations; missing links render as plain text.
   socials: [
     { kind: 'github', label: 'GitHub', url: 'https://github.com/bgdj11' },
@@ -98,131 +126,111 @@ export const profile = {
 // Sep 2028 is the planned end of the current degree, not a completed qualification.
 export const education: Education[] = [
   {
-    id: 'polytechnique', title: 'École Polytechnique', subtitle: 'Institut Polytechnique de Paris', credential: 'Master of Science and Technology', degree: 'Visual and Creative Artificial Intelligence (ViCAI)', dates: 'Sep 2026–Sep 2028 (expected)', location: 'Paris, France', credits: 140,
+    id: 'polytechnique', title: 'École Polytechnique', subtitle: 'Institut Polytechnique de Paris', credential: 'Master of Science & Technology (MSc&T)', degree: 'Visual and Creative Artificial Intelligence (ViCAI)', dates: 'September 2026 – Present (expected graduation: 2028)', cardDates: 'Sep 2026 – Present', location: 'Palaiseau, France', credits: 140,
     summary: '',
     media: { id: 'polytechnique-logo', src: '/media/education/ecole.svg', alt: 'École Polytechnique logo', placeholder: 'École Polytechnique', presentation: 'logo', shape: 'square', fit: 'cover', width: 186, height: 263 },
     details: [
-      { heading: 'Degree', paragraphs: ['MScT in Visual and Creative Artificial Intelligence (ViCAI), started in September 2026. Expected completion: September 2028. The two-year program carries 140 ECTS credits.'] },
-      { heading: 'Scholarship', items: ['École Polytechnique Excellence Scholarship — École Polytechnique Foundation, 2026.'] },
+      { heading: 'About the Program', paragraphs: ["I am currently pursuing a Master's degree in Visual and Creative Artificial Intelligence at École Polytechnique, focusing on the intersection of computer vision, computer graphics, and machine learning. The program combines visual content analysis and synthesis with modern AI techniques, including deep learning, generative models, and reinforcement learning."] },
+      { heading: 'Computer Vision & Graphics', items: ['Image Analysis and Computer Vision', 'Digital Representations and Analysis of Shapes', 'Computer Animation', 'Image Synthesis'] },
+      { heading: 'Artificial Intelligence & Machine Learning', items: ['Foundations of Machine Learning', 'Advanced Deep Learning', 'Multimodal Generative AI', 'Reinforcement Learning and Autonomous Agents'] },
+      { heading: 'Honors & Awards', items: ['École Polytechnique Foundation Excellence Scholarship'] },
     ],
+    involvement: [{ title: 'Unibuddy Student Ambassador', description: 'Representing École Polytechnique on Unibuddy, connecting with prospective students, answering questions, and sharing firsthand insights into the MSc&T program and student life in France.' }],
     gallery: [], links: [],
   },
   {
-    id: 'bachelors', title: 'Faculty of Technical Sciences', subtitle: 'University of Novi Sad', credential: 'Bachelor of Science', degree: 'Control and Computing Engineering', dates: 'Oct 2021–Jun 2026', location: 'Novi Sad, Serbia', credits: 240, gpa: '9.55/10',
-    summary: 'Applied Computer Science — Intelligent Systems module.',
+    id: 'bachelors', title: 'Faculty of Technical Sciences', subtitle: 'University of Novi Sad', credential: 'Bachelor of Science (BSc)', degree: 'Computing and Control Engineering', dates: 'October 2021 – July 2026', cardDates: 'Oct 2021 – Jul 2026', location: 'Novi Sad, Serbia', credits: 240, gpa: '9.55/10', status: 'Graduated',
+    summary: 'Applied Computer Science – Intelligent Systems',
     media: { id: 'ftn-logo', src: '/media/education/ftn.jpg', alt: 'Faculty of Technical Sciences, University of Novi Sad logo', placeholder: 'FTN', presentation: 'logo', shape: 'square', fit: 'cover' },
+    aboutProgram: [
+      "I completed my Bachelor's degree in Computing and Control Engineering at the Faculty of Technical Sciences, University of Novi Sad, within the Applied Computer Science and Informatics module, focusing on intelligent systems.",
+      "The program provided me with a broad foundation in computer science, covering algorithms, mathematics, software development, and computer systems. During my studies, I developed a particular interest in artificial intelligence, computer graphics, and knowledge-based systems. These interests eventually came together in my Bachelor's thesis on neuro-symbolic visual scene understanding, which also influenced my decision to pursue further studies in Visual and Creative AI.",
+    ],
+    coursework: [
+      { heading: 'Artificial Intelligence, Graphics & Interaction', items: ['Computational Intelligence Fundamentals', 'Knowledge Based Systems', 'Soft Computing', 'Computer Graphics', 'Human-Computer Interaction'] },
+      { heading: 'Algorithms & Computational Methods', items: ['Programming Languages and Data Structures', 'Probability and Stochastic Processes', 'Methods of Optimization', 'Numerical Algorithms and Numerical Software', 'System Modelling and Simulation'] },
+      { heading: 'Computer Systems & Software', items: ['Compilers', 'Operating Systems', 'Computer Architecture', 'Basics of Parallel Programming and Software Tools', 'Internet Software Architectures'] },
+    ],
     details: [
-      { heading: 'Academic background', paragraphs: ['BSc in Control and Computing Engineering (240 ECTS), with the Applied Computer Science — Intelligent Systems module. Cumulative GPA: 9.55/10.'] },
-      { heading: 'Bachelor thesis', paragraphs: ['Visual Scene Understanding through Neurosymbolic Reasoning (2025–2026).'] },
-      { heading: 'Awards & scholarships', items: [
+      { heading: 'Bachelor Thesis', subsections: [{ heading: 'Visual Scene Understanding Through Neuro-Symbolic Reasoning', items: ['Explored neuro-symbolic approaches to visual scene understanding and reasoning.', 'Combined scene representations with symbolic reasoning for answering questions about visual content.'] }], links: [] },
+      { heading: 'Awards & Scholarships', items: [
         'Dositeja Scholarship for Academic Excellence — Fund for Young Talents of the Republic of Serbia, 2025.',
         'Don Walker Scholarship — Magna International, 2022–2025.',
         'Student Scholarship — Ministry of Education, Republic of Serbia, 2022–2024.',
         'Award for Excellence — Municipality of Odžaci, 2022–2025.',
       ] },
-      { heading: 'Projects & activities during my studies', items: ['Federated Actor Learning — February 2026.', 'AI Nation Hackathon — Reputeo & Yandex, November 2025.', 'AIBG V4.0 Hackathon — May 2024.'] },
-      { heading: 'Languages', items: ['Serbian — native.', 'English — TOEFL iBT: 100/120.'] },
+      { heading: 'Hackathons', subsections: [
+        { heading: 'AI Nation Hackathon — Reputeo × Yandex (2025)', items: ['36-hour AI hackathon.', 'Developed CheckMate, a Chrome extension for real-time scam risk detection.', 'Led backend and AI development, implementing semantic search and risk analysis.'] },
+        { heading: 'AIBG v4.0 Hackathon (2024)', items: ['24-hour competitive AI programming hackathon.', 'Developed an autonomous Python bot for the AlienWarz strategy game.', 'Implemented BFS pathfinding and heuristic decision-making for resource management and combat.'] },
+      ] },
+      { heading: 'Student Activities', subsections: [{ heading: 'EESTEC LC Novi Sad — Member', items: ['Participated in student-led initiatives, technical events, and career fairs.', 'Contributed to the organization of KONTEH 2026 as part of the IT team.'] }] },
     ],
     gallery: [], links: [],
   },
   {
     id: 'gymnasium', title: 'Gymnasium “Jovan Jovanović Zmaj”', degree: 'High School Diploma', dates: 'Sep 2017–Jun 2021', location: 'Odžaci, Serbia', gpa: '5.0/5.0',
     summary: 'Secondary education in Odžaci.',
-    media: { id: 'gymnasium-school', src: '/media/education/gimnazija-school.jpg', alt: 'Gimnazija i ekonomska škola Jovan Jovanović Zmaj in Odžaci', placeholder: 'Jovan Jovanović Zmaj', presentation: 'logo', shape: 'square', fit: 'cover' },
-    details: [{ heading: 'Secondary education', paragraphs: ['High School Diploma, September 2017–June 2021. Cumulative GPA: 5.0/5.0.'] }],
-    gallery: [], links: [{ label: 'School website', url: 'https://www.gesjjz.edu.rs/' }],
+    media: { id: 'gymnasium-school', src: zmajPortrait, alt: 'Portrait of Jovan Jovanović Zmaj', placeholder: 'Jovan Jovanović Zmaj', presentation: 'logo', shape: 'square', fit: 'cover' },
+    details: [{ heading: 'High School Years', paragraphs: [
+      'I attended a general-program gymnasium, where I developed a broad academic foundation and an early interest in science. During high school, I participated in chemistry competitions and science fairs, organized chemistry demonstrations, and gave presentations on biology topics, including disease prevention.',
+      'Beyond academics, I was involved in volunteering and peer tutoring, while also actively playing basketball. These experiences helped me develop my curiosity for science, teamwork, and an interest in sharing knowledge with others.',
+    ] }],
+    gallery: [], links: [],
   },
 ]
 
 export const experience: Experience[] = [
   {
-    id: 'comtrade', title: 'Comtrade System Integration', role: 'Junior AI Engineer', dates: 'Jan 2026–Aug 2026', location: 'Belgrade, Serbia',
-    summary: 'Built enterprise RAG systems and AI agents on Azure and on-premises, including multilingual email automation and real-time voice interaction for humanoid robots.',
+    id: 'comtrade', title: 'Comtrade System Integration', role: 'AI Engineer', dates: 'Jan 2026–Aug 2026', location: 'Belgrade, Serbia',
+    summary: 'Developed enterprise AI solutions ranging from advanced RAG systems to real-time conversational agents. Worked on a no-code voice AI platform for large contact centers, with a focus on knowledge bases, conversation analytics, multilingual speech technologies, and LLM-powered applications.',
     media: { id: 'comtrade', src: comtradeLogo, alt: 'Comtrade logo', placeholder: 'Comtrade', presentation: 'logo', shape: 'square', fit: 'contain' },
+    details: comtradeDetails,
+    highlights: ['Python', 'Azure', 'Docker', 'RAG', 'LLMs', 'Voice AI'],
+    technologies: ['Python', 'Azure', 'Docker', 'RAG', 'LLMs', 'Voice AI'], gallery: [], links: [],
+  },
+  {
+    id: 'daze-solutions', title: 'Daze Solutions Limited', role: 'Data Science Intern', dates: 'December 2024 (4 weeks)', cardDates: 'December 2024', location: 'Remote',
+    summary: 'Worked on real estate data analysis and machine learning using Python. Built data preprocessing pipelines, explored property datasets, and applied clustering techniques to identify patterns and visualize insights.',
+    media: { id: 'daze-solutions', src: '/media/experience/daze-initial.svg', alt: 'Letter D placeholder for Daze Solutions Limited', placeholder: 'Daze Solutions Limited', presentation: 'logo', shape: 'square', fit: 'contain' },
     details: [
-      { heading: 'Enterprise RAG systems', items: [
-        'Architected end-to-end RAG pipelines on Azure and on-premises, covering document ingestion, retrieval, generation and observability.',
-        'Optimized retrieval through hybrid search, semantic reranking and semantic chunking tailored to legal, military, HR and regulatory documents.',
-        'Implemented document-level role-based access control and automated SharePoint synchronization using Entra ID group filtering, Microsoft Graph webhooks and the Delta API.',
+      { heading: 'About the Role', paragraphs: ['During my four-week internship at Daze Solutions Limited, I worked on a data science project focused on processing and analyzing real estate data. The experience gave me hands-on practice with Python-based data analysis, feature engineering, and applying machine learning techniques to real-world datasets.'] },
+      { heading: 'Project — Real Estate Data Analysis & Clustering', paragraphs: ['Worked with property datasets stored in PostgreSQL, building a workflow for data preparation, exploratory analysis, and unsupervised machine learning.'] },
+      { heading: 'Key Contributions', subsections: [
+        { heading: 'Data Processing', paragraphs: ['Extracted, cleaned, and normalized real estate data from PostgreSQL using Python, Pandas, and NumPy.'] },
+        { heading: 'Feature Engineering', paragraphs: ['Prepared and transformed property attributes into features suitable for further analysis and machine learning.'] },
+        { heading: 'Clustering', paragraphs: ['Applied K-means clustering to group properties based on their characteristics and explore meaningful patterns within the dataset.'] },
+        { heading: 'Data Visualization', paragraphs: ['Used Matplotlib to visualize clustering results, compare property groups, and interpret the resulting patterns.'] },
       ] },
-      { heading: 'Reliability and model evaluation', items: [
-        'Designed guardrails to reduce hallucinations through context grounding, confidence-based routing and structured fallback logic.',
-        'Evaluated LLMs and embedding models on multilingual and domain-specific datasets, using Serbian retrieval benchmarks to select the production embedding model.',
-      ] },
-      { heading: 'Deployment and infrastructure', paragraphs: [
-        'Managed containerized workloads across Azure and on-premises environments, working with Azure Container Apps, App Service and Functions.',
-      ] },
-      { heading: 'Multilingual email automation', paragraphs: [
-        'Developed a multi-agent pipeline for classifying and responding to high-volume enterprise email in 10 languages, with dynamic guidelines loaded from blob storage.',
-      ] },
-      { heading: 'Real-time voice agents', paragraphs: [
-        'Built a voice agent for humanoid robots with a streaming speech-to-text → LLM → text-to-speech pipeline using LiveKit, Soniox and ElevenLabs, supported by RAG over a vector database.',
+      { heading: 'Technologies & Tools', subsections: [
+        { heading: 'Programming & Analysis', paragraphs: ['Python, Pandas, NumPy, Jupyter Notebook'] },
+        { heading: 'Machine Learning', paragraphs: ['Scikit-learn, K-means Clustering, Feature Engineering'] },
+        { heading: 'Data & Visualization', paragraphs: ['PostgreSQL, Matplotlib'] },
       ] },
     ],
-    highlights: ['AI agents', 'LLM & RAG', 'Microsoft Azure'],
-    technologies: ['Microsoft Azure', 'Microsoft Graph', 'Entra ID', 'SharePoint', 'LiveKit', 'Soniox', 'ElevenLabs'], gallery: [], links: [],
+    highlights: ['Python', 'Pandas', 'NumPy', 'PostgreSQL', 'Scikit-learn', 'Matplotlib'],
+    technologies: ['Python', 'Pandas', 'NumPy', 'PostgreSQL', 'Scikit-learn', 'Matplotlib'], gallery: [], links: [],
   },
   {
-    id: 'daze-solutions', title: 'Daze Solutions Limited', role: 'Data Science Intern', dates: 'Dec 2024', location: 'Remote, Serbia',
-    summary: 'Built an end-to-end real-estate analytics pipeline, from PostgreSQL data to market segmentation.',
-    media: { id: 'daze-solutions', src: '/media/experience/daze-initial.svg', alt: 'Letter D placeholder for Daze Solutions Limited', placeholder: 'Daze Solutions Limited', presentation: 'logo', shape: 'square', fit: 'contain' },
-    details: [{ heading: 'Real-estate analytics pipeline', items: ['Extracted and cleaned PostgreSQL data in Python.', 'Engineered domain-specific features for real-estate analysis.', 'Applied K-means clustering and visualized the resulting market segments.'] }],
-    highlights: ['Data processing', 'Feature engineering', 'Market segmentation'],
-    technologies: ['Python', 'PostgreSQL', 'K-means clustering'], gallery: [], links: [],
-  },
-  {
-    id: 'petnica', title: 'Petnica Science Center', role: 'Research Intern', dates: 'Apr 2019–Sep 2020', location: 'Petnica, Serbia',
-    summary: 'Conducted mentored research in biology and chemistry, from experimental design to analysis and scientific reporting.',
+    id: 'petnica', title: 'Petnica Science Center', role: 'Research Intern', dates: 'April 2019 – September 2020', cardDates: 'Apr 2019 – Sep 2020', location: 'Petnica, Serbia',
+    summary: 'My first experience with scientific research, through intensive seminars in biology and chemistry. Conducted laboratory experiments, explored research methodologies, and learned to document and present scientific findings.',
     media: { id: 'petnica', src: petnicaLogo, alt: 'Petnica Science Center logo', placeholder: 'Petnica Science Center', presentation: 'logo', shape: 'square', fit: 'contain' },
-    details: [{ heading: 'Research experience', paragraphs: ['Conducted mentored research in biology and chemistry, covering experimental design, analysis and scientific reporting.'] }],
-    highlights: ['Experimental design', 'Research reporting'],
+    details: [
+      { heading: 'About the Experience', paragraphs: [
+        'My first introduction to scientific research came during high school, when I attended several intensive, two-week research seminars at Petnica Science Center, focusing on biology and chemistry.',
+        'Through hands-on experiments, research projects, and mentorship, I gained early exposure to the scientific process, from formulating research questions and designing experiments to analyzing results and communicating findings.',
+        'The experience introduced me to scientific writing, research presentations, and the importance of critical thinking and evidence-based reasoning. It also sparked a lasting interest in research that continues to influence my academic and professional interests today.',
+      ] },
+      { heading: 'Research Activities', subsections: [
+        { heading: 'Experimental Research', paragraphs: ['Participated in laboratory experiments and research activities in biology and chemistry, gaining practical experience with experimental procedures and scientific investigation.'] },
+        { heading: 'Scientific Methodology', paragraphs: ['Learned the fundamentals of research design, hypothesis formulation, experimental methods, and interpretation of results.'] },
+        { heading: 'Scientific Writing', paragraphs: ['Practiced structuring and writing research papers and reports, documenting experimental methods, observations, and conclusions.'] },
+        { heading: 'Research Communication', paragraphs: ['Prepared and delivered presentations on research topics and experimental findings, developing skills in scientific communication and discussion.'] },
+      ] },
+      { heading: 'Fields & Skills', paragraphs: ['Biology, Chemistry, Experimental Research, Scientific Methodology, Scientific Writing, Research Presentations'] },
+    ],
+    highlights: ['Biology', 'Chemistry', 'Experimental Research', 'Scientific Methodology', 'Scientific Writing', 'Research Presentations'],
     technologies: [], gallery: [], links: [],
   },
-]
-
-// Candidate entries are labeled drafts, never claims of finished work.
-// Reorder entries / toggle featured here, without editing components.
-export const projects: Project[] = [
-  {
-    id: 'visual-reasoning', title: 'Visual Scene Understanding through Neurosymbolic Reasoning', category: 'Vision', featured: true, year: '2025–2026',
-    summary: 'Bachelor thesis on visual scene understanding and neuro-symbolic reasoning.',
-    contribution: 'Bachelor thesis',
-    media: photo('thesis-preview', 'Thesis preview to come'),
-    placeholderNote: 'Case study in preparation. Methods, contribution and results have not been added.',
-    details: [{ heading: 'About the thesis', paragraphs: ['The detailed account of the research question, implementation and evaluation will be added here.'] }],
-    gallery: [], links: [],
-  },
-  {
-    id: 'graphics-project', title: 'Graphics / vision project', category: 'Graphics', featured: true,
-    summary: 'A place for a selected graphics or computer vision project.',
-    media: photo('graphics-preview', 'Project preview to come'),
-    placeholderNote: 'Selection pending. This is a reserved feature, not a completed project.', details: [], gallery: [], links: [],
-  },
-  {
-    id: 'interactive-worlds', title: 'Game development project', category: 'Games', featured: true,
-    summary: 'A place for a substantial interactive or game development project.',
-    media: photo('game-preview', 'Gameplay preview to come'),
-    placeholderNote: 'Selection pending. This is a reserved feature, not a completed project.', details: [], gallery: [], links: [],
-  },
-  {
-    id: 'applied-ai', title: 'AI engineering project', category: 'AI', featured: true,
-    summary: 'A place for a non-confidential AI engineering case study.',
-    media: photo('ai-preview', 'System preview to come'),
-    placeholderNote: 'Selection pending. This is a reserved feature, not a completed project.', details: [], gallery: [], links: [],
-  },
-  ...([
-    ['space-shooter', 'Space Shooter', 'Games', 'Game overview and playable build to follow.'],
-    ['botanica', 'Botanica Algorithmica', 'Graphics', 'Algorithmic growth and branching forms; details to follow.'],
-    ['graphics-coursework', 'Computer Graphics coursework', 'Graphics', 'A collection for exercises and rendering studies.'],
-    ['vision-studies', 'Computer Vision labs', 'Vision', 'A collection for notebooks and visual results.'],
-    ['curve-studies', 'Animation & curve experiments', 'Graphics', 'A collection for smaller motion experiments.'],
-    ['ai-experiments', 'AI & software experiments', 'AI', 'A collection for smaller engineering projects.'],
-  ] as const).map(([id, title, category, summary]): Project => ({
-    id, title, category, summary, featured: false,
-    media: photo(id + '-thumbnail', 'Preview to come', 'square'),
-    placeholderNote: 'Draft entry. Original media, project details and links will be added.',
-    details: [], gallery: [], links: [],
-  })),
 ]
 
 // Import original files so Vite watches replacements and hashes build URLs.

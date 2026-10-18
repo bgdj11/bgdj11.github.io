@@ -1,6 +1,6 @@
 # Editing the portfolio
 
-All personal content and file paths live in `src/data/portfolio.ts`. No layout changes are needed to add media or fill out entries. Current draft entries do not claim finished work, dates, results or preferences that have not been supplied.
+Personal content lives in `src/data/portfolio.ts`; the nine project profiles live in `src/data/projects.ts`. No layout changes are needed to replace media or edit project text. `PROJECT_RESEARCH.md` records the source review and result limitations.
 
 ## Sections and content
 
@@ -9,7 +9,7 @@ All personal content and file paths live in `src/data/portfolio.ts`. No layout c
 - `profile`: introduction, portrait, social links and resume configuration.
 - `education`: institution name in `title`, parent university in `subtitle`, separate `credential` and `degree`, optional dates/location, `credits` and `gpa`. The institution and small logo sit alongside the degree and summary on desktop, stacking on mobile. Use `presentation: 'logo'` in its media object; leave its `src` absent if no verified logo is available. Whole education, experience and hobby entries open details, including through the keyboard-focusable title; no separate “View details” label is shown.
 - `experience`: employer, role, optional dates, technologies, media and details.
-- `projects`: category, summary, optional year/contribution/technologies, media and details. Set `featured: true` for the compact two-column selection with 150 px previews. More Work uses smaller thumbnail entries, three across on wide screens. Whole cards open details, with no extra action buttons. Array order controls ordering within each group.
+- `projects` in `src/data/projects.ts`: category, collection, summary, optional contribution/technologies, media and `caseStudy` sections. The first two projects are featured; the other seven belong to `Graphics & Computer Vision` or `AI & Other Projects`, matching the supplied list. The two academic labs remain deferred. `category` controls the subtle card accent independently of filtering. Whole cards open the existing shared dialog and preserve direct links and browser history.
 - `hobbies`: Basketball, Board games, Video games and Fishing, with photographs, galleries and optional favorites.
 
 Every entry supports `details`, `gallery` and `links`. Remove `placeholderNote` after replacing a draft with verified content. Optional fields and empty collections are omitted. Use unique, stable IDs; project URLs use `?project=visual-reasoning#projects` and support reload, Back and Forward.
@@ -75,9 +75,15 @@ gallery: [
 ]
 ```
 
-GIFs require an explicit Play action, even without reduced-motion preferences. Provide a still `poster` for a calm preview. Video uses native controls, `preload="none"`, and loads its source when visible. Off-screen/hidden-tab animations stop; videos pause. Project cards use posters for animated media, with playback inside the detail view. Prefer a compressed MP4/WebM over a large GIF for longer footage. Add WebVTT captions for speech and describe important visual information in the adjacent text. Codec compatibility depends on the supplied file and browser; actual footage should be checked when added.
+GIFs and animated WebP previews use `kind: 'gif'`: they animate when visible under normal motion preferences, with a pause/play control. Reduced-motion users start playback manually. Always provide a still `poster`; offscreen and hidden-tab animations return to it. Videos retain native controls, `preload="none"`, and load when visible. Project cards use static posters, or the optional project `cardMedia`. Add WebVTT captions to videos with speech. Galleries support previous/next, thumbnails, keyboard arrows, swipe and an enlarged view.
 
 ## Rich detail content
+
+Project profiles use `caseStudy: ProjectSection[]` and the shared `ProjectCaseStudy` inside `DetailDialog`. Sections support paragraphs, paired subsections, code, `comparison` figures, galleries, tables and a source link. Set concise `navLabel` values for the “On this page” menu. Charts contain explicit labels, units, scale, series, values and provenance in `note`; `display: 'table'` is preferable for unrelated metrics. Never insert synthetic benchmarks.
+
+Documents contain `title`, `description`, `url`, `preview` and `format`. Add `slides: true` and an `original` PPTX URL for a presentation. The first slide deck is the default. `PresentationViewer` lazy-loads PDF.js only when opened, with page navigation, zoom, fullscreen and PDF/PPTX downloads. Serve preconverted static PDFs; conversion is never performed in the visitor’s browser. Thesis/summary PDFs remain direct document links. Source decks are preserved.
+
+Project media live in `public/media/projects/`. Replace assets there and edit their explicit media objects in `src/data/projects.ts`. Keep thumbnails/posters in sync. `background` sets a CSS matte without modifying artwork. Provenance is in `public/media/projects/SOURCES.md`. Regenerate current diagrams with `node scripts/generate-case-study-diagrams.mjs`; the earlier generator and illustrations are retained as references. The overview keeps the two featured projects and BunHub visible, filters additional work through the `work` query parameter, and reserves two honestly labeled ongoing coursework collections.
 
 Use blocks to cover the information appropriate to an entry. For a project, these can be Goal, Approach, Implementation, Technical challenges, My contribution and Results. For experience, use Overview, Responsibilities and Technical contributions. Education can use Coursework and Academic projects.
 

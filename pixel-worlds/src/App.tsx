@@ -19,10 +19,13 @@ export function App() {
     <ChapterRail active={active} />
     <SpaceScene />
     <main id="main" tabIndex={-1}>
-      <WorldSection id="home" eyebrow={profile.greeting} description={profile.introduction}
+      <WorldSection id="home" eyebrow={profile.greeting} description=""
         aside={<FramedImage media={profile.portrait} priority className="hero-portrait" />}
         footer={<div className="chapter-bottom"><a href="#education" className="scroll-cue"><Icon name="down" />Explore the portfolio</a></div>}>
-        <p className="home-description">{profile.description}</p>
+        <div className="home-intro-copy">
+          <p>{profile.introduction}</p>
+          <p className="home-description">{profile.description}</p>
+        </div>
         <div className="hero-actions"><a className="button button-primary" href="#projects">Explore Projects<Icon name="arrow" /></a><CvAction /></div>
         <div className="intro-socials">{profile.socials.filter(social => social.kind === 'github' || social.kind === 'linkedin').map(social => <SocialLink key={social.kind} social={social} compact />)}</div>
       </WorldSection>

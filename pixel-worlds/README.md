@@ -1,4 +1,4 @@
-# A Personal Universe — Bogdan Djukic
+# A Personal Universe — Bogdan Đukić
 
 A React + TypeScript + Vite portfolio with an interactive procedural pixel-art universe. Six content sections share one continuous flight past six celestial bodies.
 

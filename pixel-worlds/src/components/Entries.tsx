@@ -1,6 +1,7 @@
 import type { DetailContent, Education, Experience, Hobby } from '../data/portfolio'
 import type { MouseEvent } from 'react'
 import { FramedImage } from './Media'
+import { PixelHeadingText } from './PixelHeadingText'
 
 type Select = (entry: DetailContent) => void
 
@@ -13,12 +14,12 @@ function openEntry(event: MouseEvent<HTMLElement>, entry: DetailContent, onSelec
 }
 
 export function AcademicEntry({ entry, onSelect }: { entry: Education; onSelect: Select }) {
-  return <article className="academic-entry interactive-entry" onClick={event => openEntry(event, entry, onSelect)}>
+  return <article className="academic-entry interactive-entry game-card" onClick={event => openEntry(event, entry, onSelect)}>
     <div className="academic-heading">{entry.media.src && <FramedImage media={entry.media} />}<div>
-      <h3><button className="title-button" aria-haspopup="dialog">{entry.title}</button></h3>
+      <h3><button className="title-button" aria-haspopup="dialog"><PixelHeadingText>{entry.title}</PixelHeadingText></button></h3>
       {entry.subtitle && <p className="entry-school">{entry.subtitle}</p>}
       {entry.location && <p className="entry-location">{entry.location}</p>}
-      <p className="entry-date">{entry.dates ?? 'Dates to be added'}</p>
+      <p className="entry-date">{entry.cardDates ?? entry.dates ?? 'Dates to be added'}</p>
     </div></div>
     <div className="academic-program">
       <p className="academic-degree">{entry.degree}</p>
@@ -33,18 +34,18 @@ export function AcademicEntry({ entry, onSelect }: { entry: Education; onSelect:
 }
 
 export function ExperienceEntry({ entry, onSelect }: { entry: Experience; onSelect: Select }) {
-  return <li className="experience-entry interactive-entry" onClick={event => openEntry(event, entry, onSelect)}>
+  return <li className="experience-entry interactive-entry game-card" onClick={event => openEntry(event, entry, onSelect)}>
     <FramedImage media={entry.media} />
     <div className="experience-copy">
       <h3><button className="title-button" aria-haspopup="dialog" aria-label={`${entry.role} at ${entry.title}`}>{entry.role}</button></h3>
       <p className="experience-company">{entry.title}</p>
       <p className="experience-summary">{entry.summary}</p>
-      {!!entry.highlights?.length && <ul className="experience-highlights" aria-label="Areas of work">{entry.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}</ul>}
     </div>
     <div className="experience-meta">
-      {entry.dates && <p className="experience-date">{entry.dates}</p>}
+      {(entry.cardDates ?? entry.dates) && <p className="experience-date">{entry.cardDates ?? entry.dates}</p>}
       {entry.location && <p className="entry-location">{entry.location}</p>}
     </div>
+    {!!entry.highlights?.length && <ul className="experience-highlights" aria-label="Areas of work">{entry.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}</ul>}
   </li>
 }
 
