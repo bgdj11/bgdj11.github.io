@@ -1,0 +1,62 @@
+/* A comfortable desktop density at the browser's normal 100% zoom.
+   Keep real layout dimensions so the canvas, anchors and pointer hit tests agree. */
+@media (min-width: 901px) {
+  :root {
+    --text-body: 1.0625rem;
+    --leading-body: 1.7;
+    --nav-height: 68px;
+    --panel-padding: 1.25rem;
+    --section-space: 2.5rem;
+  }
+  .world { --chapter-width: min(84vw, 1120px); padding-top: 32px; padding-bottom: 28px; }
+  .world:first-child { padding-top: calc(var(--nav-height) + 32px); }
+  .panel { padding: 42px; }
+  .panel::before { border-image-width: 40px; }
+  .section-heading { margin-bottom: 24px; }
+  .section-heading h1 { font-size: clamp(23px, 2vw, 29px); }
+  .section-heading h2 { font-size: clamp(20px, 1.8vw, 25px); }
+  .section-panel-hero { gap: 30px; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+  .home-intro-copy, #beyond-code .section-intro, #contact .section-intro, #contact .resume-preview p { font-size: 17px; line-height: 1.7; }
+  .home-intro-copy, .home-description { max-width: 62ch; }
+  .hero-portrait { max-width: 350px; margin-left: auto; }
+  .hero-actions { margin-top: 20px; }
+  .intro-socials { margin-top: 18px; gap: 24px; }
+  .chapter-bottom { margin-top: 16px; }
+  .academic-entry.game-card, .experience-entry.game-card { padding: 24px; gap: 20px; }
+  .academic-entry.game-card .academic-heading { gap: 22px; }
+  .academic-entry.game-card .academic-heading > .media-logo { width: 64px; flex-basis: 64px; }
+  .academic-entry.game-card .academic-heading h3, .academic-entry.game-card .academic-degree { font-size: 14px; }
+  .academic-entry.game-card :is(.entry-school, .entry-location, .entry-date, .degree-level, .academic-summary) { font-size: 16px; }
+  .academic-entry.game-card .academic-metrics dd { font-size: 16px; }
+  .academic-entry.game-card .academic-metrics dt { font-size: 15px; }
+  .experience-entry.game-card h3 { font-size: 15px; }
+  .experience-entry.game-card :is(.experience-company, .experience-summary, .experience-date, .experience-location) { font-size: 17px; }
+  .game-card .experience-highlights { padding-top: 10px; gap: 10px 20px; }
+  .game-card .experience-highlights li { font-size: 11px; }
+  .featured-project .work-copy h3 { font-size: 14px; }
+  .featured-project .work-copy > p { font-size: 17px; line-height: 1.65; }
+  .featured-work .featured-project > .framed-media .media-window { aspect-ratio: 16 / 9; }
+  .systems-highlight .framed-media .media-window { min-height: 0; height: auto; }
+  .hobby-card h3 { font-size: 15px; }
+  .detail-dialog { width: min(1120px, calc(100vw - 48px)); height: calc(100dvh - 40px); }
+  .project-profile { font-size: 17px; line-height: 1.7; }
+  .project-profile-header .project-introduction { font-size: 18px; }
+  .project-profile-header h2 { font-size: clamp(18px, 1.6vw, 22px); }
+  .project-profile-dialog .dialog-inner { padding-inline: 30px; }
+  .case-section { margin-top: 32px; }
+  .project-contents { padding: 14px 18px; margin-top: 22px; }
+}
+@media (min-width: 1101px) {
+  .site-header { height: var(--nav-height); gap: 20px; padding-inline: clamp(24px, 3vw, 48px); }
+  .site-header nav { display: flex; position: static; padding: 0; border: 0; height: 100%; max-height: none; background: transparent; overflow: visible; gap: 20px; }
+  .site-header nav .nav-link { font-size: 10px; min-height: 44px; padding: 0; }
+  .site-header .desktop-cv { display: inline-flex; font-size: 10px; }
+  .mobile-nav-actions { display: none; }
+  .brand { font-size: 12px; }
+  .space-status { left: auto; right: 24px; text-align: right; }
+  .space-status .space-progress { margin-left: auto; }
+}
+@media (max-width: 600px) {
+  .dialog-scroll-hint { font-size: 9px; gap: 10px; padding-inline: 12px; }
+}
+

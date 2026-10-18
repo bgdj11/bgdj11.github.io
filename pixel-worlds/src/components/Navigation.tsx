@@ -34,7 +34,7 @@ export function Navigation({ active }: { active: SectionId }) {
   const toggle = useRef<HTMLButtonElement>(null)
   const header = useRef<HTMLElement>(null)
   useEffect(() => {
-    const wide = matchMedia('(min-width: 1321px)')
+    const wide = matchMedia('(min-width: 1101px)')
     const close = () => setOpen(false)
     wide.addEventListener('change', close)
     const outside = (event: PointerEvent) => { if (!header.current?.contains(event.target as Node)) close() }
@@ -47,7 +47,7 @@ export function Navigation({ active }: { active: SectionId }) {
     <a className="brand" href="#home" onClick={() => setOpen(false)} aria-label={profile.name + ', home'}><span className="pixel-mark" aria-hidden="true"><i /><i /><i /><i /></span>{profile.name}<span className="brand-period">.</span></a>
     <div className="mobile-nav-actions"><CvAction compact className="nav-cv" /><button ref={toggle} className="button menu-toggle" aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>{open ? 'Close' : 'Menu'}</button></div>
     <nav id="main-navigation" className={open ? 'is-open' : ''} aria-label="Main navigation">
-      {chapters.map(({ id, label }) => <a key={id} href={'#' + id} className={active === id ? 'nav-link is-active' : 'nav-link'} aria-current={active === id ? 'location' : undefined} onClick={() => { setOpen(false); if (matchMedia('(max-width: 1320px)').matches) toggle.current?.focus() }}>{label}</a>)}
+      {chapters.map(({ id, label }) => <a key={id} href={'#' + id} className={active === id ? 'nav-link is-active' : 'nav-link'} aria-current={active === id ? 'location' : undefined} onClick={() => { setOpen(false); if (matchMedia('(max-width: 1100px)').matches) toggle.current?.focus() }}>{label}</a>)}
       <CvAction className="nav-cv desktop-cv" compact />
     </nav>
   </header>

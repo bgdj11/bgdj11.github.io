@@ -10,7 +10,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const [active, setActive] = useState('project-section-0')
   const [contentsOpen, setContentsOpen] = useState(false)
   const [deck, setDeck] = useState(0)
-  const [showSlides, setShowSlides] = useState(false)
   const decks = project.documents?.filter(item => item.slides) ?? []
   useEffect(() => {
     const dialog = root.current?.closest('dialog')
@@ -42,7 +41,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
         <p className="project-introduction">{project.summary}</p>
         {project.contribution && <p className="project-contribution">{project.contribution}</p>}
         <ContentLinks links={project.links} />
-        {!!project.documents?.length && <button className="button button-secondary document-jump" onClick={() => { setShowSlides(true); jumpTo('project-documents') }}>View presentation ↓</button>}
+        {!!project.documents?.length && <button className="button button-secondary document-jump" onClick={() => jumpTo('project-documents')}>View presentation ↓</button>}
       </div>
       <ImageGallery media={[{ ...project.media, caption: undefined }]} />
     </header>
@@ -53,7 +52,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
     {project.caseStudy?.map((section, index) => <CaseSection key={section.heading} section={section} index={index} />)}
     {!!project.documents?.length && <section className="case-section" aria-labelledby="project-documents">
       <h3 id="project-documents" tabIndex={-1}>Research Materials</h3>
-      {!!decks.length && <div className="presentation-resources"><div className="deck-selector" role="group" aria-label="Presentation language">{decks.map((item, index) => <button key={item.url} aria-pressed={deck === index} onClick={() => { setDeck(index); setShowSlides(true) }}>{item.title}</button>)}</div>{showSlides ? <Suspense fallback={<p>Loading slide viewer…</p>}><PresentationViewer key={decks[deck].url} document={decks[deck]} /></Suspense> : <button className="presentation-cover" onClick={() => setShowSlides(true)}><img src={decks[0].preview} alt="First slide of the original English presentation" loading="lazy" /><span>View presentation — 18 slides</span></button>}</div>}
+      {!!decks.length && <div className="presentation-resources"><div className="deck-selector" role="group" aria-label="Presentation language">{decks.map((item, index) => <button key={item.url} aria-pressed={deck === index} onClick={() => setDeck(index)}>{item.title}</button>)}</div><Suspense fallback={<p>Loading slide viewer…</p>}><PresentationViewer key={decks[deck].url} document={decks[deck]} /></Suspense></div>}
       <div className="project-documents">{project.documents.filter(item => !item.slides).map(document => <a className="project-document" key={document.url} href={document.url} target="_blank" rel="noopener noreferrer">
         <img src={document.preview} alt={`First-page preview: ${document.title}`} loading="lazy" decoding="async" />
         <h4>{document.title}</h4><p>{document.description}</p><span>{document.format} ↗</span>
@@ -61,7 +60,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
     </section>}
     <footer className="project-profile-footer">
       {!!project.technologies?.length && <p><strong>Built with</strong> {project.technologies.join(', ')}</p>}
-      <ContentLinks links={project.links} />
     </footer>
   </article>
 }
@@ -81,7 +79,6 @@ function CaseSection({ section, index }: { section: ProjectSection; index: numbe
     {section.chart && <ResultChart chart={section.chart} />}
     {!!section.comparison?.length && <div className="case-comparison">{section.comparison.map(item => <div key={item.label}><h4>{item.label}</h4><ImageGallery media={[item.media]} /></div>)}</div>}
     {!!section.media?.length && <div className="case-media"><ImageGallery media={section.media} /></div>}
-    {section.source && <ContentLinks links={[section.source]} />}
   </section>
 }
 

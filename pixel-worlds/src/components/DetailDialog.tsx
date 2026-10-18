@@ -58,6 +58,7 @@ export function useDetails() {
 
 export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null)
+  const [moreBelow, setMoreBelow] = useState(false)
   useEffect(() => {
     const dialog = ref.current
     if (!dialog || !entry) return
@@ -67,7 +68,18 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     if (!dialog.open) dialog.showModal()
     dialog.scrollTop = 0
     dialog.querySelector<HTMLButtonElement>('.dialog-close')?.focus({ preventScroll: true })
+    const updateScrollCue = () => setMoreBelow(dialog.scrollHeight - dialog.clientHeight - dialog.scrollTop > 24)
+    const observer = new ResizeObserver(updateScrollCue)
+    observer.observe(dialog)
+    const body = dialog.querySelector('.dialog-inner')
+    if (body) observer.observe(body)
+    dialog.addEventListener('scroll', updateScrollCue, { passive: true })
+    dialog.addEventListener('load', updateScrollCue, true)
+    updateScrollCue()
     return () => {
+      observer.disconnect()
+      dialog.removeEventListener('scroll', updateScrollCue)
+      dialog.removeEventListener('load', updateScrollCue, true)
       dialog.close()
       document.body.style.overflow = previousOverflow
       if (previous?.isConnected && previous !== document.body) previous.focus({ preventScroll: true })
@@ -154,6 +166,7 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
         <ContentLinks links={entry.links} />
         </>}
       </div>
+      <div className="dialog-scroll-cue"><button className="dialog-scroll-hint" data-visible={moreBelow} tabIndex={moreBelow ? 0 : -1} aria-hidden={!moreBelow} onClick={() => ref.current?.scrollBy({ top: ref.current.clientHeight * .7, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}>Scroll down for more <Icon name="down" /></button></div>
     </>}
   </dialog>
 }

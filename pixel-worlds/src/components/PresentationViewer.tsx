@@ -11,7 +11,6 @@ export default function PresentationViewer({ document: resource }: { document: P
   const [page, setPage] = useState(1)
   const [width, setWidth] = useState(800)
   const [viewportHeight, setViewportHeight] = useState(innerHeight)
-  const [zoom, setZoom] = useState(1)
   const [error, setError] = useState('')
   const [rendering, setRendering] = useState(true)
   useEffect(() => {
@@ -44,7 +43,7 @@ export default function PresentationViewer({ document: resource }: { document: P
     void pdf.getPage(page).then(async slide => {
       if (disposed || !canvas.current) return
       const base = slide.getViewport({ scale: 1 })
-      const scale = Math.min(Math.max(1, width - 24) / base.width, Math.max(220, viewportHeight - 280) / base.height) * zoom
+      const scale = Math.min(Math.max(1, width - 24) / base.width, Math.max(220, viewportHeight - 220) / base.height)
       const viewport = slide.getViewport({ scale })
       const node = canvas.current
       const ratio = Math.min(devicePixelRatio || 1, 2)
@@ -55,16 +54,18 @@ export default function PresentationViewer({ document: resource }: { document: P
       if (!disposed) setRendering(false)
     }).catch(reason => { if (!disposed && reason.name !== 'RenderingCancelledException') { setError('Unable to render this slide. Open the PDF below.'); setRendering(false) } })
     return () => { disposed = true; task?.cancel() }
-  }, [pdf, page, width, viewportHeight, zoom])
+  }, [pdf, page, width, viewportHeight])
   const next = (offset: number) => setPage(value => Math.max(1, Math.min(pdf?.numPages ?? 1, value + offset)))
   return <div className="presentation-viewer" ref={container} role="region" aria-label={resource.title} tabIndex={0} onKeyDown={event => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); event.stopPropagation(); next(event.key === 'ArrowLeft' ? -1 : 1) }
   }}>
-    <div className="viewer-toolbar"><button disabled={!pdf || page === 1} onClick={() => next(-1)} aria-label="Previous slide">← Previous</button><strong role="status">Slide {page} / {pdf?.numPages ?? '…'}</strong><button disabled={!pdf || page === pdf.numPages} onClick={() => next(1)} aria-label="Next slide">Next →</button></div>
     <div className="slide-canvas" aria-busy={rendering}>
       {error ? <p role="alert">{error}</p> : <canvas ref={canvas} aria-label={`${resource.title}, slide ${page}`} role="img" />}
       {!pdf && !error && <p role="status">Loading presentation…</p>}
+      <button className="gallery-arrow gallery-previous" disabled={!pdf || page === 1} onClick={() => next(-1)} aria-label="Previous slide">‹</button>
+      <span className="gallery-count" role="status" aria-live="polite">{page} / {pdf?.numPages ?? '…'}</span>
+      <button className="gallery-arrow gallery-next" disabled={!pdf || page === pdf.numPages} onClick={() => next(1)} aria-label="Next slide">›</button>
     </div>
-    <div className="viewer-toolbar"><button onClick={() => setZoom(value => value === 1 ? 1.5 : 1)}>{zoom === 1 ? 'Zoom in' : 'Fit slide'}</button>{typeof window !== 'undefined' && window.document.fullscreenEnabled && <button onClick={() => { if (window.document.fullscreenElement) void window.document.exitFullscreen(); else void container.current?.requestFullscreen() }}>Fullscreen</button>}<a href={resource.url} target="_blank" rel="noopener noreferrer">Open PDF ↗</a><a href={resource.url} download>Download PDF ↓</a>{resource.original && <a href={resource.original} download>Original PPTX ↓</a>}</div>
+    <div className="presentation-links"><a href={resource.url} target="_blank" rel="noopener noreferrer">Open PDF ↗</a>{resource.original && <a href={resource.original} download>Original PPTX ↓</a>}</div>
   </div>
 }

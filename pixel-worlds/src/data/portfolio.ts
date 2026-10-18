@@ -89,6 +89,7 @@ export interface ProjectSection extends DetailBlock {
 }
 export interface ProjectDocument { title: string; description: string; url: string; preview: string; format: string; slides?: boolean; original?: string }
 export interface Project extends DetailContent {
+  coursework?: boolean
   cardMedia?: MediaAsset
   category: ProjectCategory
   featured: boolean // Array order sets editorial order.

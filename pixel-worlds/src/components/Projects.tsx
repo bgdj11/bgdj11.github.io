@@ -11,16 +11,14 @@ export function ProjectCollection({ onSelect }: { onSelect: (project: Project) =
   const [filter, setFilter] = useState<Filter>(readFilter)
   useEffect(() => { const sync = () => setFilter(readFilter()); window.addEventListener('popstate', sync); return () => window.removeEventListener('popstate', sync) }, [])
   const featured = projects.filter(project => project.featured)
-  const archive = projects.filter(project => !project.featured && project.id !== 'bunhub' && (filter === 'All' || (filter === 'Graphics & Vision' && ['Graphics', 'Vision'].includes(project.category)) || (filter === 'AI & Systems' && project.category === 'AI') || (filter === 'Games' && project.category === 'Games')))
+  const archive = projects.filter(project => !project.featured && (filter === 'All' || (filter === 'Graphics & Vision' && ['Graphics', 'Vision'].includes(project.category)) || (filter === 'AI & Systems' && ['AI', 'Other'].includes(project.category)) || (filter === 'Games' && project.category === 'Games') || (filter === 'Coursework' && project.coursework)))
   const select = (item: Filter) => { setFilter(item); const url = new URL(location.href); if (item === 'All') url.searchParams.delete('work'); else url.searchParams.set('work', item); history.replaceState(history.state, '', url) }
-  const bunhub = projects.find(project => project.id === 'bunhub')!
   return <>
     <div className="featured-work">{featured.map(project => <FeaturedProjectCard key={project.id} project={project} onSelect={onSelect} />)}</div>
-    <div className="systems-highlight"><FeaturedProjectCard project={bunhub} onSelect={onSelect} /></div>
     <div className="project-filters" role="group" aria-label="Filter additional projects; featured projects stay visible">{filters.map(item => <button key={item} data-category={item === 'Graphics & Vision' ? 'Graphics' : item === 'AI & Systems' ? 'AI' : item === 'Games' ? 'Games' : 'All'} className={'filter' + (filter === item ? ' is-selected' : '')} aria-pressed={filter === item} onClick={() => select(item)}>{item}</button>)}</div>
     <p className="sr-only" role="status">{archive.length} projects shown for {filter}.</p>
     <div className="small-projects">{archive.map(project => <SmallProjectCard key={project.id} project={project} onSelect={onSelect} />)}</div>
-    {(filter === 'All' || filter === 'Coursework' || filter === 'Graphics & Vision') && <div className="coursework-collections">{['Computer Animation Lab', 'Computer Graphics / Shape Modeling Lab'].map(title => <article key={title}><h3>{title}</h3><p>Ongoing Master’s Coursework</p><p className="coursework-note">A collection in progress. Lab work and results will be added as the semester develops.</p></article>)}</div>}
+    {(filter === 'All' || filter === 'Coursework') && <p className="more-work-soon">More coming soon.</p>}
   </>
 }
 

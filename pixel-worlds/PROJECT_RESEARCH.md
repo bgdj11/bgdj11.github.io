@@ -1,5 +1,14 @@
 # Project content audit
 
+## Animation and gallery revision — 18 October 2026
+
+- Computer Animation Lab uses the user-supplied local INF585-CSC51085EP README and 19 supplied recordings. These were resized to at most 760px and encoded as looping animated WebP, with 800px still posters. See animation-lab/SOURCES.txt for exact original paths.
+- The lab describes the recorded exercises and techniques. A spot check of the local Laplacian deformation source found starter TODOs despite the README's blanket completion claims; the portfolio does not claim an independently verified complete implementation. No GitHub link is displayed for this entry.
+- VQA English annotation layers retain the original graph positions and detection confidence values. The architecture inset figures also use these English annotations. The original research PDFs and PPTX files are unchanged.
+- GIF/WebP previews now loop natively, without playback controls. Gallery arrows sit on the image; there is no image lightbox. Slide decks are directly browsable when the project opens.
+- Each other project has its repository link once, in the header. Per-section source references remain in the data for this audit but are not rendered. BunHub uses the supporting-project grid.
+
+
 Reviewed 18 October 2026. Public source snapshots were inspected locally; project code was not executed, model training was not rerun, and stored metrics are not presented as newly reproduced measurements. The downloadable thesis and notebook figures are original repository material. The latest consolidated brief supersedes the earlier deferral of the two labs: they now appear as reserved ongoing coursework collections, without invented work or links.
 
 ## Visual Scene Understanding
@@ -116,7 +125,7 @@ Inspected Angular templates/routes, Spring services/controllers, chat, likes/fol
 
 ## Rendering and provenance
 
-Project copy focuses on verified methods, implementation, outputs and boundaries. Source links are pinned to the reviewed commits. Authentic media remain local; animations autoplay only while visible and respect reduced motion. Both original slide decks were exported with installed PowerPoint to static 18-page PDFs, then rendered and inspected using PDF.js. The English deck is the default. Original PDF/PPTX artifacts remain available.
+Project copy focuses on methods, implementation, outputs and boundaries. Source references in the data are pinned to the reviewed commits. Authentic media remain local; animation previews load lazily and loop natively. Background scene animation still respects reduced motion. Both original slide decks were exported with installed PowerPoint to static 18-page PDFs, then rendered and inspected using PDF.js. The English deck is the default. Original PDF/PPTX artifacts remain available.
 
 ## Consolidated review corrections — 18 October 2026
 

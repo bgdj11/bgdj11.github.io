@@ -1,6 +1,6 @@
 # Editing the portfolio
 
-Personal content lives in `src/data/portfolio.ts`; the nine project profiles live in `src/data/projects.ts`. No layout changes are needed to replace media or edit project text. `PROJECT_RESEARCH.md` records the source review and result limitations.
+Personal content lives in `src/data/portfolio.ts`; project profiles live in `src/data/projects.ts`, with the animation lab in `src/data/animation-lab.ts`. No layout changes are needed to replace media or edit project text. `PROJECT_RESEARCH.md` records the source review and result limitations.
 
 ## Sections and content
 
@@ -9,7 +9,7 @@ Personal content lives in `src/data/portfolio.ts`; the nine project profiles liv
 - `profile`: introduction, portrait, social links and resume configuration.
 - `education`: institution name in `title`, parent university in `subtitle`, separate `credential` and `degree`, optional dates/location, `credits` and `gpa`. The institution and small logo sit alongside the degree and summary on desktop, stacking on mobile. Use `presentation: 'logo'` in its media object; leave its `src` absent if no verified logo is available. Whole education, experience and hobby entries open details, including through the keyboard-focusable title; no separate “View details” label is shown.
 - `experience`: employer, role, optional dates, technologies, media and details.
-- `projects` in `src/data/projects.ts`: category, collection, summary, optional contribution/technologies, media and `caseStudy` sections. The first two projects are featured; the other seven belong to `Graphics & Computer Vision` or `AI & Other Projects`, matching the supplied list. The two academic labs remain deferred. `category` controls the subtle card accent independently of filtering. Whole cards open the existing shared dialog and preserve direct links and browser history.
+- `projects` in `src/data/projects.ts`: category, collection, summary, optional contribution/technologies, media and `caseStudy` sections. The first two projects are featured; all others, including BunHub, use compact cards. Computer Animation Lab also appears in Coursework through `coursework: true`. Shape Modeling is deferred. `category` controls the card accent. Whole cards open the existing shared dialog and preserve direct links and browser history. Keep one repository link in the header only; Animation Lab intentionally has no GitHub link. Per-section source data stays available for editorial provenance but is not rendered as repeated links.
 - `hobbies`: Basketball, Board games, Video games and Fishing, with photographs, galleries and optional favorites.
 
 Every entry supports `details`, `gallery` and `links`. Remove `placeholderNote` after replacing a draft with verified content. Optional fields and empty collections are omitted. Use unique, stable IDs; project URLs use `?project=visual-reasoning#projects` and support reload, Back and Forward.
@@ -36,7 +36,7 @@ portrait: {
 }
 ```
 
-Supported shapes are `portrait`, `square`, and `landscape`. Explicit `width`/`height` reserve the original aspect ratio; otherwise the shape supplies a ratio. Use `fit: 'contain'` for screenshots and photographs that must be shown completely; use `cover` and `position` for intentional cropping. Project list previews use a consistent landscape crop; the detail view contains the full image. Actual photos remain clear; `pixelated: true` is an explicit opt-in.
+Supported shapes are `portrait`, `square`, and `landscape`. Explicit `width`/`height` reserve the original aspect ratio; otherwise the shape supplies a ratio. Use `fit: 'contain'` for screenshots and photographs that must be shown completely; use `cover` and `position` for intentional cropping. Compact project previews contain the full image in a landscape slot. Actual photos remain clear; `pixelated: true` is an explicit opt-in.
 
 Leave `src` absent until you have a file. The frame then shows a local CSS/SVG placeholder without an external image request. Failed media uses a readable fallback. Always supply meaningful `alt` text when adding real content. Optional `caption` appears below the frame.
 
@@ -75,15 +75,15 @@ gallery: [
 ]
 ```
 
-GIFs and animated WebP previews use `kind: 'gif'`: they animate when visible under normal motion preferences, with a pause/play control. Reduced-motion users start playback manually. Always provide a still `poster`; offscreen and hidden-tab animations return to it. Videos retain native controls, `preload="none"`, and load when visible. Project cards use static posters, or the optional project `cardMedia`. Add WebVTT captions to videos with speech. Galleries support previous/next, thumbnails, keyboard arrows, swipe and an enlarged view.
+GIFs and animated WebP previews use `kind: 'gif'`: they load lazily and loop natively without play/pause controls. Always provide a still `poster` for overview cards, or use the optional project `cardMedia`. Videos retain native controls and `preload="none"`, pausing when offscreen. Add WebVTT captions to videos with speech. Gallery arrows and the position indicator sit on the image; keyboard arrows and horizontal swipes also work. Images do not open a lightbox.
 
 ## Rich detail content
 
 Project profiles use `caseStudy: ProjectSection[]` and the shared `ProjectCaseStudy` inside `DetailDialog`. Sections support paragraphs, paired subsections, code, `comparison` figures, galleries, tables and a source link. Set concise `navLabel` values for the “On this page” menu. Charts contain explicit labels, units, scale, series, values and provenance in `note`; `display: 'table'` is preferable for unrelated metrics. Never insert synthetic benchmarks.
 
-Documents contain `title`, `description`, `url`, `preview` and `format`. Add `slides: true` and an `original` PPTX URL for a presentation. The first slide deck is the default. `PresentationViewer` lazy-loads PDF.js only when opened, with page navigation, zoom, fullscreen and PDF/PPTX downloads. Serve preconverted static PDFs; conversion is never performed in the visitor’s browser. Thesis/summary PDFs remain direct document links. Source decks are preserved.
+Documents contain `title`, `description`, `url`, `preview` and `format`. Add `slides: true` and an `original` PPTX URL for a presentation. The first slide deck is the default. `PresentationViewer` loads PDF.js when the project opens and displays an inline, directly browsable presentation with arrows on the slide. PDF/PPTX links remain available; there is no separate activation, zoom or fullscreen UI. Serve preconverted static PDFs; conversion is never performed in the visitor’s browser. Thesis/summary PDFs remain direct document links. Source decks are preserved.
 
-Project media live in `public/media/projects/`. Replace assets there and edit their explicit media objects in `src/data/projects.ts`. Keep thumbnails/posters in sync. `background` sets a CSS matte without modifying artwork. Provenance is in `public/media/projects/SOURCES.md`. Regenerate current diagrams with `node scripts/generate-case-study-diagrams.mjs`; the earlier generator and illustrations are retained as references. The overview keeps the two featured projects and BunHub visible, filters additional work through the `work` query parameter, and reserves two honestly labeled ongoing coursework collections.
+Project media live in `public/media/projects/`. Replace assets there and edit their explicit media objects in `src/data/projects.ts` or `src/data/animation-lab.ts`. Keep thumbnails/posters in sync. `background` sets a CSS matte without modifying artwork. Provenance is in `public/media/projects/SOURCES.md`. Regenerate current diagrams with `node scripts/generate-case-study-diagrams.mjs` and English VQA annotations with `node scripts/translate-research-figures.mjs`. The overview keeps two featured projects visible and filters all other projects through the `work` query parameter.
 
 Use blocks to cover the information appropriate to an entry. For a project, these can be Goal, Approach, Implementation, Technical challenges, My contribution and Results. For experience, use Overview, Responsibilities and Technical contributions. Education can use Coursework and Academic projects.
 

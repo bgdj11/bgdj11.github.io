@@ -91,8 +91,6 @@
 .project-profile .media-open { border: 0; box-shadow: none; background: transparent; padding: 0; clip-path: none; }
 .project-profile .media-open::before, .project-profile .media-open::after { content: none; }
 .project-profile .media-open:hover { outline: 2px solid #9ec8b1; outline-offset: -4px; cursor: zoom-in; }
-.media-play { min-height: 44px; padding: 8px 14px; border: 1px solid #6c9480; background: #14281f; color: #e5eee6; font: 500 15px/1.5 var(--font-body); box-shadow: none; clip-path: none; margin-top: 8px; }
-.media-play::after, .media-play::before { content: none; }
 .table-scroll { overflow-x: auto; margin-top: 24px; }
 .project-profile table { width: 100%; border-collapse: collapse; background: #111e22; font: 16px/1.6 var(--font-body); }
 .project-profile caption { text-align: left; color: #e6dfc6; font-size: 19px; padding-bottom: 14px; }
@@ -111,8 +109,6 @@
 .deck-selector button, .viewer-toolbar button, .viewer-toolbar a { min-height: 44px; padding: 10px 14px; border: 1px solid #527b74; background: #182a2b; color: #e0e9da; font: 500 15px/1.4 var(--font-body); box-shadow: none; clip-path: none; text-decoration: none; }
 .deck-selector button::before, .deck-selector button::after, .viewer-toolbar button::before, .viewer-toolbar button::after { content: none; }
 .deck-selector button[aria-pressed='true'] { background: #365646; border-color: #b6d2ae; }
-.presentation-cover { display: block; width: 100%; padding: 16px; background: #142326; color: #e8eedf; border: 1px solid #527b74; box-shadow: none; clip-path: none; font: 18px/1.6 var(--font-body); }
-.presentation-cover img { width: 100%; max-height: 420px; object-fit: contain; margin-bottom: 14px; }
 .presentation-viewer { background: #101a1e; padding: 12px; width: 100%; min-width: 0; }
 .viewer-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; padding: 8px 0; }
 .viewer-toolbar strong { font: 500 17px/1.5 var(--font-body); color: #f1ecd8; padding: 0 8px; }
@@ -120,14 +116,6 @@
 .slide-canvas { overflow: auto; padding: 10px 0; min-height: 180px; }
 .slide-canvas canvas { display: block; margin: auto; }
 .presentation-viewer:fullscreen { overflow: auto; padding: 18px; background: #101a1e; }
-.media-lightbox { width: min(96vw, 1500px); max-width: 96vw; max-height: 94dvh; padding: 16px; border: 3px solid #8ab6a0; background: #0c1617; color: #efe8d7; overscroll-behavior: contain; }
-.media-lightbox::backdrop { background: #020709ed; }
-.media-lightbox .viewer-toolbar { position: sticky; top: -16px; z-index: 2; background: #0c1617; padding: 12px; }
-.lightbox-image { overflow: auto; max-height: 76dvh; }
-.lightbox-image .media-window { height: auto; aspect-ratio: auto; }
-.lightbox-image .media-window img { position: static; height: auto; max-height: 69dvh; object-fit: contain; }
-.lightbox-image.is-zoomed .framed-media { width: 180%; max-width: none; }
-.lightbox-image.is-zoomed .media-window img { max-height: none; }
 .systems-highlight { margin-top: 20px; }
 .featured-work .featured-project > .framed-media .media-window { height: auto; aspect-ratio: 16 / 10; }
 .systems-highlight .featured-project { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: center; }
@@ -187,4 +175,47 @@
   .project-profile .gallery-thumbnails button { flex-basis: 76px; width: 76px; height: 58px; }
   .viewer-toolbar { gap: 7px; }
   .viewer-toolbar button, .viewer-toolbar a { padding: 9px 10px; font-size: 14px; }
+}
+
+/* Gallery controls stay with the image, including on touch screens. */
+.gallery-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  display: grid; place-items: center; width: 44px; height: 48px; min-height: 44px;
+  padding: 0 0 4px; border: 2px solid var(--color-accent); background: #0b151aee;
+  color: #fff2df; font: 36px/1 var(--font-body); box-shadow: 3px 3px 0 #030608;
+  clip-path: none; border-radius: 0; cursor: pointer;
+}
+.gallery-arrow::before, .gallery-arrow::after { content: none; }
+.gallery-previous { left: 10px; }
+.gallery-next { right: 10px; }
+.gallery-arrow:hover:not(:disabled), .gallery-arrow:focus-visible { background: var(--color-accent); color: #080e12; }
+.gallery-arrow:focus-visible { outline: 3px solid #fff2df; outline-offset: 3px; }
+.gallery-arrow:disabled { opacity: .35; cursor: default; }
+.gallery-count {
+  position: absolute; z-index: 2; bottom: 10px; left: 50%; transform: translateX(-50%);
+  padding: 4px 10px; background: #0b151aee; color: #f1eddf;
+  font: 500 14px/1.5 var(--font-body); white-space: nowrap; pointer-events: none;
+}
+.case-media .has-slides .media-window { aspect-ratio: 16 / 10; }
+.case-media .has-slides .media-window > img { position: absolute; height: 100%; max-height: none; }
+.slide-canvas { position: relative; padding: 0; overflow: hidden; }
+.slide-canvas canvas { max-width: 100%; }
+.presentation-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 24px; padding-top: 12px; font-size: 15px; }
+.presentation-links a { color: var(--color-accent); text-underline-offset: 4px; }
+.more-work-soon { margin: 28px 0 0; text-align: center; color: var(--color-subtle); font: 11px/1.8 var(--font-ui); }
+
+/* Landscape previews retain the full result instead of squeezing into a tiny slot. */
+.small-project.game-card { grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); align-content: start; gap: 22px; padding: 20px; }
+.small-project.game-card > .framed-media { width: 100%; }
+.small-project.game-card .media-window { height: auto; aspect-ratio: 16 / 9; }
+.small-project.game-card .media-window > img { object-fit: contain; }
+.small-project.game-card h3 { font-size: 12px; line-height: 1.75; }
+.small-project.game-card p { margin-top: 10px; }
+.small-project.game-card .pixel-frame { box-shadow: none; padding: 0; border: 0; }
+@media (max-width: 600px) {
+  .gallery-previous { left: 6px; }
+  .gallery-next { right: 6px; }
+  .gallery-count { bottom: 6px; font-size: 12px; }
+  .case-media .has-slides .media-window { aspect-ratio: 4 / 3; }
+  .small-project.game-card { padding: 18px; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }

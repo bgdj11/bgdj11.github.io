@@ -1,4 +1,5 @@
 import { publicAsset } from './assets'
+import { animationLab } from './animation-lab'
 import type { Project } from './portfolio'
 
 // Content verified against pinned repository snapshots; see PROJECT_RESEARCH.md.
@@ -44,8 +45,8 @@ const rawProjects: Project[] = [
         "media": [
           {
             "id": "visual-reasoning-thesis_architecture_en",
-            "src": "/media/projects/visual-reasoning/thesis_architecture_en.webp",
-            "poster": "/media/projects/visual-reasoning/thesis_architecture_en-thumb.webp",
+            "src": "/media/projects/visual-reasoning/architecture-en.svg",
+            "poster": "/media/projects/visual-reasoning/architecture-en.svg",
             "alt": "Architecture linking image perception, a scene graph, a question-to-program model and a symbolic executor",
             "caption": "System architecture from the thesis, with English labels.",
             "placeholder": "Architecture linking image perception, a scene graph, a question-to-program model and a symbolic executor",
@@ -74,10 +75,10 @@ const rawProjects: Project[] = [
           },
           {
             "id": "visual-reasoning-detection",
-            "src": "/media/projects/visual-reasoning/detection.webp",
-            "poster": "/media/projects/visual-reasoning/detection-thumb.webp",
+            "src": "/media/projects/visual-reasoning/detection-en.svg",
+            "poster": "/media/projects/visual-reasoning/detection-en.svg",
             "alt": "Detected objects with bounding boxes and labels",
-            "caption": "Object detections turn an image into a set of candidates for further analysis.",
+            "caption": "Object detections with the original confidence values and English labels.",
             "placeholder": "Detected objects with bounding boxes and labels",
             "fit": "contain",
             "shape": "landscape"
@@ -104,10 +105,10 @@ const rawProjects: Project[] = [
           },
           {
             "id": "visual-reasoning-scene_graph",
-            "src": "/media/projects/visual-reasoning/scene_graph.webp",
-            "poster": "/media/projects/visual-reasoning/scene_graph-thumb.webp",
+            "src": "/media/projects/visual-reasoning/scene-graph-en.svg",
+            "poster": "/media/projects/visual-reasoning/scene-graph-en.svg",
             "alt": "Graph representation of objects and spatial relations",
-            "caption": "The scene graph connects visual perception to executable reasoning.",
+            "caption": "The original scene graph with object names and spatial labels translated into English.",
             "placeholder": "Graph representation of objects and spatial relations",
             "fit": "contain",
             "shape": "landscape"
@@ -627,11 +628,11 @@ const rawProjects: Project[] = [
       "Jupyter"
     ],
     "media": {
-      "id": "classical-vision-duck-contours",
-      "src": "/media/projects/classical-vision/duck-contours.webp",
-      "poster": "/media/projects/classical-vision/duck-contours-thumb.webp",
-      "alt": "Detected ducks outlined in an example image",
-      "placeholder": "Detected ducks outlined in an example image",
+      "id": "classical-vision-duck-results",
+      "src": "/media/projects/classical-vision/duck-edge-results.webp",
+      "poster": "/media/projects/classical-vision/duck-edge-results-thumb.webp",
+      "alt": "Ten duck-counting examples with detected contours highlighted in magenta",
+      "placeholder": "Duck-counting results with detected contours",
       "fit": "contain",
       "shape": "landscape"
     },
@@ -1342,12 +1343,11 @@ const rawProjects: Project[] = [
       "Collision detection"
     ],
     "media": {
-      "id": "space-shooter-gameplay",
-      "src": "/media/projects/space-shooter/gameplay.webp",
-      "poster": "/media/projects/space-shooter/gameplay-poster.webp",
-      "kind": "gif",
-      "alt": "Original Space Shooter gameplay with waves and weapon effects",
-      "placeholder": "Original Space Shooter gameplay with waves and weapon effects",
+      "id": "space-shooter-cover",
+      "src": "/media/projects/space-shooter/gameplay-poster.webp",
+      "kind": "image",
+      "alt": "Screenshot captured from the original Space Shooter game",
+      "placeholder": "Space Shooter screenshot",
       "fit": "contain"
     },
     "details": [],
@@ -1371,13 +1371,23 @@ const rawProjects: Project[] = [
         }
       },
       {
-        "heading": "Collisions, Weapons & Particles",
+        "heading": "Gameplay",
         "paragraphs": [
           "Axis-aligned rectangle intersections connect projectiles, enemies and the player. Bullets, a laser, rockets and a timed shield have different durations and cooldowns; wave logic introduces regular enemies, bosses and asteroids.",
           "Sprite animation and particles expose impacts and destruction visually. Both recordings on this page are original game captures, not a browser recreation."
         ],
-        "navLabel": "Combat systems",
+        "navLabel": "Gameplay",
         "media": [
+          {
+            "id": "space-shooter-gameplay",
+            "src": "/media/projects/space-shooter/gameplay.webp",
+            "poster": "/media/projects/space-shooter/gameplay-poster.webp",
+            "kind": "gif",
+            "alt": "Original Space Shooter gameplay with waves and weapon effects",
+            "placeholder": "Original Space Shooter gameplay with waves and weapon effects",
+            "fit": "contain",
+            "caption": "Original gameplay recording: enemy waves and weapon effects."
+          },
           {
             "id": "space-shooter-combat",
             "src": "/media/projects/space-shooter/combat.webp",
@@ -1402,7 +1412,15 @@ const rawProjects: Project[] = [
         ],
         "navLabel": "Scope"
       }
-    ]
+    ],
+    "cardMedia": {
+      "id": "space-shooter-cover",
+      "src": "/media/projects/space-shooter/gameplay-poster.webp",
+      "kind": "image",
+      "alt": "Screenshot captured from the original Space Shooter game",
+      "placeholder": "Space Shooter screenshot",
+      "fit": "contain"
+    }
   }
 ]
 
@@ -1415,4 +1433,4 @@ function withDeploymentBase<T>(value: T): T {
   return value
 }
 
-export const projects: Project[] = rawProjects.map(withDeploymentBase)
+export const projects: Project[] = [...rawProjects, animationLab].map(withDeploymentBase)

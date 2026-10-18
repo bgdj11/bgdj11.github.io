@@ -9,6 +9,7 @@ import './styles/global.css'
 import './styles/game-cards.css'
 import './styles/project-studies.css'
 import './styles/scenes.css'
+import './styles/layout-density.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode><App /></React.StrictMode>,

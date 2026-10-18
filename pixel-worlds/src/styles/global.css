@@ -482,7 +482,8 @@ a.social-link:hover { color: var(--color-accent); }
 .detail-dialog { border-image: var(--retro-panel-frame) 48 / 48px round; }
 .dialog-toolbar { position: sticky; top: 0; background: var(--color-panel); z-index: 4; display: flex; align-items: center; justify-content: flex-end; padding: 12px 24px; border-bottom: 1px solid var(--panel-rule); }
 .dialog-scroll-cue { position: sticky; bottom: 0; z-index: 3; height: 56px; margin-top: -56px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-.dialog-scroll-hint { display: inline-flex; align-items: center; gap: 14px; padding: 10px 16px; background: var(--color-panel); border: 2px solid var(--color-accent); box-shadow: 0 4px 0 #020305; font: 10px/1.8 var(--font-ui); color: var(--color-accent); }
+.dialog-scroll-hint { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; padding: 10px 16px; background: var(--color-panel); border: 2px solid var(--color-accent); box-shadow: 0 4px 0 #020305; font: 10px/1.8 var(--font-ui); color: var(--color-accent); pointer-events: auto; }
+.dialog-scroll-hint::before, .dialog-scroll-hint::after { content: none; }
 .dialog-scroll-hint svg { width: 20px; height: 20px; }
 .dialog-scroll-hint[data-visible='false'] { visibility: hidden; }
 .detail-dialog:has(.dialog-scroll-cue) .dialog-inner { padding-bottom: 76px; }
