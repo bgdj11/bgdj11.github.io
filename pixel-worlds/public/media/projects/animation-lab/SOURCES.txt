@@ -1,0 +1,20 @@
+water.webp — 02_procedural/b_water_droplet/02bwatersol.gif
+surface.webp — 01_introduction/01introductionsol.gif
+bounce.webp — 02_procedural/a_bouncing_spheres/02abouncingsolshadow.gif
+walking.webp — 04_skinning/b_skinning_plus_animation/solwalkeffectlbs.gif
+transition.webp — 03_character_animation/solution_01_smooth.gif
+ik.webp — 03_character_animation/solution_04_ik.gif
+dqs.webp — 04_skinning/a_skinning/soldqs.gif
+lbs.webp — 04_skinning/a_skinning/sollbs.gif
+weights.webp — 04_skinning/a_skinning/solskinningw.gif
+collision.webp — 05_sphere_collision/03spherecollidesol1.gif
+arap.webp — 06_deformers/b_laplacian_deformation/solarapbunny.gif
+laplacian.webp — 06_deformers/b_laplacian_deformation/sollaplacebunny.gif
+twist.webp — 06_deformers/a_interactive_deformers/soltwist.gif
+cloth.webp — 07_shapes_and_clothes/b_cloth/solinteraction.gif
+wind.webp — 07_shapes_and_clothes/b_cloth/solwind.gif
+elastic.webp — 07_shapes_and_clothes/a_shape_matching/solelasticdeform.gif
+stable-fluid.webp — 09_stable_fluids/soldivergence.gif
+advection.webp — 09_stable_fluids/soladvection.gif
+sph.webp — 08_sph/solviscosity1.gif
+Source: user-supplied local INF585-CSC51085EP course directory. Converted to looping WebP; visual content unchanged.

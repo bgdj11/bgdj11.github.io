@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" shape-rendering="crispEdges">
+  <!-- 48px corners are independent of the 24px rails, so joints can step inward. -->
+  <defs>
+    <g id="rail">
+      <path fill="#030806" d="M48 0h24v24H48z"/>
+      <path fill="#1f2933" d="M48 4h24v16H48z"/>
+      <path fill="#56738a" d="M50 5h20v13H50z"/>
+      <path fill="#becfd7" d="M52 6h16v4H52z"/>
+      <path fill="#82aecf" d="M52 10h16v6H52z"/>
+      <path fill="#465e71" d="M52 16h16v2H52z"/>
+    </g>
+    <g id="corner">
+      <!-- Stepped outer silhouette and a deep inner black bevel. -->
+      <path fill="#030806" d="M32 0h16v24h-8v16H24v8H0V32h8V16h8V8h16z"/>
+      <path fill="#25313c" d="M32 4h16v16H36v16H20v12H4V32h8V16h8V12h12z"/>
+      <!-- The diagonal connector reaches 38px into the panel. -->
+      <path fill="#56738a" d="M16 14h20v22H14V16h2z"/>
+      <path fill="#d1d9d9" d="M18 16h16v4H20v14h-4V18h2z"/>
+      <path fill="#82aecf" d="M20 20h12v12H20z"/>
+      <path fill="#465e71" d="M32 20h4v16H20v-4h12z"/>
+      <path fill="#07100c" d="M36 20h4v20H20v-4h16z"/>
+      <!-- Two raised square clasps bracket the diagonal block. -->
+      <path fill="#020604" d="M28 0h20v28H28zM0 28h28v20H0z"/>
+      <path fill="#3d5263" d="M30 2h18v24H30zM2 30h24v18H2z"/>
+      <path fill="#7197b4" d="M32 4h16v18H32zM4 32h18v16H4z"/>
+      <path fill="#d1d9d9" d="M34 6h14v4H38v10h-4zM6 34h14v4H10v10H6z"/>
+      <path fill="#465e71" d="M44 10h4v12H34v-2h10zM20 38h2v10H10v-4h10z"/>
+    </g>
+  </defs>
+  <use href="#rail"/>
+  <use href="#rail" transform="rotate(90 60 60)"/>
+  <use href="#rail" transform="rotate(180 60 60)"/>
+  <use href="#rail" transform="rotate(270 60 60)"/>
+  <use href="#corner"/>
+  <use href="#corner" transform="rotate(90 60 60)"/>
+  <use href="#corner" transform="rotate(180 60 60)"/>
+  <use href="#corner" transform="rotate(270 60 60)"/>
+</svg>

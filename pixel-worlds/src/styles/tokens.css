@@ -1,37 +1,43 @@
-/* Shared pixel UI, with one vivid palette for each atmospheric world. */
+/* Celadon pixel hardware against a near-black sky. */
 :root {
   color-scheme: dark;
   --color-bg: #07090d;
-  --color-panel: #11121c;
-  --color-panel-raised: #242239;
+  --color-panel: #0d1110;
+  --chapter-panel-opacity: 0.42;
+  --home-panel-opacity: 0.84;
+  --color-panel-raised: #18201c;
   --color-text: #fff2df;
-  --color-muted: #c2c2d9;
-  --color-subtle: #a7a9c5;
-  --color-border: #383650;
-  --color-ink: #0e1920;
-  --color-accent: #bd9bff;
-  --color-secondary: #ffcf71;
-  --scene-color: #492b86;
-  --scene-next: #234c8a;
-  --scene-back: #39276b;
-  --scene-front: #7953c2;
-  --font-heading: 'Pixelify Sans', monospace;
-  --font-ui: 'Silkscreen', monospace;
+  --color-muted: #d1cdc5;
+  --color-subtle: #aaa79f;
+  --color-border: #394b41;
+  --color-ink: #09110d;
+  --color-accent: #a9d8aa;
+  --color-secondary: #d1efd0;
+  --frame-gold: #78a486;
+  --frame-light: #c9edc5;
+  --frame-shadow: #3c6651;
+  --frame-dark: #1b3429;
+  --retro-frame: url('/frames/gold-pixel.svg');
+  --retro-panel-frame: url('/frames/celadon-panel.svg');
+  --selection-frame: url('/frames/selection-corners.svg');
+  --card-selection-frame: url('/frames/card-selection.svg');
+  --font-heading: 'Press Start 2P', monospace;
+  --font-ui: 'Press Start 2P', monospace;
   --font-body: 'Inter', sans-serif;
   --font-mono: var(--font-ui);
   --text-display: clamp(2.5rem, 4.3vw, 4.5rem);
   --text-heading: clamp(2rem, 3.1vw, 2.8rem);
   --text-closing: clamp(2rem, 3.3vw, 3rem);
   --text-subheading: clamp(1.375rem, 1.85vw, 1.75rem);
-  --text-body: 1rem;
-  --text-small: .875rem;
+  --text-body: 1.125rem;
+  --text-small: 1rem;
   --text-caption: .75rem;
   --text-metadata: .625rem;
-  --leading-display: 1.08;
-  --leading-heading: 1.15;
+  --leading-display: 1.5;
+  --leading-heading: 1.65;
   --leading-body: 1.85;
   --leading-compact: 1.6;
-  --tracking-display: -.025em;
+  --tracking-display: 0;
   --tracking-heading: 0;
   --tracking-label: 0;
   --space-1: .25rem;
@@ -55,11 +61,11 @@
   --panel-padding: clamp(1.5rem, 2.5vw, 2.5rem);
   --panel-line: 1px;
   --panel-radius: 0;
-  --panel-frame-width: 8px;
+  --panel-frame-width: 4px;
   --panel-frame-ink: #020305;
-  --panel-frame-bevel: 3px;
+  --panel-frame-bevel: 6px;
   --panel-notch: 8px;
-  --pixel-shadow: #050914;
+  --pixel-shadow: #020305;
   --control-height: 52px;
   --control-padding: var(--space-3) var(--space-5);
   --control-gap: var(--space-5);
@@ -93,24 +99,17 @@
   );
 }
 
-/* One palette family for both sections and shared navigation. */
-[data-theme='universe'] { --color-panel: #11121c; --color-accent: #bd9bff; --color-secondary: #ffcf71; --scene-color: #492b86; --scene-back: #181526; --scene-front: #29213f; }
-[data-theme='sky'] { --color-panel: #10151e; --color-accent: #77d3ff; --color-secondary: #ffc4a3; --scene-color: #234c8a; --scene-back: #111b28; --scene-front: #1c2a3b; }
-[data-theme='mountains'] { --color-panel: #14141d; --color-accent: #abafff; --color-secondary: #ffb19c; --scene-color: #413179; --scene-back: #191924; --scene-front: #292738; }
-[data-theme='botanical'] { --color-panel: #101815; --color-accent: #a0ef79; --color-secondary: #ffc96e; --scene-color: #205a3c; --scene-back: #111f18; --scene-front: #21352b; }
-[data-theme='underwater'] { --color-panel: #10171e; --color-accent: #65e6e6; --color-secondary: #9ebaff; --scene-color: #125061; --scene-back: #111c24; --scene-front: #1c323c; }
-
-/* Resolve semantic aliases at every theme boundary. */
+/* Neutral surfaces; chapter palettes supply the frame and accent tokens. */
 :root, [data-theme] {
   --panel-background: var(--color-panel);
-  --panel-border: color-mix(in srgb, var(--color-border) 70%, var(--color-accent));
-  --panel-rule: color-mix(in srgb, var(--color-border) 94%, var(--color-accent));
+  --panel-border: #587565;
+  --panel-rule: #303b35;
   --surface-subtle: color-mix(in srgb, var(--panel-background) 97%, var(--color-accent));
   --surface-hover: color-mix(in srgb, var(--panel-background) 93%, var(--color-accent));
   --accent-soft: color-mix(in srgb, var(--color-accent) 8%, transparent);
-  --accent-hover: color-mix(in srgb, var(--color-secondary) 85%, white);
-  --control-border: color-mix(in srgb, var(--color-border) 35%, var(--color-accent));
-  --control-edge: color-mix(in srgb, var(--color-accent) 38%, var(--color-bg));
+  --accent-hover: #d9f5d4;
+  --control-border: #7ca789;
+  --control-edge: #355945;
 }
 
 @media (max-width: 800px) {
@@ -125,7 +124,7 @@
     --text-display: clamp(2.375rem, 9.4vw, 3.25rem);
     --text-heading: clamp(2rem, 8vw, 2.5rem);
     --text-closing: clamp(2rem, 8.4vw, 2.75rem);
-    --text-body: .9375rem;
+    --text-body: 1.125rem;
   }
 }
 @media (max-width: 360px) {

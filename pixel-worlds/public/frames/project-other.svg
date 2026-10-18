@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" shape-rendering="crispEdges">
+  <defs>
+    <g id="side">
+      <path fill="#030806" d="M8 0h12v8h-8v4H8v8H0V8h4V4h4z"/>
+      <path fill="#6b635a" d="M8 2h12v4H10v4H6v10H2V8h4V4h2z"/>
+      <path fill="#e9e3db" d="M8 2h12v3H8zM2 8h3v12H2zM6 6h4v4H6z"/>
+      <path fill="#c5bcb2" d="M10 5h10v2H12v5H7v8H5V10h5z"/>
+      <path fill="#030806" d="M20 0h20v5H20z"/>
+      <path fill="#c5bcb2" d="M20 2h20v2H20z"/>
+    </g>
+  </defs>
+  <use href="#side"/>
+  <use href="#side" transform="rotate(90 30 30)"/>
+  <use href="#side" transform="rotate(180 30 30)"/>
+  <use href="#side" transform="rotate(270 30 30)"/>
+</svg>

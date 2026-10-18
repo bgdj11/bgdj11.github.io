@@ -1,0 +1,242 @@
+[
+  {
+    "source": "neurosymbolic-vqa\\docs\\assets\\source\\scene.png",
+    "path": "/media/projects/visual-reasoning/scene.webp",
+    "width": 1080,
+    "height": 729
+  },
+  {
+    "source": "neurosymbolic-vqa\\docs\\assets\\source\\depth.png",
+    "path": "/media/projects/visual-reasoning/depth.webp",
+    "width": 1080,
+    "height": 729
+  },
+  {
+    "source": "neurosymbolic-vqa\\docs\\assets\\source\\detection.png",
+    "path": "/media/projects/visual-reasoning/detection.webp",
+    "width": 1080,
+    "height": 729
+  },
+  {
+    "source": "neurosymbolic-vqa\\docs\\assets\\source\\masks.png",
+    "path": "/media/projects/visual-reasoning/masks.webp",
+    "width": 1080,
+    "height": 729
+  },
+  {
+    "source": "neurosymbolic-vqa\\docs\\assets\\source\\scene_graph.png",
+    "path": "/media/projects/visual-reasoning/scene_graph.webp",
+    "width": 1075,
+    "height": 898
+  },
+  {
+    "source": "neurosymbolic-vqa\\docs\\assets\\thesis_architecture_en.png",
+    "path": "/media/projects/visual-reasoning/thesis_architecture_en.webp",
+    "width": 806,
+    "height": 1200
+  },
+  {
+    "source": "neurosymbolic-vqa\\docs\\assets\\thesis_training_en.png",
+    "path": "/media/projects/visual-reasoning/thesis_training_en.webp",
+    "width": 1500,
+    "height": 1101
+  },
+  {
+    "source": "..\\project-evidence\\neurosymbolic-vqa--docs--one-page-summary.pdf.png",
+    "path": "/media/projects/visual-reasoning/summary-preview.webp",
+    "width": 715,
+    "height": 1011
+  },
+  {
+    "source": "..\\project-evidence\\neurosymbolic-vqa--docs--presentation--DIPLOMSKI_RAD_BOGDAN_PDF_JUL.pdf.png",
+    "path": "/media/projects/visual-reasoning/thesis-preview.webp",
+    "width": 620,
+    "height": 875
+  },
+  {
+    "source": "..\\project-evidence\\Bachelor_Thesis_Presentation_EN.pptx.jpeg",
+    "path": "/media/projects/visual-reasoning/presentation-en-preview.webp",
+    "width": 256,
+    "height": 144
+  },
+  {
+    "source": "..\\project-evidence\\DIPLOMSKI-PPT.pptx.jpeg",
+    "path": "/media/projects/visual-reasoning/presentation-sr-preview.webp",
+    "width": 256,
+    "height": 144
+  },
+  {
+    "source": "..\\project-evidence\\federated-actor-learning--notebooks--visualize_domain_shift.ipynb-cell4-1.png",
+    "path": "/media/projects/federated-actor-learning/feature-magnitude.webp",
+    "width": 989,
+    "height": 490
+  },
+  {
+    "source": "..\\project-evidence\\federated-actor-learning--notebooks--visualize_domain_shift.ipynb-cell7-0.png",
+    "path": "/media/projects/federated-actor-learning/pca.webp",
+    "width": 989,
+    "height": 790
+  },
+  {
+    "source": "..\\project-evidence\\federated-actor-learning--notebooks--visualize_domain_shift.ipynb-cell10-0.png",
+    "path": "/media/projects/federated-actor-learning/tsne.webp",
+    "width": 989,
+    "height": 790
+  },
+  {
+    "source": "..\\project-evidence\\federated-actor-learning--notebooks--visualize_domain_shift.ipynb-cell12-0.png",
+    "path": "/media/projects/federated-actor-learning/similarity.webp",
+    "width": 753,
+    "height": 590
+  },
+  {
+    "source": "botanica-algorithmica\\SavedPlants\\plant_1706581527.png",
+    "path": "/media/projects/botanica/branching.webp",
+    "width": 908,
+    "height": 750
+  },
+  {
+    "source": "botanica-algorithmica\\SavedPlants\\plant_1706581951.png",
+    "path": "/media/projects/botanica/canopy.webp",
+    "width": 908,
+    "height": 750
+  },
+  {
+    "source": "botanica-algorithmica\\SavedPlants\\plant_1706581827.png",
+    "path": "/media/projects/botanica/arched.webp",
+    "width": 908,
+    "height": 750
+  },
+  {
+    "source": "botanica-algorithmica\\SavedPlants\\plant_1706581747.png",
+    "path": "/media/projects/botanica/flowers.webp",
+    "width": 908,
+    "height": 750
+  },
+  {
+    "source": "botanica-algorithmica\\SavedPlants\\plant_1706581861.png",
+    "path": "/media/projects/botanica/fruit.webp",
+    "width": 908,
+    "height": 750
+  },
+  {
+    "source": "botanica-algorithmica\\SavedPlants\\plant_1707056411.png",
+    "path": "/media/projects/botanica/slender.webp",
+    "width": 908,
+    "height": 750
+  },
+  {
+    "source": "botanica-algorithmica\\demos\\regenerate.gif",
+    "path": "/media/projects/botanica/regenerate-poster.webp",
+    "width": 1360,
+    "height": 750
+  },
+  {
+    "source": "botanica-algorithmica\\demos\\development.gif",
+    "path": "/media/projects/botanica/development-poster.webp",
+    "width": 1360,
+    "height": 750
+  },
+  {
+    "source": "botanica-algorithmica\\demos\\leaves.gif",
+    "path": "/media/projects/botanica/leaves-poster.webp",
+    "width": 1360,
+    "height": 750
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--duck_counter_method1_visualization.ipynb-cell16-0.png",
+    "path": "/media/projects/classical-vision/duck-edges.webp",
+    "width": 888,
+    "height": 790
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--duck_counter_method1_visualization.ipynb-cell20-0.png",
+    "path": "/media/projects/classical-vision/duck-contours.webp",
+    "width": 888,
+    "height": 790
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--duck_counter_method1_visualization.ipynb-cell24-0.png",
+    "path": "/media/projects/classical-vision/duck-edge-results.webp",
+    "width": 1500,
+    "height": 564
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--duck_counter_method2_visualization.ipynb-cell14-0.png",
+    "path": "/media/projects/classical-vision/duck-threshold.webp",
+    "width": 765,
+    "height": 790
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--duck_counter_method2_visualization.ipynb-cell22-0.png",
+    "path": "/media/projects/classical-vision/duck-threshold-contours.webp",
+    "width": 765,
+    "height": 790
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--duck_counter_method2_visualization.ipynb-cell26-0.png",
+    "path": "/media/projects/classical-vision/duck-threshold-results.webp",
+    "width": 1500,
+    "height": 605
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--buzzy_beetle_counter_visualization.ipynb-cell10-0.png",
+    "path": "/media/projects/classical-vision/beetle-frames.webp",
+    "width": 1500,
+    "height": 910
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--buzzy_beetle_counter_visualization.ipynb-cell12-0.png",
+    "path": "/media/projects/classical-vision/beetle-foreground.webp",
+    "width": 1500,
+    "height": 910
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--buzzy_beetle_counter_visualization.ipynb-cell14-0.png",
+    "path": "/media/projects/classical-vision/beetle-color.webp",
+    "width": 1500,
+    "height": 910
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--buzzy_beetle_counter_visualization.ipynb-cell18-0.png",
+    "path": "/media/projects/classical-vision/beetle-detection.webp",
+    "width": 1500,
+    "height": 931
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--buzzy_beetle_counter_visualization.ipynb-cell22-1.png",
+    "path": "/media/projects/classical-vision/beetle-crossings.webp",
+    "width": 1500,
+    "height": 449
+  },
+  {
+    "source": "..\\project-evidence\\soft-computing-vision-projects--buzzy_beetle_counter_visualization.ipynb-cell30-0.png",
+    "path": "/media/projects/classical-vision/beetle-counts.webp",
+    "width": 1389,
+    "height": 590
+  },
+  {
+    "source": "space-shooter\\Untitled design.gif",
+    "path": "/media/projects/space-shooter/gameplay-poster.webp",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "source": "space-shooter\\Untitled design (1).gif",
+    "path": "/media/projects/space-shooter/combat-poster.webp",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "source": "rasa-sentiment-chatbot\\image.png",
+    "path": "/media/projects/sentiment-chatbot/conversation.webp",
+    "width": 1224,
+    "height": 695
+  },
+  {
+    "source": "YandexAI-hackathon\\frontend\\app\\src\\assets\\logoP.png",
+    "path": "/media/projects/checkmate/logo.webp",
+    "width": 378,
+    "height": 311
+  }
+]

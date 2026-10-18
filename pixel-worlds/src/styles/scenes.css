@@ -26,32 +26,32 @@
 .project-art-shader .art-element-one { inset: 13px; border: 1px solid #e7b77f; transform: rotate(20deg); box-shadow: 4px 4px #815e97, -4px -4px #815e97; }
 .project-art-shader .art-element-two { inset: 22px; background: #9dcfed; }
 
-/* Flat fields and crisp raster pixels. A sticky stage keeps the world in view
-   throughout long chapters without enlarging or stretching the render buffer. */
-.scene-layer { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: clip; contain: paint; background: var(--scene-base); }
-.scene-viewport { position: sticky; top: 0; width: 100%; height: 100svh; }
-.procedural-scene, .scene-fallback { position: absolute; inset: 0; width: 100%; height: 100%; }
-.procedural-scene { display: block; image-rendering: crisp-edges; image-rendering: pixelated; }
-.procedural-scene:not([data-scene-state='unavailable']) ~ .scene-fallback { display: none; }
-.scene-fallback { background: var(--scene-base); }
-.scene-form { position: absolute; bottom: 0; width: 100%; height: 42%; background: var(--scene-back); clip-path: polygon(0 65%, 10% 65%, 10% 40%, 25% 40%, 25% 25%, 40% 25%, 40% 50%, 55% 50%, 55% 15%, 70% 15%, 70% 40%, 85% 40%, 85% 70%, 100% 70%, 100% 100%, 0 100%); }
-.scene-form-front { height: 24%; background: var(--scene-front); transform: scaleX(-1); }
-.scene-layer canvas, .scene-layer img { image-rendering: pixelated; }
 .project-art { border-bottom: var(--panel-line) solid var(--panel-rule); }
 
-/* Each crossing has the next biome's foreground contours. Opposing camera and
-   foreground movement create depth; the scene itself stays fully intact. */
-.chapter-transition { position: absolute; bottom: -1px; left: 0; width: 100%; height: 144px; overflow: clip; pointer-events: none; z-index: 0; view-timeline-name: --chapter-border; view-timeline-axis: block; }
-.chapter-transition svg { position: absolute; width: 120%; height: 100%; left: -10%; bottom: 0; overflow: visible; }
-.transition-back { fill: var(--scene-back); }
-.transition-front { fill: var(--scene-front); }
-.transition-ground { fill: var(--scene-base); }
-@keyframes terrain-crossing { from { transform: translate(-28px, 26px) scale(1.03); } to { transform: translate(28px, -18px) scale(1.14); } }
-@keyframes foreground-crossing { from { transform: translate(34px, 38px) scale(1.05); } to { transform: translate(-34px, -24px) scale(1.22); } }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .transition-back, .transition-front, .transition-ground { animation: terrain-crossing 1s linear both; animation-timeline: --chapter-border; animation-range: entry 0% exit 100%; transform-origin: 50% 100%; }
-    .transition-front { animation-name: foreground-crossing; }
-    .transition-ground { animation-name: foreground-crossing; animation-direction: reverse; }
-  }
+/* One continuous camera and one bounded raster buffer for the whole journey.
+   Only the exposed planet handles intercept input; the sky itself never does. */
+.space-stage { position: fixed; inset: 0; z-index: 0; overflow: clip; pointer-events: none; background: var(--scene-base); contain: layout paint; }
+.space-canvas { display: block; width: 100%; height: 100%; image-rendering: crisp-edges; image-rendering: pixelated; }
+.planet-handle { position: absolute; display: block; border: 0; border-radius: 50%; padding: 0; margin: 0; min-width: 44px; min-height: 44px; background: transparent; pointer-events: auto; cursor: grab; touch-action: pan-y; user-select: none; transition: none; -webkit-user-select: none; }
+.planet-handle[hidden] { display: none; }
+.planet-handle.is-dragging { cursor: grabbing; }
+.planet-handle:focus-visible { outline: 2px dashed var(--color-accent); outline-offset: 8px; }
+.planet-hint { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); width: max-content; max-width: min(180px, 70vw); padding: 7px 10px; border: 1px solid var(--panel-border); background: var(--color-bg); color: var(--color-secondary); font-family: var(--font-ui); font-size: 9px; line-height: 1.8; text-align: center; pointer-events: none; opacity: 0; transition: opacity var(--transition); }
+.planet-handle[data-side='left'] .planet-hint { left: 0; transform: none; }
+.planet-handle[data-side='right'] .planet-hint { left: auto; right: 0; transform: none; }
+.planet-handle:focus-visible .planet-hint, .planet-handle.is-dragging .planet-hint { opacity: 1; }
+@media (hover: hover) {
+  .planet-handle:hover .planet-hint { opacity: 1; }
+}
+.space-status { position: absolute; left: var(--page-gutter); bottom: 24px; display: flex; flex-direction: column; gap: 9px; width: 124px; font-family: var(--font-ui); font-size: 8px; line-height: 1.8; color: var(--color-subtle); pointer-events: none; }
+.space-status > span { width: fit-content; background: var(--color-bg); }
+.space-progress { height: 3px; width: 80px; background: #302b22; overflow: hidden; }
+.space-progress > i { display: block; height: 100%; width: 100%; background: var(--color-accent); transform-origin: left; }
+.scene-layer { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: clip; }
+.scene-layer canvas, .scene-layer img { image-rendering: pixelated; }
+@media (max-width: 899px) {
+  .space-status { display: none; }
+  .planet-hint { font-size: 8px; max-width: 130px; }
+  .planet-handle[data-side='left'] .planet-hint { top: auto; bottom: calc(100% + 12px); }
+  .planet-handle[data-side='right'] .planet-hint { top: 50%; left: auto; right: calc(100% + 8px); transform: translateY(-50%); }
 }
