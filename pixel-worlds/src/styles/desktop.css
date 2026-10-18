@@ -12,7 +12,13 @@
 .desktop-window, .desktop-shortcuts, .desktop-taskbar, .desktop-portfolio .site-header, .desktop-portfolio .space-stage { --font-ui: var(--font-desktop); }
 .desktop-icon { width: 24px; height: 24px; object-fit: contain; image-rendering: pixelated; flex: 0 0 auto; }
 .desktop-portfolio .site-header { height: 54px; padding: 0 clamp(24px, 5.3vw, 88px); background: #071117f5; border-bottom: 1px solid #37505a; gap: 24px; }
-.desktop-portfolio .brand { font-size: 13px; gap: 13px; white-space: nowrap; }
+.desktop-portfolio .brand { font-size: 13px; gap: 13px; white-space: nowrap; padding: 3px 6px; margin-inline: -6px; transition: background 100ms steps(2, end), box-shadow 100ms steps(2, end); }
+.desktop-portfolio .brand::after { content: none; }
+.desktop-portfolio .brand:focus-visible { background: #23453f; box-shadow: inset 1px 1px #a3c7b2, inset -1px -1px #0b242a; outline: 1px dashed #c7e9c8; outline-offset: 3px; }
+@media (hover: hover) {
+  .desktop-portfolio .brand:hover { background: #23453f; box-shadow: inset 1px 1px #a3c7b2, inset -1px -1px #0b242a; }
+}
+.desktop-portfolio .brand:active { background: #122e2e; box-shadow: inset 1px 1px #06171b, inset -1px -1px #71988a; }
 .desktop-portfolio .brand .desktop-icon { width: 34px; height: 34px; }
 .desktop-portfolio .brand-period { margin-left: -11px; color: #f6ead5; }
 .desktop-portfolio .site-header nav { gap: 9px; }
@@ -230,6 +236,7 @@
   .desktop-portfolio .site-header nav .nav-link { min-height: 42px; }
   .desktop-portfolio .nav-link::after { bottom: 4px; }
   .desktop-portfolio .mobile-nav-actions { gap: 12px; }
+  .desktop-portfolio nav.is-open .desktop-cv { display: inline-flex; }
   .desktop-portfolio .menu-toggle { min-height: 34px; padding: 4px 12px; font-size: 16px; }
   .desktop-workspace { width: calc(100% - 152px); margin-left: 120px; gap: 24px; }
   .desktop-panel-hero { gap: 22px; }
@@ -315,14 +322,35 @@
   .desktop-shortcut { font-size: 12px; }
 }
 
-/* Native CSS cursors keep an exact hotspot, with no pointer-tracking overlay. */
+.desktop-portfolio .resume-dialog { width: min(920px, calc(100vw - 24px)); height: calc(100dvh - 32px); max-height: calc(100dvh - 32px); margin: auto; }
+.resume-dialog .dialog-filename { margin: 0; }
+.resume-download { display: inline-flex; align-items: center; gap: 6px; padding: 5px 8px; color: #f2f7df; background: #173638; border: 1px solid #9dbfaa; font: 15px/1.3 var(--font-desktop); white-space: nowrap; }
+.resume-download svg { width: 16px; height: 16px; }
+.resume-download:hover, .resume-download:focus-visible { background: #32625e; }
+.document-controls { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; font: 15px var(--font-desktop); }
+.document-controls button { min-width: 34px; min-height: 34px; padding: 4px 8px; color: #f2f7df; background: #173638; border: 1px solid #9dbfaa; }
+.document-controls button:hover:not(:disabled) { background: #32625e; }
+.document-controls button:disabled { opacity: .45; }
+.document-viewer .slide-canvas { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; overflow: auto; }
+.document-viewer .slide-canvas canvas { max-width: none; }
+.document-viewer .slide-canvas canvas, .document-viewer .slide-canvas > p { grid-column: 1 / -1; }
+.document-viewer .gallery-arrow, .document-viewer .gallery-count { position: static; transform: none; }
+.document-viewer .gallery-count { justify-self: center; }
+@media (max-width: 480px) {
+  .resume-dialog .dialog-toolbar { gap: 6px; padding-inline: 4px; }
+  .resume-dialog .dialog-toolbar > .desktop-icon { display: none; }
+  .resume-dialog .dialog-filename { font-size: 13px; }
+  .resume-download { font-size: 13px; padding-inline: 5px; }
+}
+
+/* Native CSS cursors share a 24px height and use matching resized hotspots. */
 @media (hover: hover) and (pointer: fine) {
   :root {
     --cursor-arrow: url('../assets/cursors/arrow.png') 1 1, default;
-    --cursor-pointer: url('../assets/cursors/pointer.png') 12 1, pointer;
-    --cursor-grab: url('../assets/cursors/grab.png') 17 17, grab;
-    --cursor-grabbing: url('../assets/cursors/grabbing.png') 17 17, grabbing;
-    --cursor-text: url('../assets/cursors/text.png') 9 23, text;
+    --cursor-pointer: url('../assets/cursors/pointer.png') 7 1, pointer;
+    --cursor-grab: url('../assets/cursors/grab.png') 12 12, grab;
+    --cursor-grabbing: url('../assets/cursors/grabbing.png') 12 12, grabbing;
+    --cursor-text: url('../assets/cursors/text.png') 5 12, text;
   }
   html, body, .desktop-portfolio { cursor: var(--cursor-arrow); }
   .desktop-portfolio :is(a[href], button:not(:disabled):not(.planet-handle), [role='button'], .interactive-entry, .featured-project, .small-project) { cursor: var(--cursor-pointer); }

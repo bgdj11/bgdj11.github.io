@@ -7,7 +7,7 @@ A React + TypeScript + Vite portfolio with an interactive procedural pixel-art u
 With Node.js 22.12 or newer:
 
 ```sh
-npm install
+npm ci
 npm run dev
 ```
 
@@ -33,7 +33,9 @@ The page remains a normal scrollable document: wheel scrolling over an open wind
 
 `src/components/Desktop.tsx` owns window state and desktop controls; `WorldSection.tsx` places existing content inside that window shell. `src/styles/desktop.css` supplies the desktop presentation, with local Pixelify Sans for interface labels, Press Start 2P headings, and Inter body copy. Desktop icons are copied from the supplied retro computer pack; the mapping is documented in `public/media/desktop/SOURCES.md`. The shared `SpaceScene` and planet renderers are unchanged.
 
-Home, Education, Experience, Projects, Beyond Code and Contact have semantic headings, persistent navigation, smooth anchors and active-section tracking. Featured Work uses compact two-column cards with a small image and summary inside one frame. More Work uses a denser three-column thumbnail grid. Whole cards open details; both grids collapse on smaller screens. Education, experience, projects and hobbies share accessible detail dialogs. CV and contact destinations remain unavailable until real files and links are supplied.
+Home, Education, Experience, Projects, Beyond Code and Contact have semantic headings, persistent navigation, smooth anchors and active-section tracking. Featured Work uses compact two-column cards with a small image and summary inside one frame. More Work uses a denser three-column thumbnail grid. Whole cards open details; both grids collapse on smaller screens. Education, experience, projects and hobbies share accessible detail dialogs. Every CV button opens the same in-page PDF window, with a persistent download action. Resume availability is verified before enabling the controls.
+
+The app is self-contained: profile images are bundled from `src/assets/profile/`, with no build imports from the root design-asset folders. `src/components/Resume.tsx` owns shared CV state and actions; `ResumeDialog.tsx` opens the accessible modal and lazily loads the existing PDF renderer.
 
 Edit `src/data/portfolio.ts` to update:
 
@@ -90,9 +92,9 @@ The repository includes [`.github/workflows/deploy-pages.yml`](../.github/workfl
 Before the first deployment, open the GitHub repository’s **Settings → Pages** and set **Source** to **GitHub Actions**. Then commit and push the workflow together with the portfolio files:
 
 ```powershell
-git add .github pixel-worlds images
+git add README.md .github pixel-worlds
 git commit -m "Deploy portfolio with GitHub Pages"
 git push origin v2
 ```
 
-The workflow derives the Pages base path from the repository name. For `bgdj11/website`, the deployed portfolio URL will be `https://bgdj11.github.io/website/`. Public media, frames, PDFs, slide viewer resources and social icons are resolved through Vite’s base URL, so they work under that subpath as well as locally.
+The workflow passes the actual Pages base path from `actions/configure-pages` to Vite using `PAGES_BASE_PATH`, supporting repository sites, user sites, and custom domains. Outside the workflow, local builds default to `/`. To test a repository path locally in PowerShell, set `$env:PAGES_BASE_PATH = "/website"` before `npm run build` and `npm run preview`. For `bgdj11/website`, the deployed portfolio URL will be `https://bgdj11.github.io/website/`. Public media, frames, PDFs, slide viewer resources and social icons are resolved through Vite’s base URL, so they work under that subpath as well as locally.

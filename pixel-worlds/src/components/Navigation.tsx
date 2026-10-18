@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { chapters, profile } from '../data/portfolio'
 import type { SectionId } from '../data/portfolio'
-import { CvAction } from './Contact'
+import { CvAction } from './Resume'
 import { DesktopIcon, useDesktop } from './Desktop'
 
 export function useActiveSection() {

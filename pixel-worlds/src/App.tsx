@@ -7,7 +7,8 @@ import { DetailDialog, useDetails } from './components/DetailDialog'
 import { SpaceScene } from './components/SpaceScene'
 import { FramedImage } from './components/Media'
 import { AcademicEntry, HobbyCard, ExperienceEntry } from './components/Entries'
-import { CvAction, ResumePreview, ResumeProvider, SocialLink } from './components/Contact'
+import { SocialLink } from './components/Contact'
+import { CvAction, ResumePreview, ResumeProvider, ResumeModal } from './components/Resume'
 import { DesktopProvider, DesktopShortcuts, DesktopTaskbar, PortraitWindow, useDesktop } from './components/Desktop'
 
 export function App() {
@@ -44,5 +45,6 @@ function PortfolioDesktop() {
     </main>
     <DesktopTaskbar />
     <DetailDialog entry={detail.entry} onClose={detail.close} />
+    <ResumeModal />
   </div>
 }
