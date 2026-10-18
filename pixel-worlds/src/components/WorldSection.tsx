@@ -1,29 +1,23 @@
 import type { ReactNode } from 'react'
 import { chapters } from '../data/portfolio'
-import type { SectionId, World } from '../data/portfolio'
+import type { SectionId } from '../data/portfolio'
+import { DesktopWindow } from './Desktop'
 
-export function WorldSection({ id, children, aside, footer, eyebrow, description, theme, scene }: {
+export function WorldSection({ id, children, aside, footer, eyebrow, description }: {
   id: SectionId; children: ReactNode; aside?: ReactNode; footer?: ReactNode
-  eyebrow?: string; description?: ReactNode; theme?: World; scene?: ReactNode
+  eyebrow?: string; description?: ReactNode
 }) {
   const chapter = chapters.find(item => item.id === id)!
-  return <section id={id} className="world" data-accent={id} data-theme={theme ?? chapter.world} aria-labelledby={id + '-heading'}>
-    {scene && <div className="scene-layer" aria-hidden="true" inert>{scene}</div>}
-    <div className="section-container">
-      <ContentPanel className={'section-panel' + (aside ? ' section-panel-hero' : '')}>
+  return <DesktopWindow id={id}>
+      <div className={'desktop-panel' + (aside ? ' desktop-panel-hero' : '')}>
         <div className="section-editorial">
           <SectionHeading id={id} eyebrow={eyebrow} description={description ?? chapter.description}>{chapter.title}</SectionHeading>
           <div className="section-body">{children}</div>
         </div>
         {aside && <aside className="section-aside">{aside}</aside>}
-      </ContentPanel>
+      </div>
       {footer}
-    </div>
-  </section>
-}
-
-export function ContentPanel({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <div className={'panel ' + className}>{children}</div>
+  </DesktopWindow>
 }
 
 export function SectionHeading({ id, eyebrow, children, description }: {

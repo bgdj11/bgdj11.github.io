@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { chapters, profile } from '../data/portfolio'
 import type { SectionId } from '../data/portfolio'
 import { CvAction } from './Contact'
+import { DesktopIcon, useDesktop } from './Desktop'
 
 export function useActiveSection() {
   const [active, setActive] = useState<SectionId>('home')
@@ -11,10 +12,13 @@ export function useActiveSection() {
       frame = 0
       const marker = Math.max(140, innerHeight * .28)
       let current: SectionId = 'home'
+      let nearest = -Infinity
       for (const { id } of chapters) {
-        if ((document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= marker) current = id
+        const node = document.getElementById(id)
+        if (!node || node.hidden) continue
+        const top = node.getBoundingClientRect().top
+        if (top <= marker && top > nearest) { current = id; nearest = top }
       }
-      if (scrollY + innerHeight >= document.documentElement.scrollHeight - 4) current = 'contact'
       setActive(current)
     }
     const schedule = () => { if (!frame) frame = requestAnimationFrame(measure) }
@@ -30,6 +34,7 @@ export function useActiveSection() {
 }
 
 export function Navigation({ active }: { active: SectionId }) {
+  const desktop = useDesktop()
   const [open, setOpen] = useState(false)
   const toggle = useRef<HTMLButtonElement>(null)
   const header = useRef<HTMLElement>(null)
@@ -44,10 +49,10 @@ export function Navigation({ active }: { active: SectionId }) {
   return <header className="site-header" data-accent={active} ref={header} onKeyDown={event => {
     if (event.key === 'Escape' && open) { setOpen(false); toggle.current?.focus() }
   }}>
-    <a className="brand" href="#home" onClick={() => setOpen(false)} aria-label={profile.name + ', home'}><span className="pixel-mark" aria-hidden="true"><i /><i /><i /><i /></span>{profile.name}<span className="brand-period">.</span></a>
+    <a className="brand" href="#home" onClick={event => { event.preventDefault(); setOpen(false); desktop.open('home') }} aria-label={profile.name + ', home'}><DesktopIcon name="computer" />{profile.name}<span className="brand-period">.</span></a>
     <div className="mobile-nav-actions"><CvAction compact className="nav-cv" /><button ref={toggle} className="button menu-toggle" aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>{open ? 'Close' : 'Menu'}</button></div>
     <nav id="main-navigation" className={open ? 'is-open' : ''} aria-label="Main navigation">
-      {chapters.map(({ id, label }) => <a key={id} href={'#' + id} className={active === id ? 'nav-link is-active' : 'nav-link'} aria-current={active === id ? 'location' : undefined} onClick={() => { setOpen(false); if (matchMedia('(max-width: 1100px)').matches) toggle.current?.focus() }}>{label}</a>)}
+      {chapters.map(({ id, label }) => <a key={id} href={'#' + id} className={active === id ? 'nav-link is-active' : 'nav-link'} aria-current={active === id ? 'location' : undefined} onClick={event => { event.preventDefault(); setOpen(false); desktop.open(id) }}>{label}</a>)}
       <CvAction className="nav-cv desktop-cv" compact />
     </nav>
   </header>

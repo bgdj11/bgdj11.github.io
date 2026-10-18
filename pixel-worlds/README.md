@@ -27,6 +27,12 @@ npm run preview
 
 ## Portfolio content
 
+The interface opens as a retro desktop. All six content windows start open: About, Education and Experience side by side, Projects across the full workspace width, then compact Hobbies and Contact windows side by side. Desktop shortcuts, header navigation, and the taskbar reopen windows. Title bars support mouse dragging on wider screens, minimizing, closing, and expanding to the workspace width. Double-clicking a title bar also expands it. The Start menu restores all windows or resets their positions; the small button at the far right of the taskbar shows the planetary desktop and restores the previous windows.
+
+The page remains a normal scrollable document: wheel scrolling over an open window still moves the procedural camera, and exposed planets remain interactive. On narrow screens windows stack, dragging is disabled, and shortcuts become a horizontal strip. Projects shows the complete collection immediately, with two compact featured cards, a three-column archive on wider screens, and the existing category filters. All original entry data, detail dialogs, project URLs, galleries, social destinations, and the resume are retained.
+
+`src/components/Desktop.tsx` owns window state and desktop controls; `WorldSection.tsx` places existing content inside that window shell. `src/styles/desktop.css` supplies the desktop presentation, with local Pixelify Sans for interface labels, Press Start 2P headings, and Inter body copy. Desktop icons are copied from the supplied retro computer pack; the mapping is documented in `public/media/desktop/SOURCES.md`. The shared `SpaceScene` and planet renderers are unchanged.
+
 Home, Education, Experience, Projects, Beyond Code and Contact have semantic headings, persistent navigation, smooth anchors and active-section tracking. Featured Work uses compact two-column cards with a small image and summary inside one frame. More Work uses a denser three-column thumbnail grid. Whole cards open details; both grids collapse on smaller screens. Education, experience, projects and hobbies share accessible detail dialogs. CV and contact destinations remain unavailable until real files and links are supplied.
 
 Edit `src/data/portfolio.ts` to update:
@@ -40,11 +46,11 @@ Project candidates are labeled drafts; they are not claims of finished work. Mis
 
 ## Visual system
 
-`src/styles/tokens.css` defines the shared palette, type scale, spacing, surfaces, controls and frame dimensions. All chapters use near-black opaque text panels with stepped gold frames: a black outer outline, bright upper/left bevel, bronze lower/right bevel and dark inner separation. Headings use Pixelify Sans, interface labels use Silkscreen and paragraphs use Inter. Fonts are locally bundled with licenses in `public/font-licenses/`.
+`src/styles/tokens.css` defines the underlying design tokens; `src/styles/desktop.css` adds teal window frames, raised title-bar controls, inset records, desktop shortcuts, and the taskbar. Headings use Press Start 2P, desktop labels use Pixelify Sans, and paragraphs use Inter. Fonts are locally bundled with licenses in `public/font-licenses/`.
 
-Panels occupy approximately 72% of the desktop viewport (up to 1120 px) and the available width on small screens. Shared nine-slice frames in `public/frames/gold-pixel.svg` give panels, photographs and dialogs stepped pixel corners. Text remains a normal DOM layer above the scene: it is never drawn, warped, rotated or scaled by the camera. There are no CSS or canvas gradients, blurry glows, separate biome backgrounds or blackout transitions.
+The desktop uses a two-column workspace with a centered About window, paired Education and Experience windows, a full-width Projects window, and paired Hobbies and Contact windows. On tablets and phones, windows stack into one column. Text remains a normal DOM layer above the scene; scrolling never draws, rotates, or scales it with the camera. Transparent gaps pass pointer input to the planetary background.
 
-`WorldSection` provides the chapter heading, description, framed body and optional footer/aside. Optional custom `scene` content is decorative and inert; the default background is the shared `SpaceScene` mounted once by `App`. Detail dialogs open up to 1240 px wide with independently scrollable content and nearly full-screen mobile layouts.
+`WorldSection` provides the chapter heading, description, body, and optional footer/aside inside `DesktopWindow`. The shared `SpaceScene` is mounted once by `App`. Detail dialogs retain their independently scrollable content and nearly full-screen mobile layouts.
 
 ## Interactive space
 

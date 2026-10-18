@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import '@fontsource/inter/latin-400.css'
 import '@fontsource/inter/latin-500.css'
+import '@fontsource/pixelify-sans/latin-400.css'
+import '@fontsource/pixelify-sans/latin-600.css'
 import { App } from './App'
 import './styles/tokens.css'
 import './styles/section-palettes.css'
@@ -10,6 +12,7 @@ import './styles/game-cards.css'
 import './styles/project-studies.css'
 import './styles/scenes.css'
 import './styles/layout-density.css'
+import './styles/desktop.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode><App /></React.StrictMode>,

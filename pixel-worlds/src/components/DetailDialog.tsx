@@ -6,6 +6,7 @@ import { ContentLinks } from './Contact'
 import { Icon } from './Icon'
 import { PixelHeadingText } from './PixelHeadingText'
 import { ProjectCaseStudy } from './ProjectCaseStudy'
+import { DesktopIcon } from './Desktop'
 
 function linkedProject() {
   const id = new URL(location.href).searchParams.get('project')
@@ -110,7 +111,7 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     if (event.target === event.currentTarget && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) onClose()
   }}>
     {entry && <>
-      <div className="dialog-toolbar"><button className="dialog-close" onClick={onClose} aria-label="Close details"><Icon name="close" /></button></div>
+      <div className="dialog-toolbar"><DesktopIcon name={project ? 'folder' : educationEntry ? 'books' : experienceProfile ? 'terminal' : 'joystick'} /><span className="dialog-filename">{entry.title}</span><button className="dialog-close" onClick={onClose} aria-label="Close details"><Icon name="close" /></button></div>
       <div className="dialog-inner" key={entry.id}>
         {project?.caseStudy ? <ProjectCaseStudy project={project} /> : <>
         {educationEntry ? <header className="education-dialog-header">
