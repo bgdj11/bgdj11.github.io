@@ -38,7 +38,7 @@ function PortfolioDesktop() {
       <WorldSection id="experience"><ol className="experience-list">{experience.map(entry => <ExperienceEntry key={entry.id} entry={entry} onSelect={detail.open} />)}</ol></WorldSection>
       <WorldSection id="projects"><ProjectCollection onSelect={detail.open} /></WorldSection>
       <WorldSection id="beyond-code"><div className="hobby-grid">{hobbies.map(hobby => <HobbyCard key={hobby.id} hobby={hobby} onSelect={detail.open} />)}</div></WorldSection>
-      <WorldSection id="contact" footer={<footer className="site-footer"><a href="#home" className="footer-signature" onClick={event => { event.preventDefault(); desktop.open('home') }}>{profile.name}</a><a className="text-link" href="#home" onClick={event => { event.preventDefault(); desktop.open('home') }}>Back to top<Icon name="down" className="up-arrow" /></a></footer>}>
+      <WorldSection id="contact" footer={<footer className="site-footer"><a href="#home" className="footer-signature" onClick={event => { event.preventDefault(); desktop.open('home') }}>{profile.name}</a></footer>}>
         <div className="contact-layout"><div className="social-list">{profile.socials.map(social => <SocialLink key={social.kind} social={social} />)}</div><ResumePreview /></div>
       </WorldSection>
     </main>
