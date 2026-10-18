@@ -1,7 +1,8 @@
+import { publicAsset } from './assets'
 import type { Project } from './portfolio'
 
 // Content verified against pinned repository snapshots; see PROJECT_RESEARCH.md.
-export const projects: Project[] = [
+const rawProjects: Project[] = [
   {
     "id": "visual-reasoning",
     "title": "Visual Scene Understanding",
@@ -1404,3 +1405,14 @@ export const projects: Project[] = [
     ]
   }
 ]
+
+function withDeploymentBase<T>(value: T): T {
+  if (typeof value === 'string' && value.startsWith('/')) return publicAsset(value) as T
+  if (Array.isArray(value)) return value.map(withDeploymentBase) as T
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, withDeploymentBase(item)])) as T
+  }
+  return value
+}
+
+export const projects: Project[] = rawProjects.map(withDeploymentBase)

@@ -77,6 +77,16 @@ Run `npm run build` for TypeScript and the production bundle. Local browser chec
 
 The version-two checks cover the continuous canvas, actual two-axis mouse rotation, keyboard/reset behavior, scroll camera, normal wheel scrolling, reduced motion, hidden-document event handling, stable seeds on resize, fresh seeds on reload and mobile/desktop layouts. The portfolio checks cover navigation, filters, dialogs, focus restoration and automated accessibility. A controlled visibility event in headless Chrome checks lifecycle code; it does not simulate an actual operating-system background tab.
 
-## Hosting status
+## GitHub Pages deployment
 
-The Sites `create_site` request for `bogdan-pixel-worlds` timed out on 11 October 2026. A subsequent complete owner listing did not contain that site. No project ID or deployment URL was returned, and nothing was published. Do not repeat `create_site` blindly; reconcile the existing registration attempt before trying to host this project. The local Vite application and production build are independent of Sites.
+The repository includes [`.github/workflows/deploy-pages.yml`](../.github/workflows/deploy-pages.yml). It builds `pixel-worlds/` and deploys the generated `dist/` artifact on every push to `main` or `v2`; it can also be started from the Actions tab.
+
+Before the first deployment, open the GitHub repository’s **Settings → Pages** and set **Source** to **GitHub Actions**. Then commit and push the workflow together with the portfolio files:
+
+```powershell
+git add .github pixel-worlds images
+git commit -m "Deploy portfolio with GitHub Pages"
+git push origin v2
+```
+
+The workflow derives the Pages base path from the repository name. For `bgdj11/website`, the deployed portfolio URL will be `https://bgdj11.github.io/website/`. Public media, frames, PDFs, slide viewer resources and social icons are resolved through Vite’s base URL, so they work under that subpath as well as locally.

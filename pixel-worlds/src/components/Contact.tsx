@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { profile } from '../data/portfolio'
+import { publicAsset } from '../data/assets'
 import type { ContentLink, Social, SocialKind } from '../data/portfolio'
 import { FramedImage } from './Media'
 import { Icon } from './Icon'
@@ -11,13 +12,13 @@ export function safeUrl(url?: string) {
 }
 
 export function ContentLinks({ links = [] }: { links?: ContentLink[] }) {
-  return <div className="content-links">{links.filter(link => safeUrl(link.url)).map(link => <a key={link.url} href={link.url} className="text-link" target="_blank" rel="noopener noreferrer">{link.url.startsWith('https://github.com/') && <img className="github-link-icon" src="/media/social/normal/github.png" width="24" height="24" alt="GitHub:" />}{link.label}<Icon name="arrow" /></a>)}</div>
+  return <div className="content-links">{links.filter(link => safeUrl(link.url)).map(link => <a key={link.url} href={link.url} className="text-link" target="_blank" rel="noopener noreferrer">{link.url.startsWith('https://github.com/') && <img className="github-link-icon" src={publicAsset('/media/social/normal/github.png')} width="24" height="24" alt="GitHub:" />}{link.label}<Icon name="arrow" /></a>)}</div>
 }
 
 function SocialIcon({ kind }: { kind: SocialKind }) {
   return <span className="social-icon" aria-hidden="true">
     {(['normal', 'hover', 'pressed'] as const).map(state =>
-      <img key={state} className={`social-icon-${state}`} src={`/media/social/${state}/${kind}.png`}
+      <img key={state} className={`social-icon-${state}`} src={publicAsset(`/media/social/${state}/${kind}.png`)}
         width={16} height={16} alt="" draggable={false} />
     )}
   </span>

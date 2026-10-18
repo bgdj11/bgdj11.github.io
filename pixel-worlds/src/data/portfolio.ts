@@ -7,7 +7,9 @@ import comtradeLogo from '../../../images/comtrade.png'
 import petnicaLogo from '../../../images/petnica.jpg'
 import zmajPortrait from '../../../images/Jovan_Jovanović_Zmaj.jpg'
 import { comtradeDetails } from './comtrade'
+import { publicAsset } from './assets'
 export { projects } from './projects'
+export { publicAsset } from './assets'
 
 export type SectionId = 'home' | 'education' | 'experience' | 'projects' | 'beyond-code' | 'contact'
 export type World = 'universe' | 'sky' | 'mountains' | 'botanical' | 'underwater'
@@ -116,7 +118,7 @@ export const profile = {
     { kind: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/bgdj11/' },
   ] as Social[],
   resume: {
-    url: '/Bogdan_Djukic_CV.pdf',
+    url: publicAsset('/Bogdan_Djukic_CV.pdf'),
     filename: 'Bogdan_Djukic_CV.pdf',
     thumbnail: photo('resume', 'Resume preview to come', 'portrait'),
   },
@@ -128,7 +130,7 @@ export const education: Education[] = [
   {
     id: 'polytechnique', title: 'École Polytechnique', subtitle: 'Institut Polytechnique de Paris', credential: 'Master of Science & Technology (MSc&T)', degree: 'Visual and Creative Artificial Intelligence (ViCAI)', dates: 'September 2026 – Present (expected graduation: 2028)', cardDates: 'Sep 2026 – Present', location: 'Palaiseau, France', credits: 140,
     summary: '',
-    media: { id: 'polytechnique-logo', src: '/media/education/ecole.svg', alt: 'École Polytechnique logo', placeholder: 'École Polytechnique', presentation: 'logo', shape: 'square', fit: 'cover', width: 186, height: 263 },
+    media: { id: 'polytechnique-logo', src: publicAsset('/media/education/ecole.svg'), alt: 'École Polytechnique logo', placeholder: 'École Polytechnique', presentation: 'logo', shape: 'square', fit: 'cover', width: 186, height: 263 },
     details: [
       { heading: 'About the Program', paragraphs: ["I am currently pursuing a Master's degree in Visual and Creative Artificial Intelligence at École Polytechnique, focusing on the intersection of computer vision, computer graphics, and machine learning. The program combines visual content analysis and synthesis with modern AI techniques, including deep learning, generative models, and reinforcement learning."] },
       { heading: 'Computer Vision & Graphics', items: ['Image Analysis and Computer Vision', 'Digital Representations and Analysis of Shapes', 'Computer Animation', 'Image Synthesis'] },
@@ -141,7 +143,7 @@ export const education: Education[] = [
   {
     id: 'bachelors', title: 'Faculty of Technical Sciences', subtitle: 'University of Novi Sad', credential: 'Bachelor of Science (BSc)', degree: 'Computing and Control Engineering', dates: 'October 2021 – July 2026', cardDates: 'Oct 2021 – Jul 2026', location: 'Novi Sad, Serbia', credits: 240, gpa: '9.55/10', status: 'Graduated',
     summary: 'Applied Computer Science – Intelligent Systems',
-    media: { id: 'ftn-logo', src: '/media/education/ftn.jpg', alt: 'Faculty of Technical Sciences, University of Novi Sad logo', placeholder: 'FTN', presentation: 'logo', shape: 'square', fit: 'cover' },
+    media: { id: 'ftn-logo', src: publicAsset('/media/education/ftn.jpg'), alt: 'Faculty of Technical Sciences, University of Novi Sad logo', placeholder: 'FTN', presentation: 'logo', shape: 'square', fit: 'cover' },
     aboutProgram: [
       "I completed my Bachelor's degree in Computing and Control Engineering at the Faculty of Technical Sciences, University of Novi Sad, within the Applied Computer Science and Informatics module, focusing on intelligent systems.",
       "The program provided me with a broad foundation in computer science, covering algorithms, mathematics, software development, and computer systems. During my studies, I developed a particular interest in artificial intelligence, computer graphics, and knowledge-based systems. These interests eventually came together in my Bachelor's thesis on neuro-symbolic visual scene understanding, which also influenced my decision to pursue further studies in Visual and Creative AI.",
@@ -191,7 +193,7 @@ export const experience: Experience[] = [
   {
     id: 'daze-solutions', title: 'Daze Solutions Limited', role: 'Data Science Intern', dates: 'December 2024 (4 weeks)', cardDates: 'December 2024', location: 'Remote',
     summary: 'Worked on real estate data analysis and machine learning using Python. Built data preprocessing pipelines, explored property datasets, and applied clustering techniques to identify patterns and visualize insights.',
-    media: { id: 'daze-solutions', src: '/media/experience/daze-initial.svg', alt: 'Letter D placeholder for Daze Solutions Limited', placeholder: 'Daze Solutions Limited', presentation: 'logo', shape: 'square', fit: 'contain' },
+    media: { id: 'daze-solutions', src: publicAsset('/media/experience/daze-initial.svg'), alt: 'Letter D placeholder for Daze Solutions Limited', placeholder: 'Daze Solutions Limited', presentation: 'logo', shape: 'square', fit: 'contain' },
     details: [
       { heading: 'About the Role', paragraphs: ['During my four-week internship at Daze Solutions Limited, I worked on a data science project focused on processing and analyzing real estate data. The experience gave me hands-on practice with Python-based data analysis, feature engineering, and applying machine learning techniques to real-world datasets.'] },
       { heading: 'Project — Real Estate Data Analysis & Clustering', paragraphs: ['Worked with property datasets stored in PostgreSQL, building a workflow for data preparation, exploratory analysis, and unsupervised machine learning.'] },
