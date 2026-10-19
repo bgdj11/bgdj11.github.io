@@ -3,6 +3,7 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent, ReactNode } from
 import { chapters, profile } from '../data/portfolio'
 import type { SectionId } from '../data/portfolio'
 import { publicAsset } from '../data/assets'
+import { CvAction } from './Resume'
 
 const apps: Record<SectionId, { file: string; icon: string }> = {
   home: { file: 'about.exe', icon: 'computer' },
@@ -78,7 +79,9 @@ export function DesktopShortcuts() {
   return <nav className="desktop-shortcuts" aria-label="Desktop shortcuts">{chapters.map(({ id, label }) =>
     <button key={id} data-shortcut={id} className={`desktop-shortcut${active === id && windows[id] === 'open' ? ' is-selected' : ''}`} onClick={() => open(id)} aria-label={`Open ${label}`}>
       <DesktopIcon name={apps[id].icon} /><span>{label}</span><i className={windows[id] === 'open' ? 'running' : ''} aria-hidden="true" />
-    </button>)}</nav>
+    </button>)}
+    <CvAction className="desktop-shortcut cv-shortcut" label="Open CV"><DesktopIcon name="document" /><span>CV</span></CvAction>
+  </nav>
 }
 
 export function DesktopWindow({ id, children }: { id: SectionId; children: ReactNode }) {
@@ -105,7 +108,7 @@ export function DesktopWindow({ id, children }: { id: SectionId; children: React
     if (!drag.current) return
     const d = drag.current
     const x = Math.max(8 - d.left, Math.min(innerWidth - d.width - d.left - 24, event.clientX - d.x))
-    const y = Math.max(60 - d.top, Math.min(innerHeight - 100 - d.top, event.clientY - d.y))
+    const y = Math.max(8 - d.top, Math.min(innerHeight - 100 - d.top, event.clientY - d.y))
     setPosition({ x: d.offsetX + x, y: d.offsetY + y })
   }
   const stopDrag = () => { drag.current = null; setDragging(false) }

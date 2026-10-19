@@ -115,7 +115,7 @@ export const profile = {
     { kind: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/bogdandjukic25' },
     { kind: 'itch', label: 'itch.io', url: 'https://bgdj11.itch.io' },
     { kind: 'email', label: 'Email', url: 'mailto:bogdandjukic25@gmail.com' },
-    { kind: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/33746418215' },
+    { kind: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/381637492509' },
     { kind: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/bgdj11/' },
   ] as Social[],
   resume: {

@@ -1,14 +1,13 @@
 import { chapters, education, experience, hobbies, profile } from './data/portfolio'
-import { Navigation, useActiveSection } from './components/Navigation'
+import { useActiveSection } from './hooks/useActiveSection'
 import { WorldSection } from './components/WorldSection'
-import { Icon } from './components/Icon'
 import { ProjectCollection } from './components/Projects'
 import { DetailDialog, useDetails } from './components/DetailDialog'
 import { SpaceScene } from './components/SpaceScene'
 import { FramedImage } from './components/Media'
 import { AcademicEntry, HobbyCard, ExperienceEntry } from './components/Entries'
 import { SocialLink } from './components/Contact'
-import { CvAction, ResumePreview, ResumeProvider, ResumeModal } from './components/Resume'
+import { ResumePreview, ResumeProvider, ResumeModal } from './components/Resume'
 import { DesktopProvider, DesktopShortcuts, DesktopTaskbar, PortraitWindow, useDesktop } from './components/Desktop'
 
 export function App() {
@@ -22,7 +21,6 @@ function PortfolioDesktop() {
   const activeTheme = chapters.find(chapter => chapter.id === active)!.world
   return <div className="portfolio desktop-portfolio" data-theme={activeTheme}>
     <a className="skip-link" href="#main">Skip to content</a>
-    <Navigation active={active} />
     <DesktopShortcuts />
     <SpaceScene />
     <main id="main" className="desktop-workspace" tabIndex={-1}>
@@ -32,7 +30,6 @@ function PortfolioDesktop() {
           <p>{profile.introduction}</p>
           <p className="home-description">{profile.description}</p>
         </div>
-        <div className="hero-actions"><a className="button button-primary" href="#projects" onClick={event => { event.preventDefault(); desktop.open('projects') }}>Explore Projects<Icon name="arrow" /></a><CvAction /></div>
         <div className="intro-socials">{profile.socials.filter(social => social.kind === 'github' || social.kind === 'linkedin').map(social => <SocialLink key={social.kind} social={social} compact />)}</div>
       </WorldSection>
       <WorldSection id="education"><div className="academic-entries">{education.map(entry => <AcademicEntry key={entry.id} entry={entry} onSelect={detail.open} />)}</div></WorldSection>

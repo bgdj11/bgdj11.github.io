@@ -9,4 +9,4 @@ The shared SocialLink component displays the hover frame for pointer hover and
 keyboard focus, and the pressed frame during activation. Reduced-motion users
 get state changes without positional animation. No continuous animation runs.
 
-WhatsApp destination uses the phone number supplied in Bogdan_CV.pdf.
+WhatsApp destination uses the owner-provided number 0637492509, formatted internationally as +381637492509.
