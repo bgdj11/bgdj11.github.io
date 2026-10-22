@@ -7,6 +7,8 @@ import { Icon } from './Icon'
 import { PixelHeadingText } from './PixelHeadingText'
 import { ProjectCaseStudy } from './ProjectCaseStudy'
 import { DesktopIcon } from './Desktop'
+import { hobbyPages } from '../data/hobbies'
+import { HobbyDetail } from './HobbyDetail'
 
 function linkedProject() {
   const id = new URL(location.href).searchParams.get('project')
@@ -88,6 +90,7 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     }
   }, [entry])
   const project = entry && 'category' in entry ? entry as Project : null
+  const hobbyPage = entry ? hobbyPages[entry.id] : undefined
   const educationEntry = entry && 'degree' in entry ? entry as Education : null
   const polytechniqueEntry = educationEntry?.id === 'polytechnique' ? educationEntry : null
   const educationProfile = educationEntry
@@ -100,7 +103,7 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     ['Contribution', project?.contribution ?? ''],
     ['Technologies', 'technologies' in entry ? (entry.technologies as string[] | undefined)?.join(', ') ?? '' : ''],
   ].filter(([label, value]) => label && value && !(experienceProfile && label === 'Role')) : []
-  return <dialog className={'detail-dialog' + (educationProfile ? ' education-profile-dialog' : '') + (experienceProfile ? ' experience-profile-dialog' : '') + (project ? ' project-profile-dialog' : '')} data-accent={accent} ref={ref} aria-labelledby="dialog-heading" onCancel={event => { event.preventDefault(); onClose() }} onKeyDown={event => {
+  return <dialog className={'detail-dialog' + (educationProfile ? ' education-profile-dialog' : '') + (experienceProfile ? ' experience-profile-dialog' : '') + (project ? ' project-profile-dialog' : '') + (hobbyPage ? ' hobby-profile-dialog' : '')} data-accent={accent} ref={ref} aria-labelledby="dialog-heading" onCancel={event => { event.preventDefault(); onClose() }} onKeyDown={event => {
     if (event.key !== 'Tab') return
     const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], video[controls], [tabindex="0"]')].filter(node => node.getClientRects().length > 0)
     const first = controls[0], last = controls[controls.length - 1]
@@ -113,7 +116,7 @@ export function DetailDialog({ entry, onClose }: { entry: DetailContent | null; 
     {entry && <>
       <div className="dialog-toolbar"><DesktopIcon name={project ? 'folder' : educationEntry ? 'books' : experienceProfile ? 'terminal' : 'joystick'} /><span className="dialog-filename">{entry.title}</span><button className="dialog-close" onClick={onClose} aria-label="Close details"><Icon name="close" /></button></div>
       <div className="dialog-inner" key={entry.id}>
-        {project?.caseStudy ? <ProjectCaseStudy project={project} /> : <>
+        {hobbyPage ? <HobbyDetail entry={entry} page={hobbyPage} /> : project?.caseStudy ? <ProjectCaseStudy project={project} /> : <>
         {educationEntry ? <header className="education-dialog-header">
           {entry.media.src && <FramedImage media={entry.media} />}
           <div className="education-dialog-identity">

@@ -13,6 +13,7 @@ import './styles/project-studies.css'
 import './styles/scenes.css'
 import './styles/layout-density.css'
 import './styles/desktop.css'
+import './styles/hobbies.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode><App /></React.StrictMode>,

@@ -10,3 +10,5 @@ keyboard focus, and the pressed frame during activation. Reduced-motion users
 get state changes without positional animation. No continuous animation runs.
 
 WhatsApp destination uses the owner-provided number 0637492509, formatted internationally as +381637492509.
+
+Steam uses the supplied pack's native normal, hover, and pressed frames and links to Bogdan's profile (76561199364383318).

@@ -23,8 +23,38 @@ function useWindowManager() {
   const [maximized, setMaximized] = useState<SectionId | null>(null)
   const [arrangement, setArrangement] = useState(0)
   const [announcement, setAnnouncement] = useState('')
+  const [exploring, setExploring] = useState(false)
+  const exploreReturn = useRef<{ y: number; element: HTMLElement | null } | null>(null)
+  const returnToPortfolio = useCallback(() => {
+    const point = exploreReturn.current
+    exploreReturn.current = null
+    setExploring(false)
+    setAnnouncement('Back to the portfolio. Your windows are where you left them.')
+    requestAnimationFrame(() => {
+      if (point) {
+        window.scrollTo({ top: point.y, behavior: 'instant' })
+        point.element?.focus({ preventScroll: true })
+      }
+    })
+  }, [])
+  const toggleExploration = () => {
+    if (exploring) { returnToPortfolio(); return }
+    exploreReturn.current = { y: scrollY, element: document.activeElement instanceof HTMLElement ? document.activeElement : null }
+    setExploring(true)
+    setAnnouncement('Explore the planets. Scroll to travel, drag a planet to rotate it, or press Escape to return to your portfolio.')
+  }
+  useEffect(() => {
+    if (!exploring) return
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && !event.defaultPrevented) { event.preventDefault(); returnToPortfolio() }
+    }
+    window.addEventListener('keydown', escape)
+    return () => window.removeEventListener('keydown', escape)
+  }, [exploring, returnToPortfolio])
   const focus = useCallback((id: SectionId) => setActive(id), [])
   const open = useCallback((id: SectionId, navigate = true) => {
+    setExploring(false)
+    exploreReturn.current = null
     setWindows(current => ({ ...current, [id]: 'open' }))
     setActive(id)
     if (navigate) {
@@ -58,7 +88,7 @@ function useWindowManager() {
     window.addEventListener('hashchange', followHash)
     return () => window.removeEventListener('hashchange', followHash)
   }, [open])
-  return { windows, active, focus, open, hide, maximized, setMaximized, arrangement, arrange, restoreAll, announcement }
+  return { windows, active, focus, open, hide, maximized, setMaximized, arrangement, arrange, restoreAll, announcement, exploring, toggleExploration }
 }
 
 export function DesktopProvider({ children }: { children: ReactNode }) {
@@ -75,8 +105,8 @@ export function DesktopIcon({ name, className = '' }: { name: string; className?
 }
 
 export function DesktopShortcuts() {
-  const { open, windows, active } = useDesktop()
-  return <nav className="desktop-shortcuts" aria-label="Desktop shortcuts">{chapters.map(({ id, label }) =>
+  const { open, windows, active, exploring } = useDesktop()
+  return <nav className="desktop-shortcuts" aria-label="Desktop shortcuts" inert={exploring} aria-hidden={exploring || undefined}>{chapters.map(({ id, label }) =>
     <button key={id} data-shortcut={id} className={`desktop-shortcut${active === id && windows[id] === 'open' ? ' is-selected' : ''}`} onClick={() => open(id)} aria-label={`Open ${label}`}>
       <DesktopIcon name={apps[id].icon} /><span>{label}</span><i className={windows[id] === 'open' ? 'running' : ''} aria-hidden="true" />
     </button>)}
@@ -140,8 +170,6 @@ export function DesktopTaskbar() {
   const desktop = useDesktop()
   const [menu, setMenu] = useState(false)
   const [time, setTime] = useState(() => new Date())
-  const [showingDesktop, setShowingDesktop] = useState(false)
-  const visibleBefore = useRef<SectionId[]>([])
   const start = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -150,23 +178,26 @@ export function DesktopTaskbar() {
     document.addEventListener('pointerdown', outside)
     return () => { clearInterval(timer); document.removeEventListener('pointerdown', outside) }
   }, [])
-  const showDesktop = () => {
-    if (showingDesktop) visibleBefore.current.forEach(id => desktop.open(id, false))
-    else {
-      visibleBefore.current = chapters.filter(({ id }) => desktop.windows[id] === 'open').map(({ id }) => id)
-      visibleBefore.current.forEach(id => desktop.hide(id, 'minimized'))
-    }
-    setShowingDesktop(!showingDesktop)
-  }
-  return <div className="desktop-taskbar" onKeyDown={event => { if (event.key === 'Escape') { setMenu(false); start.current?.focus() } }}>
+  return <div className="desktop-taskbar" onKeyDown={event => { if (event.key === 'Escape' && menu) { event.preventDefault(); setMenu(false); start.current?.focus() } }}>
     {menu && <div className="start-menu" ref={menuRef} id="start-menu"><div className="start-menu-heading"><DesktopIcon name="computer" /><span>{profile.name}<small>A personal universe</small></span></div>
       <nav aria-label="Start menu">{chapters.map(({ id, label }) => <button key={id} onClick={() => { desktop.open(id); setMenu(false) }}><DesktopIcon name={apps[id].icon} />{label}<span>↗</span></button>)}</nav>
-      <div className="start-menu-actions"><button onClick={() => { desktop.restoreAll(); setMenu(false); setShowingDesktop(false) }}>Restore all windows</button><button onClick={() => { desktop.arrange(); setMenu(false) }}>Arrange windows</button></div>
+      <div className="start-menu-actions"><button onClick={() => { desktop.restoreAll(); setMenu(false) }}>Restore all windows</button><button onClick={() => { desktop.arrange(); setMenu(false) }}>Arrange windows</button></div>
     </div>}
     <button className={`start-button${menu ? ' is-pressed' : ''}`} ref={start} aria-expanded={menu} aria-controls="start-menu" onClick={() => setMenu(!menu)}><span className="start-symbol" aria-hidden="true"><i /><i /><i /><i /></span>Start</button>
     <div className="taskbar-windows" aria-label="Running applications">{chapters.filter(({ id }) => desktop.windows[id] !== 'closed').map(({ id }) =>
-      <button key={id} className={`taskbar-app${desktop.active === id && desktop.windows[id] === 'open' ? ' is-active' : ''}${desktop.windows[id] === 'minimized' ? ' is-minimized' : ''}`} aria-label={`Show ${apps[id].file}`} onClick={() => { desktop.open(id); setShowingDesktop(false) }}><DesktopIcon name={apps[id].icon} /><span>{apps[id].file}</span></button>)}</div>
+      <button key={id} className={`taskbar-app${desktop.active === id && desktop.windows[id] === 'open' ? ' is-active' : ''}${desktop.windows[id] === 'minimized' ? ' is-minimized' : ''}`} aria-label={`Show ${apps[id].file}`} onClick={() => desktop.open(id)}><DesktopIcon name={apps[id].icon} /><span>{apps[id].file}</span></button>)}</div>
     <div className="taskbar-tray"><span className="online-dot" title="Welcome to my personal universe" /><time dateTime={time.toISOString()}>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}</time></div>
-    <button className="show-desktop" title={showingDesktop ? 'Restore windows' : 'Show desktop'} aria-label={showingDesktop ? 'Restore windows' : 'Show desktop'} onClick={showDesktop} />
+    <button className="show-desktop" title={desktop.exploring ? 'Back to portfolio' : 'Show desktop'} aria-label={desktop.exploring ? 'Restore windows' : 'Show desktop'} aria-pressed={desktop.exploring} onClick={desktop.toggleExploration} />
   </div>
+}
+
+export function PlanetExplorer() {
+  const { exploring, toggleExploration } = useDesktop()
+  return <aside className="planet-explorer" aria-label="Planet exploration">
+    {exploring && <p>Scroll to explore.<br />Drag a planet to rotate it.</p>}
+    <button className="planet-explorer-toggle" onClick={toggleExploration} aria-pressed={exploring}>
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="6" /><ellipse cx="12" cy="12" rx="11" ry="3" transform="rotate(-30 12 12)" /></svg>
+      {exploring ? 'Back to portfolio' : 'Explore the planets'}
+    </button>
+  </aside>
 }

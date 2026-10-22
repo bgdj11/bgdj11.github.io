@@ -2,7 +2,7 @@ import { publicAsset } from './assets'
 import { animationLab } from './animation-lab'
 import type { Project } from './portfolio'
 
-// Content verified against pinned repository snapshots; see PROJECT_RESEARCH.md.
+// Project profiles, figures and metrics from the linked repositories.
 const rawProjects: Project[] = [
   {
     "id": "visual-reasoning",

@@ -26,4 +26,4 @@ For this repository the address is **https://bgdj11.github.io/website/**. The bu
 - Root image/icon/cursor packs: original design assets; not required to build or deployed.
 - `.tools/`, `.qa/`, `node_modules/`, and `dist/`: local or generated files, ignored by Git.
 
-All CV entry points share `src/components/Resume.tsx` and open `ResumeDialog.tsx`, with a PDF viewer and download action. Replace `pixel-worlds/public/Bogdan_Djukic_CV.pdf` to update the CV. Further content documentation is in [pixel-worlds/README.md](pixel-worlds/README.md).
+All CV entry points share `src/components/Resume.tsx` and open `ResumeDialog.tsx`, with a PDF viewer and download action. Replace `pixel-worlds/public/Bogdan_Dukic_CV.pdf` to update the CV. Further content documentation is in [pixel-worlds/README.md](pixel-worlds/README.md).

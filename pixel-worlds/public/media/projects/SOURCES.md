@@ -1,6 +1,6 @@
 # Project media sources
 
-These files are local derivatives of material from the portfolio owner's public repositories, retrieved 18 October 2026, plus the supplied local computer animation course materials. No AI-generated replacement artwork or fabricated result screenshots were added.
+These files are derivatives of material from Bogdan's public repositories, retrieved 18 October 2026, and local computer animation course materials.
 
 - `animation-lab/`: 19 recordings from the user-supplied INF585-CSC51085EP course folder, resized to at most 760px and converted to looping WebP. Static posters are used on the overview. Exact relative source paths are recorded in `animation-lab/SOURCES.txt`.
 - `visual-reasoning/*-en.svg`: English annotation layers over the original saved detection and scene-graph figures; object positions, IDs, confidence values and model outputs are unchanged. The architecture insets use the translated figures too. Reproduce with `node scripts/translate-research-figures.mjs`.

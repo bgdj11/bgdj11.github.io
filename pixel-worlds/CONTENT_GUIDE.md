@@ -1,6 +1,6 @@
 # Editing the portfolio
 
-Personal content lives in `src/data/portfolio.ts`; project profiles live in `src/data/projects.ts`, with the animation lab in `src/data/animation-lab.ts`. No layout changes are needed to replace media or edit project text. `PROJECT_RESEARCH.md` records the source review and result limitations.
+Personal content lives in `src/data/portfolio.ts`; project profiles live in `src/data/projects.ts`, with the animation lab in `src/data/animation-lab.ts`. No layout changes are needed to replace media or edit project text.
 
 ## Sections and content
 
@@ -104,11 +104,11 @@ Hobbies additionally accept `favorites: [{ title, category?, note?, media? }]`. 
 
 ## Contact and PDF resume
 
-The supplied `Bogdan_CV.pdf` has been installed as `public/Bogdan_Djukic_CV.pdf`. Education, professional experience, scholarships, academic activities and contact links have been filled from that document. The first two hobby slots and unverified project details remain placeholders. The current master's degree ends in September 2028 in the CV; the site explicitly labels that as expected completion.
+The one-page CV is stored at `public/Bogdan_Dukic_CV.pdf`, with its LaTeX source in `../cv/review/`. The current master's degree ends in 2028 and is labeled as an expected completion.
 
 Set `profile.socials` URLs to verified `https://` addresses or a `mailto:` address. Missing URLs render as non-clickable text, not dead links. Add Instagram by adding an item with `kind: 'instagram'`.
 
-Place the actual PDF at `public/Bogdan_Djukic_CV.pdf`. That is the default `profile.resume.url`; change it if you prefer another path. View CV / View Resume open that PDF in a new tab; Download PDF downloads the same file. A small signature check prevents the static host's HTML fallback from being mistaken for a PDF. Until the file exists, all actions are disabled with a clear missing-PDF state. Reload after adding or replacing the file.
+Place the actual PDF at `public/Bogdan_Dukic_CV.pdf`. That is the default `profile.resume.url`; change it if you prefer another path. Every CV entry point opens the same in-page PDF dialog, and its download action uses the same file. A small signature check prevents the static host's HTML fallback from being mistaken for a PDF. Until the file exists, all actions are disabled with a clear missing-PDF state. Reload after adding or replacing the file.
 
 Optionally export the PDF's first page to an image and put its path in `profile.resume.thumbnail.src` with suitable alt text. The thumbnail is separate from the actual PDF and is not generated automatically.
 
