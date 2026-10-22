@@ -1,11 +1,8 @@
 # Desktop cursors
 
-PNG artwork from the user-supplied `Cursors/` folder at the repository root, scaled proportionally to a shared 24px visible height with nearest-neighbor sampling. This normalizes the differently sized source artwork rather than applying one multiplier to every image. Colors are unchanged. Hotspots use the resized image coordinates; grab and grabbing share the same size and center.
+The active cursor uses the user-supplied `Cursors/Arrows/Arrow2.png`, scaled to 24px high with nearest-neighbor sampling. The pressed frame uses the same artwork at 20px high inside an identically sized transparent canvas, so a click looks like the arrow briefly contracts without moving its hotspot.
 
-| Asset | Source in `Cursors/` | Hotspot |
-| --- | --- | --- |
-| arrow.png | Arrows/Arrow2.png | 1, 1 |
-| pointer.png | Hands/Hand1.png | 7, 1 |
-| grab.png | Hands/Hand_Drag2.png | 12, 12 |
-| grabbing.png | Hands/Hand_Drag2.png | 12, 12 |
-| text.png | Text/Text1.png | 5, 12 |
+| Asset | Source | Size | Hotspot |
+| --- | --- | --- | --- |
+| arrow.png | Arrows/Arrow2.png | 17 x 24 | 1, 1 |
+| arrow-pressed.png | Arrows/Arrow2.png | 17 x 24 canvas, 14 x 20 artwork | 1, 1 |

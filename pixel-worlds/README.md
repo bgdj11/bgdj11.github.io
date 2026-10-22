@@ -27,9 +27,9 @@ npm run preview
 
 ## Portfolio content
 
-The interface opens as a retro desktop. All six content windows start open: About, Education and Experience side by side, Projects across the full workspace width, then compact Hobbies and Contact windows side by side. Desktop shortcuts, header navigation, and the taskbar reopen windows. Title bars support mouse dragging on wider screens, minimizing, closing, and expanding to the workspace width. Double-clicking a title bar also expands it. The Start menu restores all windows or resets their positions; the small button at the far right of the taskbar shows the planetary desktop and restores the previous windows.
+The interface opens as a retro desktop. All six content windows start open: About, Education and Experience side by side, Projects across the full workspace width, then compact Hobbies and Contact windows side by side. Desktop shortcuts and the taskbar reopen windows; there is no separate header navigation. A seventh desktop shortcut opens the CV in its PDF dialog. Title bars support mouse dragging on wider screens, minimizing, closing, and expanding to the workspace width. Double-clicking a title bar also expands it. The Start menu restores all windows or resets their positions; the small button at the far right of the taskbar shows the planetary desktop and restores the previous windows.
 
-The page remains a normal scrollable document: wheel scrolling over an open window still moves the procedural camera, and exposed planets remain interactive. On narrow screens windows stack, dragging is disabled, and shortcuts become a horizontal strip. Projects shows the complete collection immediately, with two compact featured cards, a three-column archive on wider screens, and the existing category filters. All original entry data, detail dialogs, project URLs, galleries, social destinations, and the resume are retained.
+The page remains a normal scrollable document: wheel scrolling over an open window still moves the procedural camera, and exposed planets remain interactive. On narrow screens windows stack, dragging is disabled, and the seven shortcuts form two rows of up to four icons. On short desktop screens the sidebar scrolls so every shortcut remains reachable. Projects shows the complete collection immediately, with two compact featured cards, a three-column archive on wider screens, and the existing category filters. All original entry data, detail dialogs, project URLs, galleries, social destinations, and the resume are retained.
 
 `src/components/Desktop.tsx` owns window state and desktop controls; `WorldSection.tsx` places existing content inside that window shell. `src/styles/desktop.css` supplies the desktop presentation, with local Pixelify Sans for interface labels, Press Start 2P headings, and Inter body copy. Desktop icons are copied from the supplied retro computer pack; the mapping is documented in `public/media/desktop/SOURCES.md`. The shared `SpaceScene` and planet renderers are unchanged.
 
@@ -39,12 +39,12 @@ The app is self-contained: profile images are bundled from `src/assets/profile/`
 
 Edit `src/data/portfolio.ts` to update:
 
-- `profile`: introduction, portrait, social URLs and resume settings. Put the actual PDF at `public/Bogdan_Djukic_CV.pdf`, or configure another path.
-- `education`, `experience`, `hobbies`: entries and expandable details grounded in the supplied brief.
+- `profile`: introduction, portrait, social URLs and resume settings. Put the actual PDF at `public/Bogdan_Dukic_CV.pdf`, or configure another path.
+- `education`, `experience`, `hobbies`: entries and expandable details.
 - `projects`: featured status, ordering, categories, descriptions, contribution, technologies, media and verified links.
 - `chapters`: labels, headings and theme mapping for the six content sections.
 
-Project candidates are labeled drafts; they are not claims of finished work. Missing photographs and screenshots use neutral framed placeholders. No addresses, results, dates or repository links have been invented. See [CONTENT_GUIDE.md](CONTENT_GUIDE.md) for local asset paths, image sizing, galleries, GIF/video previews, detail blocks, favorites and the PDF resume.
+Missing photographs and screenshots use framed placeholders. See [CONTENT_GUIDE.md](CONTENT_GUIDE.md) for local asset paths, image sizing, galleries, GIF/video previews, detail blocks, favorites and the PDF resume.
 
 ## Visual system
 
@@ -80,6 +80,12 @@ Hidden documents unsubscribe from animation. Reduced motion freezes automatic ro
 If canvas rendering is unavailable, the portfolio content remains usable against a dark background.
 
 ## Validation
+
+Hobby pages live in `src/data/hobbies.ts`, with shared journal, album and photo-viewer components in `src/components/HobbyDetail.tsx` and styling in `src/styles/hobbies.css`. Personal stories alternate with albums instead of tags and timeline lists. Fishing and basketball each have two albums; board games feature the collection alongside game-night photos. Add or reorder album items in the data file. Gallery arrows sit over the media; clicking a photograph opens its larger view.
+
+Deployable photographs, thumbnails, video posters and clips are in `public/media/hobbies/`. Photographs are WebP copies of the originals in the repository's `images/` directory. `HobbyVideo.tsx` shows a large central play button, preloads metadata for the selected clip, then enables native controls on playback. Clips use fast-start MP4 containers, pause when out of view and stop when changing slides. The childhood basketball video is the updated 11-second clip. Asset origins are recorded in `public/media/hobbies/SOURCES.md`; the originals are not needed by the build.
+
+Video game favorites are a curated list, with locally stored official Steam artwork. The Steam icon and library link point to Bogdan's profile. There is no live library import: the public games listing required sign-in when checked, and the static site does not contain a Steam API key or depend on a Steam request to render.
 
 Run `npm run build` for TypeScript and the production bundle. Local browser checks and screenshots live in ignored `.qa/`; their Playwright tooling is outside the application in `../.tools/qa/`.
 

@@ -12,8 +12,8 @@ export const animationLab: Project = {
   category: 'Graphics',
   coursework: true,
   featured: false,
-  summary: 'A visual collection of real-time animation studies: moving characters, deformable meshes, cloth and fluids.',
-  contribution: 'INF585 / CSC51085EP — Computer Animation coursework',
+  summary: 'An ongoing Computer Animation course, with recordings exploring moving characters, deformable meshes, cloth and fluids.',
+  contribution: 'INF585 / CSC51085EP — Computer Animation coursework (in progress)',
   technologies: ['C++', 'OpenGL', 'GLSL', 'CGP', 'Eigen', 'ImGui'],
   media: {
     id: 'animation-cover', src: '/media/projects/animation-lab/cloth-poster.webp',
@@ -26,7 +26,7 @@ export const animationLab: Project = {
     {
       heading: 'From Motion to Simulation', navLabel: 'Overview',
       paragraphs: [
-        'This collection follows nine computer animation labs, moving from simple procedural motion to articulated characters, interactive deformation and physical simulation. Each exercise is a standalone C++ scene with controls for exploring how the result changes.',
+        'I am currently taking this computer animation course. Its nine labs cover procedural motion, articulated characters, interactive deformation and physical simulation. The collection below brings together recordings of the lab exercises as I work through the material.',
         'The recordings below show the exercises in action. They are grouped by what moves and how it responds: a surface reacting to a drop, a character reaching toward a target, a piece of cloth meeting an obstacle, or fluid carrying motion through space.',
       ],
     },

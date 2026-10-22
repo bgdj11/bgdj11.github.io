@@ -2,8 +2,8 @@ import type { DetailBlock } from './portfolio'
 
 export const comtradeDetails: DetailBlock[] = [
   { heading: 'About the Role', paragraphs: [
-    'At Comtrade System Integration, I worked on the design and development of enterprise AI solutions, from advanced retrieval-augmented generation systems to real-time conversational agents and intelligent meeting assistants.',
-    'My work covered different stages of AI application development, including initial prototyping, information retrieval, document processing, LLM and speech model integration, analytics, and cloud deployment. I also gained experience evaluating AI models and adapting emerging technologies to practical requirements, particularly in multilingual and enterprise environments.',
+    'At Comtrade System Integration, I developed AI solutions spanning automated document processing, retrieval-augmented generation, real-time conversational agents and intelligent meeting assistants.',
+    'A central part of my work was building an automated pipeline for processing documents in different formats, including PDF, Word, TXT and Markdown. It combined format-specific text extraction, Docling and OCR to prepare their contents for search and AI applications. I also worked on initial prototypes, LLM and speech model evaluation, conversation analytics and cloud deployment.',
   ] },
   { heading: 'No-Code Conversational AI Platform', paragraphs: [
     'Enterprise Voice Agent Platform for Contact Centers',
@@ -31,20 +31,19 @@ export const comtradeDetails: DetailBlock[] = [
     ] },
     { heading: 'Technologies', paragraphs: ['Python, React, Microsoft Azure, Docker, LiveKit, LLMs, RAG, STT, TTS, Voice Cloning'] },
   ] },
-  { heading: 'Enterprise RAG & Knowledge Systems', paragraphs: [
-    'Retrieval-Augmented Generation, Document Intelligence & Secure Knowledge Access',
-    'Designed and developed enterprise-grade RAG solutions capable of retrieving, processing, and reasoning over complex organizational knowledge.',
+  { heading: 'Automated Document Processing & RAG', paragraphs: [
+    'From PDF, Word, TXT and Markdown to Searchable Knowledge',
+    'Built an automated document-processing pipeline that combined different text-extraction approaches for different file formats. Docling, format-specific parsing and OCR made document content available for indexing and retrieval.',
     'These systems were developed for document-heavy environments, including legal, HR, military, and regulatory domains, where retrieval accuracy, data security, and reliable responses are especially important.',
-    'My work involved building end-to-end retrieval pipelines, improving search relevance, evaluating language and embedding models, and integrating enterprise authentication and document management systems.',
+    'My work connected document ingestion and extraction with preprocessing, chunking, indexing and retrieval. I also evaluated language and embedding models and improved search relevance through hybrid retrieval and semantic reranking.',
   ], subsections: [
+    { heading: 'Automated Document Processing', paragraphs: ['Developed a pipeline for heterogeneous documents, including PDF, Word, plain text and Markdown. Combined format-specific text extraction, Docling document parsing and OCR for scanned content, preparing extracted text for downstream indexing and retrieval.'] },
     { heading: 'End-to-End RAG Architecture', paragraphs: ['Architected retrieval pipelines spanning document ingestion, preprocessing, indexing, retrieval, response generation, and observability, supporting both Azure-hosted and on-premises environments.'] },
     { heading: 'Advanced Information Retrieval', paragraphs: ['Improved retrieval quality through hybrid search, semantic reranking, and semantic chunking, adapting retrieval strategies to complex, domain-specific document collections.'] },
-    { heading: 'Secure Document Access', paragraphs: ['Implemented document-level role-based access control (RBAC), integrating Microsoft Entra ID permissions to ensure users could retrieve only information they were authorized to access.'] },
-    { heading: 'SharePoint Integration', paragraphs: ['Developed automated document synchronization using Microsoft Graph API, webhooks, and Delta API to keep indexed knowledge sources aligned with changing enterprise documents and access permissions.'] },
     { heading: 'Grounding & Hallucination Prevention', paragraphs: ['Designed guardrails using context grounding, confidence-based routing, and structured fallback strategies to improve response reliability and reduce unsupported answers.'] },
     { heading: 'Model Evaluation & Benchmarking', paragraphs: ['Evaluated LLMs and embedding models on multilingual and domain-specific datasets, including Serbian-language retrieval benchmarks, to select models suited to production requirements.'] },
     { heading: 'Cloud & On-Premises Deployment', paragraphs: ['Worked with containerized AI services using Docker and Azure infrastructure, including Azure Container Apps, App Service, and Functions.'] },
-    { heading: 'Technologies', paragraphs: ['Python, Azure AI Services, RAG, LLMs, Embedding Models, Hybrid Search, Semantic Reranking, Docker, Microsoft Graph API, SharePoint, Entra ID'] },
+    { heading: 'Technologies', paragraphs: ['Python, Docling, OCR, Azure AI Services, RAG, LLMs, Embedding Models, Hybrid Search, Semantic Reranking, Docker'] },
   ] },
   { heading: 'Microsoft Teams AI Meeting Assistant', paragraphs: [
     'Internal Project — Context-Aware Meeting Intelligence',
@@ -58,8 +57,8 @@ export const comtradeDetails: DetailBlock[] = [
   ] },
   { heading: 'Technologies & Tools', subsections: [
     { heading: 'Languages & Development', items: ['Python', 'C#', 'Angular', 'React'] },
-    { heading: 'Artificial Intelligence', items: ['Large Language Models (LLMs)', 'Retrieval-Augmented Generation (RAG)', 'Embedding Models', 'Hybrid Search & Semantic Reranking', 'Document Processing', 'Model Evaluation & Benchmarking'] },
+    { heading: 'Artificial Intelligence & Document Processing', items: ['Large Language Models (LLMs)', 'Retrieval-Augmented Generation (RAG)', 'Embedding Models', 'Hybrid Search & Semantic Reranking', 'Automated Document Processing', 'Docling', 'OCR', 'Model Evaluation & Benchmarking'] },
     { heading: 'Conversational & Speech AI', items: ['LiveKit', 'Speech-to-Text (STT)', 'Text-to-Speech (TTS)', 'Voice Cloning', 'Real-Time Conversational AI'] },
-    { heading: 'Cloud, Infrastructure & Integrations', items: ['Microsoft Azure', 'Azure Container Apps', 'Azure App Service', 'Azure Functions', 'Docker', 'Microsoft Graph API', 'SharePoint', 'Microsoft Entra ID'] },
+    { heading: 'Cloud & Infrastructure', items: ['Microsoft Azure', 'Azure Container Apps', 'Azure App Service', 'Azure Functions', 'Docker'] },
   ] },
 ]

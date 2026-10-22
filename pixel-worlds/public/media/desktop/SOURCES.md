@@ -11,3 +11,4 @@ Copied from the user-supplied `itchio-pxl-retro-computer-icons-set-110/separated
 | joystick.png | 74 |
 | globe.png | 67 |
 | image.png | 89 |
+| document.png | 41 |

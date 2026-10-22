@@ -1,18 +1,40 @@
+import { useEffect } from 'react'
 import { chapters, education, experience, hobbies, profile } from './data/portfolio'
-import { Navigation, useActiveSection } from './components/Navigation'
+import { useActiveSection } from './hooks/useActiveSection'
 import { WorldSection } from './components/WorldSection'
-import { Icon } from './components/Icon'
 import { ProjectCollection } from './components/Projects'
 import { DetailDialog, useDetails } from './components/DetailDialog'
 import { SpaceScene } from './components/SpaceScene'
 import { FramedImage } from './components/Media'
 import { AcademicEntry, HobbyCard, ExperienceEntry } from './components/Entries'
 import { SocialLink } from './components/Contact'
-import { CvAction, ResumePreview, ResumeProvider, ResumeModal } from './components/Resume'
-import { DesktopProvider, DesktopShortcuts, DesktopTaskbar, PortraitWindow, useDesktop } from './components/Desktop'
+import { ResumePreview, ResumeProvider, ResumeModal } from './components/Resume'
+import { DesktopProvider, DesktopShortcuts, DesktopTaskbar, PlanetExplorer, PortraitWindow, useDesktop } from './components/Desktop'
 
 export function App() {
+  usePressedCursor()
   return <ResumeProvider><DesktopProvider><PortfolioDesktop /></DesktopProvider></ResumeProvider>
+}
+
+function usePressedCursor() {
+  useEffect(() => {
+    const root = document.documentElement
+    const press = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch' && event.button === 0) root.classList.add('is-pointer-down')
+    }
+    const release = () => root.classList.remove('is-pointer-down')
+    window.addEventListener('pointerdown', press)
+    window.addEventListener('pointerup', release)
+    window.addEventListener('pointercancel', release)
+    window.addEventListener('blur', release)
+    return () => {
+      release()
+      window.removeEventListener('pointerdown', press)
+      window.removeEventListener('pointerup', release)
+      window.removeEventListener('pointercancel', release)
+      window.removeEventListener('blur', release)
+    }
+  }, [])
 }
 
 function PortfolioDesktop() {
@@ -20,19 +42,17 @@ function PortfolioDesktop() {
   const desktop = useDesktop()
   const detail = useDetails()
   const activeTheme = chapters.find(chapter => chapter.id === active)!.world
-  return <div className="portfolio desktop-portfolio" data-theme={activeTheme}>
+  return <div className={`portfolio desktop-portfolio${desktop.exploring ? ' is-exploring' : ''}`} data-theme={activeTheme}>
     <a className="skip-link" href="#main">Skip to content</a>
-    <Navigation active={active} />
     <DesktopShortcuts />
     <SpaceScene />
-    <main id="main" className="desktop-workspace" tabIndex={-1}>
+    <main id="main" className="desktop-workspace" tabIndex={-1} inert={desktop.exploring} aria-hidden={desktop.exploring || undefined}>
       <WorldSection id="home" eyebrow={profile.greeting} description=""
         aside={<PortraitWindow><FramedImage media={profile.portrait} priority className="hero-portrait" /></PortraitWindow>}>
         <div className="home-intro-copy">
           <p>{profile.introduction}</p>
           <p className="home-description">{profile.description}</p>
         </div>
-        <div className="hero-actions"><a className="button button-primary" href="#projects" onClick={event => { event.preventDefault(); desktop.open('projects') }}>Explore Projects<Icon name="arrow" /></a><CvAction /></div>
         <div className="intro-socials">{profile.socials.filter(social => social.kind === 'github' || social.kind === 'linkedin').map(social => <SocialLink key={social.kind} social={social} compact />)}</div>
       </WorldSection>
       <WorldSection id="education"><div className="academic-entries">{education.map(entry => <AcademicEntry key={entry.id} entry={entry} onSelect={detail.open} />)}</div></WorldSection>
@@ -43,6 +63,7 @@ function PortfolioDesktop() {
         <div className="contact-layout"><div className="social-list">{profile.socials.map(social => <SocialLink key={social.kind} social={social} />)}</div><ResumePreview /></div>
       </WorldSection>
     </main>
+    <PlanetExplorer />
     <DesktopTaskbar />
     <DetailDialog entry={detail.entry} onClose={detail.close} />
     <ResumeModal />

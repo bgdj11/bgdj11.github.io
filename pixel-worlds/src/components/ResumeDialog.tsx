@@ -4,7 +4,7 @@ import { DesktopIcon } from './Desktop'
 import { Icon } from './Icon'
 
 const PdfViewer = lazy(() => import('./PresentationViewer'))
-const resume = { title: 'Bogdan Djukic — CV', url: profile.resume.url, description: 'Curriculum vitae', preview: '', format: 'PDF' }
+const resume = { title: `${profile.name} — CV`, url: profile.resume.url, description: 'Curriculum vitae', preview: '', format: 'PDF' }
 
 export function ResumeDialog({ onClose }: { onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null)
@@ -29,7 +29,7 @@ export function ResumeDialog({ onClose }: { onClose: () => void }) {
     }}>
     <div className="dialog-toolbar">
       <DesktopIcon name="computer" />
-      <h2 id="resume-heading" className="dialog-filename">Bogdan Djukic — CV</h2>
+      <h2 id="resume-heading" className="dialog-filename">{profile.name} — CV</h2>
       <a className="resume-download" href={profile.resume.url} download={profile.resume.filename}>Download PDF<Icon name="download" /></a>
       <button className="dialog-close" onClick={onClose} aria-label="Close CV"><Icon name="close" /></button>
     </div>

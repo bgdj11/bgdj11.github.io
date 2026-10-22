@@ -1,0 +1,137 @@
+% One-page CV for computer vision, graphics, and applied ML roles. Compile with XeLaTeX.
+% Uses Lato TrueType fonts from TeX Live or a local font installation.
+\documentclass[10pt,a4paper]{article}
+\usepackage[left=15.5mm,right=15.5mm,top=11.5mm,bottom=11mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Lato}[
+  Extension = .ttf,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic,
+  Ligatures = TeX
+]
+\newfontfamily\displayfont{Lato}[
+  Extension = .ttf,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Ligatures = TeX
+]
+\usepackage{xcolor}
+% Strict monochrome: 100% black ink, black hyperlinks and rules on white.
+\definecolor{ink}{HTML}{000000}
+\definecolor{navy}{HTML}{000000}
+\definecolor{muted}{HTML}{000000}
+\definecolor{line}{HTML}{000000}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=navy,linkcolor=navy,
+  pdftitle={Bogdan Dukic - CV - Visual AI, Computer Vision and Graphics},
+  pdfauthor={Bogdan Dukic},
+  pdfsubject={Research and R\&D internship resume},
+  pdfkeywords={Computer Vision, Computer Graphics, Research, Machine Learning, PyTorch, C++, OpenGL},
+  pdflang={en}
+}
+\urlstyle{same}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{1.5em}
+\raggedright
+\setlist[itemize]{
+  label=\textbullet, leftmargin=1.25em, labelsep=0.45em,
+  topsep=1pt, itemsep=0.8pt, parsep=0pt, partopsep=0pt
+}
+% Edit these macros to adjust spacing globally.
+\newcommand{\cvsection}[1]{%
+  \par\addvspace{6.5pt}\needspace{4\baselineskip}%
+  {\displayfont\fontsize{10.95}{12.8}\selectfont\bfseries\color{navy}\MakeUppercase{#1}}\par\vspace{2.4pt}%
+  {\color{line}\hrule height 0.8pt}\vspace{2pt}%
+}
+\newcommand{\entry}[2]{%
+  \par\addvspace{3.2pt}\needspace{2.5\baselineskip}%
+  {\fontsize{10.25}{12.6}\selectfont\bfseries #1}%
+  \hfill {\fontsize{8.85}{11.2}\selectfont\color{muted}#2}\par
+}
+\newcommand{\subline}[1]{{\fontsize{9.0}{11.3}\selectfont\color{muted}#1}\par}
+\newcommand{\cvlink}[2]{\href{#1}{{\color{navy}\underline{#2}}}}
+\newcommand{\key}[1]{{\bfseries #1}}
+\begin{document}
+\fontsize{10.05}{12.55}\selectfont\color{ink}
+
+% Header
+{\displayfont\fontsize{24.0}{27.5}\selectfont\bfseries Bogdan Dukic}\par
+\vspace{1pt}
+{\displayfont\fontsize{10.3}{13.1}\selectfont\color{navy}\bfseries Computer Vision\enspace\textbar\enspace Computer Graphics\enspace\textbar\enspace Machine Learning}\par
+\vspace{3pt}
+{\fontsize{9.1}{12.2}\selectfont
+\cvlink{mailto:bogdandjukic25@gmail.com}{bogdandjukic25@gmail.com}\enspace\textbar\enspace
++33 7 46 41 82 15\par
+\vspace{1.5pt}
+\cvlink{https://bgdj11.github.io/website/}{bgdj11.github.io/website}\enspace\textbar\enspace
+\cvlink{https://github.com/bgdj11}{github.com/bgdj11}\enspace\textbar\enspace
+\cvlink{https://www.linkedin.com/in/bogdandjukic25/}{linkedin.com/in/bogdandjukic25}\par
+}
+\cvsection{Education}
+\entry{École Polytechnique \enspace\textbar\enspace Institut Polytechnique de Paris}{Sep 2026 to 2028 (expected)}
+MScT in Visual and Creative Artificial Intelligence\par
+\subline{\key{Merit scholarship:} École Polytechnique Foundation Excellence Scholarship.}
+\subline{\key{Current coursework:} Machine Learning, Computer Animation, Digital Representations and Analysis of Shapes, Image Analysis and Computer Vision.}
+\subline{\key{Upcoming coursework:} Image Synthesis, Advanced Deep Learning, Multimodal Generative AI.}
+\entry{University of Novi Sad \enspace\textbar\enspace Faculty of Technical Sciences}{Oct 2021 to Jul 2026}
+BSc in Computing and Control Engineering \enspace\textbar\enspace \key{GPA: 9.55/10}\par
+\subline{Intelligent Systems specialization (240 ECTS).}
+\subline{\key{Scholarships:} Dositeja (2025); Don Walker Scholarship, Magna International (2022 to 2025).}
+
+\cvsection{Research \& Selected Projects}
+\entry{\cvlink{https://github.com/bgdj11/neurosymbolic-vqa}{Neuro-Symbolic Visual Scene Understanding}}{Bachelor's thesis \enspace\textbar\enspace 2025 to 2026}
+\subline{Python, PyTorch, YOLOv8, FastSAM, MiDaS, CLIP, T5 \enspace\textbar\enspace \cvlink{https://github.com/bgdj11/neurosymbolic-vqa/blob/main/docs/one-page-summary.pdf}{Research summary}}
+\begin{itemize}
+ \item Built an end-to-end visual question answering system combining object detection, segmentation and depth-based scene graphs with T5-generated symbolic reasoning programs.
+ \item Adapted T5 via REINFORCE with execution-based rewards and KL regularization, improving end-to-end CLEVR-Humans accuracy from \key{32.7\% to 45.6\%} (7,202 questions) without target-domain program labels.
+ \item Achieved \key{79.0\% end-to-end accuracy} on CLEVR (10,000 questions); analyzed errors arising from visual perception and spatial relationships.
+\end{itemize}
+
+\entry{\cvlink{https://github.com/bgdj11/federated-actor-learning}{Federated Actor Learning}}{Python, PyTorch, asyncio \enspace\textbar\enspace 2026}
+\begin{itemize}
+ \item Implemented an asynchronous actor runtime with TCP messaging, supervision and SQLite persistence; built both centrally coordinated sample-weighted FedAvg and decentralized CRDT-based gossip training.
+ \item Validated both training workflows on non-IID EuroSAT partitions using pretrained ResNet18 features, testing model exchange, aggregation and actor recovery.
+\end{itemize}
+
+\entry{\cvlink{https://github.com/bgdj11/botanica-algorithmica}{Botanica Algorithmica \enspace\textbar\enspace Procedural Plant Generation}}{Python \enspace\textbar\enspace Computer Graphics}
+\begin{itemize}
+ \item Created an interactive \key{2D procedural generation} tool using weighted L-system grammars, stack-based branching and controlled randomness to produce varied plant structures.
+ \item Implemented growth visualization, editable branch and leaf parameters, plant presets and PNG export.
+\end{itemize}
+
+\entry{\cvlink{https://github.com/bgdj11/bun-hub}{BunHub | Distributed Social Platform}}{Java, Spring Boot, Angular}
+\begin{itemize}
+ \item Engineered a distributed social platform with real-time WebSocket messaging, RabbitMQ integrations and PostgreSQL-backed services.
+ \item Implemented Bloom-filter username lookups, concurrency-safe social interactions using database locking, and scheduled background tasks.
+\end{itemize}
+
+\cvsection{Professional Experience}
+\entry{AI Engineer \enspace\textbar\enspace Comtrade System Integration}{Jan to Aug 2026 \enspace\textbar\enspace Belgrade}
+\begin{itemize}
+ \item Developed the first working prototype of a no-code voice-agent platform in a four-person team, with visual scenario building, configurable guardrails and call analytics; integrated modular LLM, STT and TTS services.
+ \item Built an automated document-processing pipeline for PDF, Word, TXT and Markdown, combining format-specific extraction, Docling and OCR with semantic chunking, hybrid retrieval and reranking for RAG applications.
+ \item Implemented permission-aware retrieval using Microsoft Entra ID and automated SharePoint synchronization through Microsoft Graph API, webhooks and delta queries.
+ \item Contributed to an agenda-aware Microsoft Teams meeting assistant; evaluated LLM, embedding and speech models for multilingual and Serbian-language applications.
+\end{itemize}
+
+\entry{Data Science Intern \enspace\textbar\enspace Daze Solutions Limited}{Dec 2024 \enspace\textbar\enspace Remote}
+\begin{itemize}
+ \item Built a real-estate analytics pipeline with PostgreSQL extraction, data cleaning, feature engineering, K-means clustering and Matplotlib visualizations using Python and Pandas.
+\end{itemize}
+
+\cvsection{Technical Skills \& Languages}
+\textbf{Programming:} Python, C++, Java, SQL.\par
+\textbf{Machine Learning \& Vision:} PyTorch, Transformers, OpenCV, scikit-learn, NumPy, Pandas.\par
+\textbf{Graphics \& tools:} OpenGL, GLSL, Eigen, SFML, Git, Linux, Docker, Azure, PostgreSQL, FastAPI.\par
+\textbf{Languages:} Serbian (native), English (C1; TOEFL iBT 100/120), French (A1, actively learning).\par
+
+\end{document}

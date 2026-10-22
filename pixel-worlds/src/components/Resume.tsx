@@ -1,9 +1,11 @@
-import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import { createContext, lazy, Suspense, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { profile } from '../data/portfolio'
-import { FramedImage } from './Media'
 import { Icon } from './Icon'
 import { ResumeDialog } from './ResumeDialog'
+
+const PdfPreview = lazy(() => import('./PresentationViewer'))
+const resumeDocument = { title: 'CV preview', url: profile.resume.url, description: 'Curriculum vitae', preview: '', format: 'PDF' }
 
 type ResumeState = 'checking' | 'available' | 'missing'
 const ResumeContext = createContext<{ state: ResumeState; isOpen: boolean; open: () => void; close: () => void } | null>(null)
@@ -46,22 +48,33 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
   return <ResumeContext.Provider value={{ state, isOpen, open, close }}>{children}</ResumeContext.Provider>
 }
 
-export function CvAction({ className = 'button button-secondary', compact = false, download = false, label: customLabel }: { className?: string; compact?: boolean; download?: boolean; label?: string }) {
+export function CvAction({ className = 'button button-secondary', compact = false, download = false, label: customLabel, children }: { className?: string; compact?: boolean; download?: boolean; label?: string; children?: ReactNode }) {
   const { state, open } = useResume()
   const label = customLabel ?? (compact ? 'CV' : download ? 'Download PDF' : 'View CV')
-  const content = <>{label}<Icon name={download ? 'download' : 'arrow'} /></>
+  const content = children ?? <>{label}<Icon name={download ? 'download' : 'arrow'} /></>
   return state === 'available'
     ? download
       ? <a className={className} href={profile.resume.url} download={profile.resume.filename}>{content}</a>
-      : <button type="button" className={className} onClick={open} aria-haspopup="dialog">{content}</button>
+      : <button type="button" className={className} onClick={open} aria-label={label} aria-haspopup="dialog">{content}</button>
     : <button className={className} disabled title={state === 'checking' ? 'Checking resume availability' : 'Resume PDF has not been added yet'} aria-label={`${label} — ${state === 'checking' ? 'checking availability' : 'PDF not yet added'}`}>{content}</button>
 }
 
 export function ResumePreview() {
-  const { state } = useResume()
-  return <article className="resume-preview">
-    <FramedImage media={profile.resume.thumbnail} />
-    <div><h3>Resume</h3><p>{state === 'available' ? 'View my resume here or download a PDF copy.' : state === 'checking' ? 'Checking resume availability…' : 'The PDF resume hasn’t been added yet.'}</p><div className="resume-actions"><CvAction label="View Resume" /><CvAction download /></div></div>
+  const { state, open } = useResume()
+  const ref = useRef<HTMLElement>(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) { setVisible(true); observer.disconnect() }
+    }, { rootMargin: '150px' })
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+  return <article ref={ref} className="resume-preview" aria-label="CV preview">
+    {state === 'missing' ? <p>CV preview unavailable.</p> : visible && state === 'available'
+      ? <Suspense fallback={<p role="status">Loading CV…</p>}><PdfPreview document={resumeDocument} mode="preview" /></Suspense>
+      : <p role="status">Loading CV…</p>}
+    {state === 'available' && <button type="button" className="resume-preview-open" onClick={open} aria-label="Open CV preview" aria-haspopup="dialog" title="Open CV" />}
   </article>
 }
 

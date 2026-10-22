@@ -48,7 +48,7 @@ export interface MediaAsset {
   background?: string // Matte behind transparent media; does not alter the original artwork.
 }
 export interface ContentLink { label: string; url: string }
-export type SocialKind = 'github' | 'linkedin' | 'itch' | 'instagram' | 'email' | 'whatsapp'
+export type SocialKind = 'github' | 'linkedin' | 'itch' | 'instagram' | 'email' | 'whatsapp' | 'steam'
 export interface Social { kind: SocialKind; label: string; url?: string }
 export interface DetailBlock { heading: string; paragraphs?: string[]; items?: string[]; subsections?: DetailBlock[]; links?: ContentLink[] }
 export interface Favorite { title: string; note?: string; category?: string; media?: MediaAsset }
@@ -115,12 +115,12 @@ export const profile = {
     { kind: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/bogdandjukic25' },
     { kind: 'itch', label: 'itch.io', url: 'https://bgdj11.itch.io' },
     { kind: 'email', label: 'Email', url: 'mailto:bogdandjukic25@gmail.com' },
-    { kind: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/33746418215' },
+    { kind: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/381637492509' },
     { kind: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/bgdj11/' },
   ] as Social[],
   resume: {
-    url: publicAsset('/Bogdan_Djukic_CV.pdf'),
-    filename: 'Bogdan_Djukic_CV.pdf',
+    url: publicAsset('/Bogdan_Dukic_CV.pdf'),
+    filename: 'Bogdan_Dukic_CV.pdf',
     thumbnail: photo('resume', 'Resume preview to come', 'portrait'),
   },
 }
@@ -185,11 +185,11 @@ export const education: Education[] = [
 export const experience: Experience[] = [
   {
     id: 'comtrade', title: 'Comtrade System Integration', role: 'AI Engineer', dates: 'Jan 2026–Aug 2026', location: 'Belgrade, Serbia',
-    summary: 'Developed enterprise AI solutions ranging from advanced RAG systems to real-time conversational agents. Worked on a no-code voice AI platform for large contact centers, with a focus on knowledge bases, conversation analytics, multilingual speech technologies, and LLM-powered applications.',
+    summary: 'Built an automated pipeline for processing PDF, Word, TXT and Markdown documents using format-specific text extraction, Docling and OCR. Also developed RAG systems and a no-code voice AI platform, with work on conversation analytics and multilingual speech models.',
     media: { id: 'comtrade', src: comtradeLogo, alt: 'Comtrade logo', placeholder: 'Comtrade', presentation: 'logo', shape: 'square', fit: 'contain' },
     details: comtradeDetails,
-    highlights: ['Python', 'Azure', 'Docker', 'RAG', 'LLMs', 'Voice AI'],
-    technologies: ['Python', 'Azure', 'Docker', 'RAG', 'LLMs', 'Voice AI'], gallery: [], links: [],
+    highlights: ['Python', 'Docling', 'OCR', 'RAG', 'LLMs', 'Voice AI'],
+    technologies: ['Python', 'Docling', 'OCR', 'Azure', 'Docker', 'RAG', 'LLMs', 'Voice AI'], gallery: [], links: [],
   },
   {
     id: 'daze-solutions', title: 'Daze Solutions Limited', role: 'Data Science Intern', dates: 'December 2024 (4 weeks)', cardDates: 'December 2024', location: 'Remote',

@@ -9,6 +9,13 @@ coverage/
 .qa/
 .sites-runtime/
 
+# Private planning and content-review notes
+/PORTFOLIO_PIXEL_WORLDS_FINAL_BRIEF.md
+/portfolio_project_list.md
+/pixel-worlds/PROJECT_RESEARCH.md
+.codex/
+.agents/
+
 # Environment secrets and local overrides
 .env
 .env.*
