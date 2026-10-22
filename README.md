@@ -16,7 +16,7 @@ Use Node.js 22.12+ (GitHub Actions uses Node.js 24). `npm run build` checks Type
 2. Commit and push the changes to `v2` or `main`.
 3. The [Pages workflow](.github/workflows/deploy-pages.yml) installs the locked dependencies, builds the app, and deploys `pixel-worlds/dist/`. You can also run it manually from Actions.
 
-For this repository the address is **https://bgdj11.github.io/website/**. The build uses the base path reported by GitHub Pages, including when a custom domain is configured. Do not upload the source `index.html` directly or select branch-based publishing: Vite needs its build step.
+For the `bgdj11/bgdj11.github.io` repository the address is **https://bgdj11.github.io/**. The build uses the base path reported by GitHub Pages, including when a custom domain is configured. Do not upload the source `index.html` directly or select branch-based publishing: Vite needs its build step.
 
 ## Structure
 
