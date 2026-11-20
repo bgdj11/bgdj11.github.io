@@ -1,5 +1,5 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[left=1.32cm,right=1.32cm,top=1.18cm,bottom=1.10cm]{geometry}
+\usepackage[left=1.32cm,right=1.32cm,top=1.10cm,bottom=0.78cm]{geometry}
 \usepackage{fontspec}
 \setmainfont{Liberation Sans}
 \usepackage{enumitem}
@@ -16,9 +16,9 @@
 \raggedright\hyphenpenalty=10000\exhyphenpenalty=10000
 \newcommand{\CVText}{\fontsize{9.52}{10.85}\selectfont}
 \newcommand{\CVSm}{\fontsize{9.18}{10.55}\selectfont}
-\newcommand{\cvsection}[1]{\vspace{6.5pt}\noindent{\fontsize{11.0}{12.4}\selectfont\bfseries #1}\par\vspace{2.0pt}\hrule height .48pt\vspace{4.4pt}}
+\newcommand{\cvsection}[1]{\vspace{5.5pt}\noindent{\fontsize{11.0}{12.4}\selectfont\bfseries #1}\par\vspace{2.0pt}\hrule height .48pt\vspace{3.4pt}}
 \newcommand{\entry}[2]{\noindent\textbf{#1}\hfill{\CVSm #2}\par}
-\newcommand{\pbullet}[1]{\par\noindent\hspace*{2.5pt}\makebox[10pt][l]{\textbullet}\begin{minipage}[t]{\dimexpr\linewidth-15pt\relax}\raggedright\CVText #1\end{minipage}\par\vspace{0.7pt}}
+\newcommand{\pbullet}[1]{\par\noindent\hspace*{2.5pt}\makebox[10pt][l]{\textbullet}\begin{minipage}[t]{\dimexpr\linewidth-15pt\relax}\raggedright\CVText #1\end{minipage}\par\vspace{0.45pt}}
 \begin{document}
 \CVText
 \begin{minipage}[t]{0.86\textwidth}
@@ -34,7 +34,7 @@
 \cvsection{EDUCATION}
 \entry{École Polytechnique, Institut Polytechnique de Paris}{Sep 2026 -- 2028 (expected)}
 MScT in Visual and Creative Artificial Intelligence\par
-Coursework: Foundations of Machine Learning, Computer Vision, Shape Analysis, Computer Animation.\par
+Coursework: Foundations of Machine Learning, Image Analysis and Computer Vision, Digital Representations and Analysis of Shapes, Computer Animation.\par
 Upcoming: Advanced Deep Learning, Multimodal Generative AI, Image Synthesis.\par
 \hspace*{10pt}Scholarship: École Polytechnique Foundation Excellence Scholarship (2026--2028).\par
 \vspace{4pt}
@@ -49,11 +49,11 @@ Python, PyTorch \textbar\ \href{https://github.com/bgdj11/neurosymbolic-vqa/blob
 \pbullet{Designed a modular visual question answering system linking neural perception to a 27-operator typed DSL, validated programs and deterministic, interpretable execution.}
 \pbullet{Fine-tuned T5-small for question-to-program translation, then adapted it to human questions with REINFORCE, execution rewards and KL regularization without target-domain program labels.}
 \pbullet{Increased CLEVR-Humans end-to-end accuracy from 32.7\% to 45.6\% on 7,202 questions. Reduced execution failures from 25.5\% to 0.6\% in the annotated-scene track; achieved 99.9\% CLEVR accuracy with scene graphs and 79.0\% end-to-end.}
-\vspace{2.5pt}
+\vspace{2pt}
 \entry{\href{https://github.com/bgdj11/federated-actor-learning}{\underline{Federated Actor Learning}}}{2026}
 \pbullet{Implemented an asynchronous actor runtime with local/TCP messaging, supervision and SQLite persistence for coordinated FedAvg and decentralized CRDT-based gossip learning.}
 \pbullet{Evaluated both training workflows on non-IID EuroSAT partitions using ResNet18 features, including model exchange, aggregation, state merging and checkpoint recovery.}
-\vspace{2.5pt}
+\vspace{2pt}
 \entry{\href{https://github.com/bgdj11/photometric-stereo-reconstruction}{\underline{Photometric Stereo \& Differentiable 3D Terrain Reconstruction}}}{2026 -- Present}
 \pbullet{Built a multi-light terrain reconstruction pipeline combining classical photometric stereo (LS/IRLS), neural height fields and differentiable inverse rendering in PyTorch.}
 \pbullet{Jointly estimated surface geometry and unknown spotlight parameters using Fourier-feature MLPs, per-pixel reflectance estimation and regularized height-map refinement.}
@@ -67,19 +67,21 @@ Python, PyTorch \textbar\ \href{https://github.com/bgdj11/neurosymbolic-vqa/blob
 \pbullet{Engineered core components of a no-code call-center voice-agent platform, integrating LiveKit and telephony with interchangeable STT, LLM and TTS providers and a React visual workflow editor.}
 \pbullet{Built agent knowledge-base automation, conversation/call analytics and configurable guardrails, adapting speech workflows for Serbian-language interactions.}
 \pbullet{Developed a Microsoft Teams meeting assistant using transcripts and live context to track agenda coverage, detect skipped topics and answer participants' questions.}
-\vspace{2.5pt}
+\vspace{2pt}
 \entry{Data Science Intern \textbar\ Daze Solutions Limited}{Dec 2024 \textbar\ Remote}
-\pbullet{Built a PostgreSQL-to-Pandas pipeline to extract, clean and normalize real-estate records, engineering structured property features for exploratory analysis and downstream clustering.}
+\pbullet{Built a Python/Pandas data pipeline to extract, clean and normalize real-estate records, engineering structured property features for exploratory analysis and downstream clustering.}
 \pbullet{Applied K-means clustering to property attributes and visualized segment profiles to explore patterns in the dataset.}
-\vspace{2.5pt}
+\vspace{2pt}
 \entry{Research Intern \textbar\ Petnica Science Center}{Apr 2019 -- Sep 2020 \textbar\ Petnica}
 \pbullet{Conducted biology and chemistry laboratory research involving experimental design, data interpretation, scientific writing and presentation of results.}
 
 \cvsection{TECHNICAL SKILLS \& LANGUAGES}
 Programming: Python, C++, Java, SQL.\par
-Computer Graphics \& 3D Vision: Blender, Godot, OpenCV, 3D reconstruction, inverse rendering, mesh processing.\par
+Computer Graphics \& Geometry: OpenGL, Blender, Godot, curve/surface modeling, mesh processing, point clouds.\par
+Animation \& Simulation: Kinematics, skinning, rigid-body dynamics, physics-based simulation.\par
+3D Vision \& Rendering: OpenCV, 3D reconstruction, photometric stereo, differentiable/inverse rendering.\par
 Machine Learning \& Scientific Computing: PyTorch, Transformers, scikit-learn, NumPy, SciPy, Pandas.\par
-AI Systems \& Infrastructure: RAG, FAISS, LiveKit, FastAPI, Docker, Microsoft Azure, Git, Linux, PostgreSQL.\par
+AI Systems \& Infrastructure: RAG, FAISS, LiveKit, FastAPI, Docker, Microsoft Azure, Git, Linux.\par
 Mathematics: Linear algebra, numerical optimization, geometry, probability \& statistics.\par
 Languages: Serbian (native), English (C1, TOEFL iBT 100/120), French (actively learning).
 \end{document}
